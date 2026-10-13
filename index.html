@@ -135,6 +135,66 @@ details.sess>summary::-webkit-details-marker{display:none}
 .hist .cell{display:inline-block;min-width:28px;padding:4px 0;border-radius:8px;background:rgba(255,255,255,.06)}
 .hist .cell.on{background:rgba(48,209,88,.25);color:#30d158;font-weight:700}
 .sync{font-size:11px;color:var(--mut);margin-top:8px}
+
+
+.habit-streaks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:4px}
+@media(min-width:420px){.habit-streaks{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.hstreak{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 10px 8px;min-width:0}
+.hstreak .top{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.hstreak .flame{font-size:14px;line-height:1}
+.hstreak .hl{font-size:11px;font-weight:650;color:var(--tx);letter-spacing:-.01em;line-height:1.25;flex:1;min-width:0}
+.hstreak .nums{display:flex;gap:10px;margin-top:4px}
+.hstreak .nums div{font-size:11px;color:var(--mut)}
+.hstreak .nums b{display:block;font-size:16px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.hstreak .cad{font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.step-notches{letter-spacing:2px;font-size:12px;color:var(--mut);margin-top:4px}
+.step-notches .on{color:#fff}
+.goals-card .hab-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.goals-card .hab-row:last-child{border:0}
+.week-rings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px}
+@media(min-width:380px){.week-rings{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.week-rings.seven{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(min-width:360px){.week-rings.seven{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.wring{text-align:center}
+.wring svg{width:48px;height:48px;display:block;margin:0 auto}
+.wring .n{font-size:11px;font-weight:800;margin-top:-34px;height:0;position:relative;line-height:48px}
+.wring .l{font-size:9px;font-weight:600;color:var(--mut);margin-top:36px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.goals-card h2{margin:0 0 12px}
+.goals-card .g-block{padding:10px 0;border-bottom:1px solid var(--line)}
+.goals-card .g-block:last-child{border:0}
+.goals-card .g-k{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+.goals-card .g-v{font-size:15px;font-weight:600;letter-spacing:-.02em;line-height:1.35}
+.goals-card .g-meta{font-size:12px;color:var(--mut);margin-top:3px}
+.goals-card .status{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:99px;margin-left:6px;vertical-align:middle}
+.goals-card .status.ok{background:rgba(48,209,88,.18);color:var(--green)}
+.goals-card .status.open{background:rgba(255,255,255,.08);color:var(--mut)}
+.goals-card .status.due{background:rgba(255,214,10,.15);color:var(--amber)}
+.goals-card .wk-list .wk-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;font-size:13px;border-bottom:1px solid var(--line)}
+.goals-card .wk-list .wk-row:last-child{border:0}
+.next-lines{display:flex;flex-direction:column;gap:8px}
+.next-lines .nl{display:flex;align-items:baseline;gap:8px;font-size:13px;line-height:1.35}
+.next-lines .nl .p{font-weight:700;width:64px;flex:none}
+.next-lines .nl .t{flex:1;color:var(--tx)}
+.next-lines .nl .d{font-size:11px;color:var(--mut);white-space:nowrap}
+.lvl-rings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}
+.lvl-ring{text-align:center}
+.lvl-ring svg{width:56px;height:56px;display:block;margin:0 auto}
+.lvl-ring .lv{font-size:14px;font-weight:800;letter-spacing:-.03em;margin-top:-38px;position:relative;line-height:56px;height:0}
+.lvl-ring .nm{font-size:10px;font-weight:600;color:var(--mut);margin-top:42px}
+.game-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.badge{font-size:11px;font-weight:700;padding:6px 10px;border-radius:100px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--mut)}
+.badge.on{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
+.badge.gold{background:rgba(255,214,10,.15);color:var(--amber);border-color:rgba(255,214,10,.35)}
+.week-score{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:8px}
+.week-score .big{font-size:28px;font-weight:800;letter-spacing:-.04em}
+.week-score .delta{font-size:13px;font-weight:700}
+.week-score .delta.up{color:var(--green)}.week-score .delta.dn{color:var(--red)}
+.celeb{position:fixed;inset:0;pointer-events:none;z-index:99;overflow:hidden}
+.celeb i{position:absolute;width:6px;height:6px;border-radius:50%;opacity:0;animation:pop .7s ease-out forwards}
+@keyframes pop{0%{transform:translate(0,0) scale(.4);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1);opacity:0}}
+.toast-xp{position:fixed;left:50%;bottom:88px;transform:translateX(-50%) translateY(8px);background:#fff;color:#000;font-weight:800;font-size:13px;padding:8px 14px;border-radius:100px;opacity:0;pointer-events:none;z-index:98;transition:opacity .2s,transform .2s}
+.toast-xp.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.streak .freeze{font-size:9px;color:var(--amber);font-weight:700}
 .money-lock{padding:14px 0}
 .money-lock .ml-row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
 .money-lock input[type=password]{flex:1;min-width:140px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--tx);font-size:14px}
@@ -174,6 +234,30 @@ details.sess>summary::-webkit-details-marker{display:none}
 @media (min-width:900px){
   .topbar{display:none}
 }
+
+.lvl-hero{display:flex;align-items:center;gap:14px;margin-top:4px}
+.lvl-badge{width:64px;height:64px;border-radius:18px;background:linear-gradient(145deg,#ffe074,#ff9f0a);color:#111;display:grid;place-items:center;flex:none;box-shadow:0 8px 24px rgba(255,159,10,.35)}
+.lvl-badge .n{font-size:22px;font-weight:900;letter-spacing:-.04em;line-height:1}
+.lvl-badge .t{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin-top:1px}
+.lvl-meta{flex:1;min-width:0}
+.lvl-meta .ttl{font-size:15px;font-weight:800;letter-spacing:-.02em}
+.lvl-meta .sub{font-size:12px;color:var(--mut);margin-top:2px}
+.xp-bar{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px}
+.xp-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#30d158,#ffe074);width:0;transition:width .35s ease}
+.rewards-row{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.reward{display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.reward.unlocked{border-color:rgba(48,209,88,.45);background:rgba(48,209,88,.1)}
+.reward .ico{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;font-size:18px;background:rgba(255,255,255,.06);flex:none}
+.reward .body{flex:1;min-width:0}
+.reward .name{font-size:13px;font-weight:700;letter-spacing:-.01em}
+.reward .meta{font-size:11px;color:var(--mut);margin-top:2px}
+.reward .tag{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);flex:none}
+.reward.unlocked .tag{color:var(--green)}
+.reward-next{margin-top:4px}
+.reward-next .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:6px}
+.reward-next .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#64d2ff,#bf5af2);width:0;transition:width .35s ease}
+.xp-float{position:fixed;left:50%;top:42%;transform:translate(-50%,0);font-weight:900;font-size:22px;color:#ffe074;text-shadow:0 2px 12px rgba(0,0,0,.6);pointer-events:none;z-index:100;opacity:0;animation:xpFloat 1.1s ease-out forwards}
+@keyframes xpFloat{0%{opacity:0;transform:translate(-50%,12px) scale(.85)}15%{opacity:1;transform:translate(-50%,0) scale(1.05)}100%{opacity:0;transform:translate(-50%,-48px) scale(1)}}
 </style>
 <script>/**
  * Skipped minification because the original files appears to be already minified.
@@ -223,10 +307,32 @@ details.sess>summary::-webkit-details-marker{display:none}
     <section class="view on" id="v-home">
       <div class="home-layout">
         <div class="card home-hero">
-          <div class="label">Progress to pinnacle</div>
-          <div class="chart-wrap"><canvas id="star" height="320"></canvas></div>
+          <div class="star-wrap-label">This week · equal weight · step notches</div>
+          <div class="chart-wrap" id="starWrap"><canvas id="star" height="320"></canvas></div>
           <div class="goal-list" id="goalList"></div>
-          <div class="pillar-dots" id="pillarDots"></div>
+          <div class="pillar-nums" id="pillarNums"></div>
+        </div>
+        <div class="card">
+          <h2>Habit streaks</h2>
+          <div class="habit-streaks" id="habitStreaks"></div>
+          <div class="sub" style="margin-top:10px" id="freezeLine"></div>
+        </div>
+        <div class="card">
+          <h2>Level &amp; XP</h2>
+          <div class="lvl-hero" id="lvlHero">
+            <div class="lvl-badge"><div class="n" id="lvlNum">1</div><div class="t">LVL</div></div>
+            <div class="lvl-meta">
+              <div class="ttl" id="lvlTitle">Level 1</div>
+              <div class="sub" id="lvlSub">0 XP · next at 40</div>
+              <div class="xp-bar"><i id="lvlBar" style="width:0%"></i></div>
+            </div>
+          </div>
+          <div class="reward-next" id="rewardNext"></div>
+          <h2 style="margin-top:16px">Rewards</h2>
+          <div class="rewards-row" id="rewardsRow"></div>
+          <div class="lvl-rings" id="lvlRings" style="margin-top:14px"></div>
+          <div class="week-score" id="weekScore"></div>
+          <div class="game-row" id="badgesRow"></div>
         </div>
         <div class="card dayplan">
           <div class="row"><h2 style="margin:0" id="dayplanTitle">Day plan</h2><span class="sub" id="dayplanDate"></span></div>
@@ -234,14 +340,13 @@ details.sess>summary::-webkit-details-marker{display:none}
           <div class="bg-line" id="dayplanBg">Background · savings / house — <span id="dayplanBgAmt">savings goal</span></div>
         </div>
         <div class="card">
-          <h2>Quick ticks</h2>
+          <h2>Today</h2><div class="sub" style="margin:-4px 0 8px">Daily habits</div>
           <div id="homeTicks"></div>
           <div class="sync" id="ticksSync"></div>
         </div>
         <div class="card">
-          <h2>Streaks</h2>
-          <div class="streaks" id="streaks"></div>
-          <div class="sub" style="margin-top:14px">Axes track sub-goals from baseline to target. Update goals.csv to move the needle.</div>
+          <h2>Next checkpoints</h2>
+          <div class="next-lines" id="nextLines"></div>
         </div>
         <div class="card">
           <h2>History</h2>
@@ -252,90 +357,66 @@ details.sess>summary::-webkit-details-marker{display:none}
     </section>
 
     <section class="view" id="v-career">
-      <div class="card"><h2>Today &amp; this week</h2><div id="careerTicks"></div></div>
-      <div class="card career-sec">
-        <h3>Macro hedge fund job</h3>
-        <p class="sub" id="jobDesc"></p>
-        <div class="row" style="margin:12px 0"><span class="sub">Star progress</span><span class="big" id="jobPct" style="font-size:22px;color:var(--blue)">0%</span></div>
-        <h2 class="q4-h" style="margin-top:4px">Q4 2026</h2>
-        <div class="ms-list" id="jobMs"></div>
-        <h2 style="margin-top:18px">This week</h2>
-        <div id="jobWeek"></div>
-      </div>
-      <div class="card career-sec">
+
+      <div class="card goals-card" id="careerGoals"></div>
+      <div class="card"><h2>Habits</h2><div id="careerTicks"></div></div>
+      <div class="card">
         <h3 id="savTitle">Savings</h3>
         <p class="sub" id="savDesc"></p>
         <div id="fin" style="margin:12px 0"></div>
-        <div class="row" style="margin:8px 0 12px"><span class="sub">Star progress</span><span class="big" id="savPct" style="font-size:22px;color:var(--blue)">0%</span></div>
-        <h2 class="q4-h" style="margin-top:4px">Q4 2026</h2>
-        <div class="ms-list" id="savMs"></div>
-        <h2 style="margin-top:18px">This week</h2>
-        <div id="savWeek"></div>
       </div>
+
     </section>
 
     <section class="view" id="v-fitness">
-      <div class="card"><h2>Today &amp; this week</h2><div id="fitTicks"></div></div>
-      <div class="grid-2">
-        <div class="stack">
-          <div class="card today-strip">
-            <div class="date-line" id="dateLine"></div>
-            <div class="today-grid">
-              <div>
-                <div class="sess-title" id="tsess"></div>
-                <div class="sub" id="textra" style="color:var(--sage)"></div>
-                <details class="sess" id="sessDetails"><summary>Session detail</summary><div id="tsessDetail"></div></details>
-              </div>
-              <div class="race-pill" id="racePill"><div class="n" id="raceDays">–</div><div class="l" id="raceLabel">days</div></div>
-            </div>
-            <div class="sub" style="margin-top:12px;color:var(--sage);font-weight:600" id="phase"></div>
-            <div class="sub" style="margin-top:6px;color:var(--tx2)" id="phdet"></div>
-          </div>
-          <div class="card">
-            <h2 id="planLabel">Interim schedule</h2>
-            <div class="sub" id="gymSrc" style="margin-bottom:10px"></div>
-            <div id="plan"></div>
-          </div>
-        </div>
-        <div class="card"><h2>Road to London</h2><div id="phases"></div></div>
-      </div>
+
+      <div class="card goals-card" id="fitGoals"></div>
+      <div class="card"><h2>Habits</h2><div id="fitTicks"></div></div>
       <div class="card">
-        <h2 class="q4-h" style="margin-top:0">Q4 2026</h2>
-        <div class="sub" style="margin-bottom:10px">Lifts · running · body fat</div>
-        <div id="fitQ4"></div>
+        <div class="date-line" id="dateLine"></div>
+        <div class="sub" id="phase" style="margin-top:8px"></div>
+        <div class="sub" id="phdet" style="margin-top:4px"></div>
+        <div class="race-pill" id="racePill" style="margin-top:12px;display:inline-flex"><div class="n" id="raceDays">–</div><div class="l" id="raceLabel">days to London</div></div>
       </div>
+
     </section>
 
     <section class="view" id="v-learning">
-      <div class="card"><h2>Today &amp; this week</h2><div id="learnTicks"></div></div>
+
+      <div class="card goals-card" id="learnGoals"></div>
+      <div class="card"><h2>Habits</h2><div id="learnTicks"></div></div>
       <div class="card"><h2>Reading list</h2><div id="books"></div></div>
-      <div class="card">
-        <h2 class="q4-h" style="margin-top:0">Q4 2026</h2>
-        <div class="sub" style="margin-bottom:10px">Five books by 31 Dec · Notion note each</div>
-        <div id="learnQ4"></div>
-      </div>
+
     </section>
 
     <section class="view" id="v-relationships">
-      <div class="card"><h2>Today &amp; this week</h2><div id="relTicks"></div></div>
+
+      <div class="card goals-card" id="relGoals"></div>
+      <div class="card"><h2>Habits</h2><div id="relTicks"></div></div>
       <div class="card"><h2>With Lauren</h2><div class="sub" id="lauren"></div></div>
-      <div class="card">
-        <h2 class="q4-h" style="margin-top:0">Q4 2026</h2>
-        <div id="relQ4"></div>
-      </div>
+
     </section>
 
     <section class="view" id="v-todo">
       <div class="card"><h2>Waiting on you</h2><div id="todos"></div></div>
     </section>
-    <div class="foot">Log by messaging Ollie · updated <span id="upd"></span></div>
+    
+<div style="display:none">
+  <div id="pillarDots"></div><div id="streaks"></div>
+  <div id="jobDesc"></div><div id="jobPct"></div><div id="jobMs"></div><div id="jobWeek"></div>
+  <div id="savPct"></div><div id="savMs"></div><div id="savWeek"></div>
+  <div id="fitQ4"></div><div id="learnQ4"></div><div id="relQ4"></div>
+  <div id="tsess"></div><div id="textra"></div><div id="tsessDetail"></div><div id="plan"></div><div id="phases"></div><div id="planLabel"></div><div id="gymSrc"></div><div id="sessDetails"></div>
+</div>
+
+  <div class="foot">Log by messaging Ollie · updated <span id="upd"></span></div>
   </main>
   <nav class="tabbar">
     <button data-v="home" class="on"><svg viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg>Home</button>
-    <button data-v="career"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Career</button>
-    <button data-v="fitness"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M8 4l2 2M14 18l2 2M4 8l2 2M18 14l2 2M8.5 15.5l-3 3M15.5 8.5l3-3"/></svg>Fitness</button>
-    <button data-v="learning"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Learn</button>
-    <button data-v="relationships"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z"/></svg>Lauren</button>
+    <button data-v="career"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Career<i class="done-badge">✓</i></button>
+    <button data-v="fitness"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M8 4l2 2M14 18l2 2M4 8l2 2M18 14l2 2M8.5 15.5l-3 3M15.5 8.5l3-3"/></svg>Fitness<i class="done-badge">✓</i></button>
+    <button data-v="learning"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Learn<i class="done-badge">✓</i></button>
+    <button data-v="relationships"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z"/></svg>Lauren<i class="done-badge">✓</i></button>
     <button data-v="todo"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>To do<i class="bdg" id="tdb"></i></button>
   </nav>
 </div>
@@ -349,12 +430,24 @@ details.sess>summary::-webkit-details-marker{display:none}
     <button type="button" class="close" id="gsClose">Done</button>
   </div>
 </div>
+<div class="celeb" id="celeb" aria-hidden="true"></div>
+<div class="toast-xp" id="toastXp"></div>
 <script>
-const D={"log":[{"date":"2026-10-06","pillar":"Fitness","sub-area":"running","activity":"EXAMPLE - 5k run","points":"3","note":"EXAMPLE ROW - delete when real data arrives"},{"date":"2026-10-08","pillar":"Career","sub-area":"macro","activity":"EXAMPLE - Macro study block","points":"2","note":"EXAMPLE ROW - delete when real data arrives"},{"date":"2026-10-09","pillar":"Relationships","sub-area":"wife","activity":"EXAMPLE - Date night","points":"4","note":"EXAMPLE ROW - delete when real data arrives"},{"date":"2026-10-11","pillar":"Fitness","sub-area":"running","activity":"Royal Parks Half Marathon 1:36:05","points":"8","note":"race, baseline"}],"plan":{"weekLabel":"Interim schedule (until Runner app programme starts)","gymSource":"Coach Block 4 from Training Template / gym app seed.json (OR_Macrocycle). Day1\u2192Mon, Day2\u2192Wed, Day3\u2192Fri. Sets/reps/RPE shown = Block 4 Week 1; primary-lift progression notes cover Weeks 1\u20133. Block 5 (macrocycle w/c 12 Oct) is not in the sheet yet.","currentLifts":"Squat 180 / Bench 120 / Deadlift 190","week":[{"day":"Mon","kind":"gym","coachDay":1,"title":"Gym \u00b7 Day 1 \u00b7 Squat primary","summary":"Comp. Squat \u00b7 Close Grip Bench \u00b7 Incline DB Bench \u00b7 Leg Extensions \u00b7 Straight bar PD \u00b7 Seated Lat Raise","exercises":[{"classification":"Squat: Primary","exercise":"Comp. Squat","rx":"1\u00d73 @6 \u00b7 135kg cap \u00b7 2\u00d75 85% of top set \u00b7 114.75","progression":"W1: 1\u00d73 @6 [135kg cap]; 2\u00d75 85% of top set [114.75] \u2192 W2: 1\u00d73 @7 [135-140]; 2\u00d75 85% of top set [120] \u2192 W3: 1\u00d73 @7 [142.5-147.5]; 2\u00d75 85% of top set"},{"classification":"Bench: Secondary","exercise":"Close Grip Bench","rx":"3\u00d78 @4, @5, @6 \u00b7 80kg cap","progression":null},{"classification":"Bench: Supplementary","exercise":"Incline DB Bench","rx":"2\u00d710 @6, @7","progression":null},{"classification":"Quads","exercise":"Leg Extensions","rx":"1\u00d710 @8 \u00b7 2\u00d7Myo-Reps AMRAP x2 (10s rests)","progression":null},{"classification":"Triceps","exercise":"Straight bar PD","rx":"3\u00d710-12 @8","progression":null},{"classification":"Shoulders","exercise":"Seated Lat Raise","rx":"3\u00d710-12 @8","progression":null}],"extra":"Reading 20 min"},{"day":"Tue","kind":"run","title":"Run 5 miles","summary":"Run 5 miles","exercises":[],"extra":"Macro 08:00-09:30 \u00b7 Reading 30 min"},{"day":"Wed","kind":"gym","coachDay":2,"title":"Gym \u00b7 Day 2 \u00b7 Deadlift primary","summary":"Comp. Deadlift \u00b7 2ct Pause Bench \u00b7 Larsen Press \u00b7 RDL \u00b7 Single Arm PD \u00b7 Bayesian Curl \u00b7 Weighted Plank \u00b7 Single-Arm Barbell Hold","exercises":[{"classification":"Deadlift: Primary","exercise":"Comp. Deadlift","rx":"1\u00d73 @4 \u00b7 140kg cap \u00b7 1\u00d73 @5 \u00b7 150kg cap \u00b7 1\u00d73 Top set - 20kg","progression":"W1: 1\u00d73 @4 [140kg cap]; 1\u00d73 @5 [150kg cap]; 1\u00d73 Top set - 20kg \u2192 W2: 1\u00d73 @5 [140-150]; 1\u00d73 @6 [150-160]; 1\u00d73 Top set - 20kg \u2192 W3: 1\u00d73 @6 [150-160]; 1\u00d73 @7 [160-170]; 1\u00d73 Top set - 20kg"},{"classification":"Bench: Tertiary","exercise":"2ct Pause Bench","rx":"1\u00d73 @6 \u00b7 85kg cap","progression":null},{"classification":"Bench: Tertiary","exercise":"Larsen Press","rx":"2\u00d76 @5 \u00b7 75kg cap","progression":null},{"classification":"Deadlift: Secondary","exercise":"RDL","rx":"2\u00d78 @6, @7 \u00b7 120kg cap","progression":null},{"classification":"Back","exercise":"Single Arm PD","rx":"3\u00d710-12 @8","progression":null},{"classification":"Biceps","exercise":"Bayesian Curl","rx":"3\u00d710-12 @8","progression":null},{"classification":"Abs","exercise":"Weighted Plank","rx":"1\u00d7AMRAP @9","progression":null},{"classification":"Grip","exercise":"Single-Arm Barbell Hold","rx":"1\u00d7AMRAP @9","progression":null}],"extra":"Macro 08:00-09:30 \u00b7 Plan this week's Lauren thing"},{"day":"Thu","kind":"run","title":"Run 5 miles","summary":"Run 5 miles","exercises":[],"extra":"Macro 08:00-09:30 \u00b7 Optional: Rix Football 18:30-20:00"},{"day":"Fri","kind":"gym","coachDay":3,"title":"Gym \u00b7 Day 3 \u00b7 Bench primary","summary":"High Bar Squat \u00b7 Comp. Bench \u00b7 Leg Press \u00b7 Seated Hamstring Curl \u00b7 Straight bar extension \u00b7 Straight bar front raise","exercises":[{"classification":"Squat: Secondary","exercise":"High Bar Squat","rx":"3\u00d78 @4, @5, @6 \u00b7 100kg cap","progression":null},{"classification":"Bench: Primary","exercise":"Comp. Bench","rx":"1\u00d73 @6 \u00b7 95kg cap \u00b7 2\u00d77 80% of top set","progression":"W1: 1\u00d73 @6 [95kg cap]; 2\u00d77 80% of top set \u2192 W2: 1\u00d73 @7 [100kg]; 2\u00d77 80% of top set \u2192 W3: 1\u00d73 @8 [105]; 2\u00d77 80% of top set"},{"classification":"Squat: Supplementary","exercise":"Leg Press","rx":"2\u00d710 @6, @7","progression":null},{"classification":"Hamstrings","exercise":"Seated Hamstring Curl","rx":"1\u00d710 @8 \u00b7 2\u00d7Myo-Reps AMRAP x2 (10s rests)","progression":null},{"classification":"Triceps","exercise":"Straight bar extension","rx":"3\u00d710-12 @8","progression":null},{"classification":"Shoulders","exercise":"Straight bar front raise","rx":"3\u00d710-12 @8","progression":null}],"extra":"Lauren slot (date/surprise)"},{"day":"Sat","kind":"run","title":"Long run 10\u201315 miles","summary":"Long run 10\u201315 miles","exercises":[],"extra":"Lauren slot (alt)"},{"day":"Sun","kind":"run","title":"Run 6 miles","summary":"Run 6 miles","exercises":[],"extra":"Reading 45 min + 5-min weekly review"}],"phases":[{"name":"Recovery","start":"2026-10-12","end":"2026-10-18","run":"Easy only: 2-3 x 30-40 min, no quality. Football optional.","lift":"2 sessions @RPE6, no heavy pulls until Thu"},{"name":"Base","start":"2026-10-19","end":"2026-12-20","run":"Build 40->60 km/wk, long run 16->24k, tempo + strides. Checkpoint: 10k ~42-43 min by early Dec Baseline half 1:36:05 (Riegel \u22483:21).","lift":"Bench 125 x1, DL 200 x1, Squat hold 180"},{"name":"Build","start":"2026-12-21","end":"2027-02-14","run":"60->75 km/wk, long 26->32k with MP blocks, threshold + VO2 reps. Checkpoint: half end-Jan (sub-1:30 \u2248 ~3:10; sub-1:27 needed for sub-3). Baseline: Royal Parks Half 1:36:05 \u2192 Riegel \u22483:21.","lift":"Bench 130, DL 210-215, Squat 180-185; strength 2-3x"},{"name":"Peak","start":"2027-02-15","end":"2027-03-28","run":"75-85 km/wk, 2-3 x 32-35k long runs, MP work; set goal pace from Jan half (sub-1:30\u2192~3:10, sub-1:27\u2192sub-3)","lift":"Maintain: 2 sessions, low volume, no lifting PRs"},{"name":"Taper","start":"2027-03-29","end":"2027-04-25","run":"Volume -20/-40/-60%, keep some MP; race TCS London Marathon Sun 25 Apr 2027","lift":"1-2 light sessions, stop heavy lower body 10 days out"}],"race":{"name":"TCS London Marathon 2027","date":"2027-04-25","note":"Oliver runs Sun 25 Apr 2027"},"raceDate":"2027-04-25"},"books":[{"title":"Central Banking 101","author":"Joseph Wang","status":"reading","started":"2026-10","finished":"","notion_url":""}],"todo":[{"item":"Running app login","needed_by_agent":"Ollie","why":"To pull your running sessions into the plan automatically","added":"2026-10-10","status":"open"},{"item":"More book names for the reading list","needed_by_agent":"Ollie","why":"To fill the 26-book year after Central Banking 101","added":"2026-10-10","status":"waiting: decide whether to add Fixed Income Markets"},{"item":"Marathon race date","needed_by_agent":"Ollie","why":"TCS London Marathon Sun 25 Apr 2027","added":"2026-10-10","status":"done"},{"item":"Half marathon result (after Sun 11 Oct)","needed_by_agent":"Ollie","why":"Royal Parks Half 11 Oct 2026: 1:36:05 (Riegel \u22483:21 marathon). Baseline set.","added":"2026-10-10","status":"done"},{"item":"Pick a topic from Weekly Macro's ranked list","needed_by_agent":"Macro_Weekly","why":"Newsletter is waiting on your choice","added":"2026-10-10","status":"open"},{"item":"Current savings baseline for the \u00a3100K goal","needed_by_agent":"Ollie","why":"To track progress from the right start point","added":"2026-10-10","status":"open"},{"item":"Confirm weekly points targets","needed_by_agent":"Ollie","why":"Targets are placeholder 20 pts per pillar","added":"2026-10-10","status":"open"},{"item":"Interactive Brokers read-only access (Flex Query token + query id preferred, or monthly activity statement CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Barclays Smart Investor statement export (CSV/PDF)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Chase statement export (CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"NatWest statement export (CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Coach Block 5 / current-week gym prescription","needed_by_agent":"Ollie","why":"Block 4 ends ~5 Oct; macrocycle Block 5 starts w/c 12 Oct but is not in Training Template yet \u2014 need sets/reps/RPE for post-half weeks","added":"2026-10-10","status":"open"},{"item":"Confirm which Block 4 week (or Block 5) to use for load after the half","needed_by_agent":"Ollie","why":"App shows Block 4 Week 1 rx + W1\u2013W3 progression; need your call on starting loads post-race","added":"2026-10-10","status":"open"},{"item":"Confirm London Marathon day: Sat 24 or Sun 25 Apr","needed_by_agent":"Ollie","why":"Confirmed: Sun 25 Apr 2027","added":"2026-10-10","status":"done"}],"finance":[],"scoring":[{"pillar":"Fitness","sub-area":"gym","activity":"Gym session","points":"3"},{"pillar":"Fitness","sub-area":"running","activity":"5k run","points":"3"},{"pillar":"Fitness","sub-area":"running","activity":"Long run (15k+)","points":"5"},{"pillar":"Fitness","sub-area":"running","activity":"Race","points":"8"},{"pillar":"Fitness","sub-area":"eating","activity":"Clean eating day","points":"1"},{"pillar":"Learning","sub-area":"reading","activity":"30 pages reading","points":"2"},{"pillar":"Learning","sub-area":"output","activity":"Published write-up / newsletter","points":"5"},{"pillar":"Learning","sub-area":"output","activity":"Draft / notes session","points":"2"},{"pillar":"Relationships","sub-area":"wife","activity":"Date night","points":"4"},{"pillar":"Relationships","sub-area":"wife","activity":"Quality evening together","points":"2"},{"pillar":"Relationships","sub-area":"family","activity":"Family call","points":"2"},{"pillar":"Relationships","sub-area":"family","activity":"Family visit","points":"4"},{"pillar":"Relationships","sub-area":"friends","activity":"Friends meetup","points":"3"},{"pillar":"Career","sub-area":"macro","activity":"Macro study block","points":"2"},{"pillar":"Career","sub-area":"macro","activity":"Trade journal entry","points":"2"},{"pillar":"Career","sub-area":"macro","activity":"Trade idea written up","points":"3"},{"pillar":"Career","sub-area":"finances","activity":"Budget / portfolio review","points":"2"}],"goals":[{"id":"job","pillar":"Career","label":"Macro hedge fund job","short":"Job","kind":"checklist","baseline":"","target":"","current":"0","unit":"","note":"","description":"Land a seat at a macro hedge fund. Q4 2026: CV/pitch + Point72 approach (31 Oct), warm network + applications + mocks (30 Nov), two first rounds (15 Dec), offer conversation before Christmas (24 Dec). Star follows the Q4 checklist.","milestones":"","deadline":"2026-12-24"},{"id":"savings","pillar":"Career","label":"Savings goal","short":"Save","kind":"number","baseline":"","target":"","current":"","unit":"","note":"deadline extended to 2027-06-30; Q4 checkpoint ~[amount]","description":"Save [amount] by end of Q2 2027 (30 Jun 2027). Q4 path: accounts linked (18 Oct), budget + auto-transfers (31 Oct), ~[amount] by 31 Dec.","milestones":"","deadline":"2027-06-30"},{"id":"squat","pillar":"Fitness","label":"Squat 200kg","short":"Squat","kind":"number","baseline":"180","target":"200","current":"180","unit":"kg","note":"","description":"Competition squat. Q4: 190 kg by 30 Nov, 200 kg by 31 Dec.","milestones":"","deadline":"2026-12-31"},{"id":"bench","pillar":"Fitness","label":"Bench 140kg","short":"Bench","kind":"number","baseline":"120","target":"140","current":"120","unit":"kg","note":"","description":"Competition bench. Q4: 130 kg by 30 Nov, 135\u2013140 kg by 31 Dec.","milestones":"","deadline":"2026-12-31"},{"id":"deadlift","pillar":"Fitness","label":"Deadlift 240kg","short":"DL","kind":"number","baseline":"190","target":"240","current":"190","unit":"kg","note":"240 kg noted as 2027","description":"Competition deadlift. Q4: 210 kg by 30 Nov, 220\u2013225 kg by 31 Dec. 240 kg is a 2027 target (post-marathon strength block).","milestones":"","deadline":"2027-12-31"},{"id":"marathon","pillar":"Fitness","label":"Sub-3h marathon","short":"Race","kind":"marathon","baseline":"3:21:00","target":"3:00:00","current":"3:21:00","unit":"h:mm:ss","note":"half 1:36:05 Royal Parks 2026-10-11; Riegel equiv ~3:21; progress=(3:21-pred)/(3:21-3:00)","description":"TCS London Marathon Sun 25 Apr 2027 \u2014 target sub-3:00. Baseline from Royal Parks Half 1:36:05 (Riegel \u22483:21). Q4: 40 mi/week + quality session, 10K sub-40 (Nov), half under 1:30 (31 Dec).","milestones":"half_sub_132|10k_sub_40|mp_long_25k|half_sub_127","deadline":"2027-04-25"},{"id":"bodyfat","pillar":"Fitness","label":"Body fat 10-12%","short":"BF%","kind":"number","baseline":"22.5","target":"11","current":"22.5","unit":"%","note":"lower is better","description":"Body composition. Q4: ~0.5 kg/week loss, 5\u20136 kg by 31 Dec, ~15\u201316% body fat. Long-term target 10\u201312%.","milestones":"","deadline":"2026-12-31"},{"id":"books","pillar":"Learning","label":"Book every 2 weeks","short":"Books","kind":"books","baseline":"0","target":"26","current":"0","unit":"","note":"Q4: 5 books by 2026-12-31","description":"Five books by 31 Dec 2026: Central Banking 101 by 25 Oct, then one every two weeks, each with a Notion note. Long-term cadence remains a book every two weeks.","milestones":"","deadline":"2026-12-31"},{"id":"dates","pillar":"Relationships","label":"Weekly date with Lauren","short":"Dates","kind":"dates","baseline":"0","target":"1","current":"0","unit":"","note":"11 Q4 dates + weekend away","description":"One date with Lauren every week \u2014 all 11 in Q4 2026 \u2014 plus one bigger weekend away by 31 Dec.","milestones":"","deadline":"2026-12-31"}],"job_milestones":[{"milestone":"cv_pitch","done":"0","due":"2026-10-31","label":"CV and pitch finished"},{"milestone":"trade_writeup","done":"0","due":"2026-10-31","label":"One trade write-up"},{"milestone":"point72","done":"0","due":"2026-10-31","label":"Point72 approach sent"},{"milestone":"warm_10","done":"0","due":"2026-11-30","label":"Ten warm contacts"},{"milestone":"apps_5","done":"0","due":"2026-11-30","label":"Applications to top five funds"},{"milestone":"mock_interview","done":"0","due":"2026-11-30","label":"Weekly mock interview (November)"},{"milestone":"interviews_2","done":"0","due":"2026-12-15","label":"At least two first-round interviews"},{"milestone":"offer_convo","done":"0","due":"2026-12-24","label":"Offer conversation before Christmas"}],"savings_milestones":[{"milestone":"m21k","due":"2026-12-31","label":"~[locked]"},{"milestone":"m100k","due":"2027-06-30","label":"[locked] saved (Q2 2027)"}],"career_weekly":[{"goal_id":"job","id":"macro_blocks","label":"3 macro study blocks","target_per_week":"3","log_match":"macro study|study block"},{"goal_id":"job","id":"writeup","label":"1 write-up","target_per_week":"1","log_match":"write-up|writeup|newsletter|published"},{"goal_id":"job","id":"outreach","label":"2 outreach messages","target_per_week":"2","log_match":"outreach|networking|message"},{"goal_id":"savings","id":"log_savings","label":"Log savings (~\u00a31","target_per_week":"925/wk)","log_match":"1","null":["savings|saved|portfolio|budget"]},{"goal_id":"savings","id":"nospend","label":"No-spend review","target_per_week":"1","log_match":"no-spend|nospend|spend review"}],"actions":[{"pillar":"Career","scope":"daily","id":"macro_block","label":"Macro study block","points":"2","target":"1"},{"pillar":"Career","scope":"daily","id":"outreach","label":"Outreach message","points":"1","target":"1"},{"pillar":"Career","scope":"weekly","id":"macro_blocks","label":"3 macro study blocks","points":"6","target":"3"},{"pillar":"Career","scope":"weekly","id":"writeup","label":"1 write-up","points":"5","target":"1"},{"pillar":"Career","scope":"weekly","id":"outreach_w","label":"2 outreach messages","points":"2","target":"2"},{"pillar":"Fitness","scope":"daily","id":"session","label":"Training session (gym/run)","points":"3","target":"1"},{"pillar":"Fitness","scope":"daily","id":"protein","label":"Hit protein target","points":"1","target":"1"},{"pillar":"Fitness","scope":"weekly","id":"sessions","label":"Planned sessions done","points":"3","target":"4"},{"pillar":"Fitness","scope":"weekly","id":"long_run","label":"Long run / quality session","points":"5","target":"1"},{"pillar":"Learning","scope":"daily","id":"read","label":"Reading session (20+ pages)","points":"2","target":"1"},{"pillar":"Learning","scope":"weekly","id":"read_sessions","label":"Reading sessions","points":"2","target":"4"},{"pillar":"Learning","scope":"weekly","id":"takeaway","label":"Book takeaway / notes","points":"2","target":"1"},{"pillar":"Relationships","scope":"daily","id":"lauren_touch","label":"Something thoughtful for Lauren","points":"1","target":"1"},{"pillar":"Relationships","scope":"weekly","id":"date","label":"Exciting plan with Lauren","points":"4","target":"1"}],"marathon_milestones":[{"milestone":"mi40","label":"40 mi/week + one quality session","done":"0","due":"2026-12-31","note":"by December"},{"milestone":"10k_sub_40","label":"10K test sub-40","done":"0","due":"2026-11-30","note":"November"},{"milestone":"half_sub_130","label":"Half under 1:30","done":"0","due":"2026-12-31","note":"Q4 race shape"},{"milestone":"sub3_london","label":"Marathon sub-3:00 (TCS London)","done":"0","due":"2027-04-25","note":"Sun 25 Apr 2027"}],"dayplan":[{"date":"2026-10-13","time":"06:00","id":"wake","item":"Wake","pillar":"Fitness","priority":"2","note":""},{"date":"2026-10-13","time":"06:15","id":"run5","item":"Easy 5 mi \u00b7 conversational \u00b7 legs post half","pillar":"Fitness","priority":"2","note":"non-negotiable"},{"date":"2026-10-13","time":"07:15","id":"breakfast","item":"Shower + high-protein breakfast","pillar":"Fitness","priority":"2","note":""},{"date":"2026-10-13","time":"08:00","id":"commute_read","item":"Commute: Central Banking 101 (~20 min)","pillar":"Learning","priority":"5","note":""},{"date":"2026-10-13","time":"09:00","id":"work_day","item":"Work \u00b7 hard stop 19:00 \u00b7 leave on time","pillar":"Career","priority":"4","note":"current job"},{"date":"2026-10-13","time":"19:30","id":"lauren","item":"Lauren \u00b7 phones away \u00b7 plan this week's date","pillar":"Relationships","priority":"3","note":""},{"date":"2026-10-13","time":"20:15","id":"hf_work","item":"Hedge fund \u00b7 Point72 London / Macro_Careers \u00b7 one concrete output","pillar":"Career","priority":"1","note":""},{"date":"2026-10-13","time":"22:30","id":"sleep","item":"Lights out \u00b7 7h sleep minimum","pillar":"Fitness","priority":"2","note":""}],"updates":[{"timestamp":"2026-10-12T11:05:00+01:00","text":"Today plan for Tue 13 Oct added (tickable). In-app updates feed with bell + unread badge."},{"timestamp":"2026-10-12T11:10:00+01:00","text":"Q4 milestones added \u2014 job, savings (\u00a3100K \u2192 30 Jun 2027), lifts, running, body fat, Lauren, reading. Q4 2026 section on each goal."},{"timestamp":"2026-10-12T11:15:00+01:00","text":"Moved to GitHub Pages. Ticks sync via Google Sheet (or this device). Money figures encrypted client-side."}],"q4_milestones":[{"goal_id":"job","id":"cv_pitch","due":"2026-10-31","label":"CV and pitch finished","done":"0","note":""},{"goal_id":"job","id":"trade_writeup","due":"2026-10-31","label":"One trade write-up","done":"0","note":""},{"goal_id":"job","id":"point72","due":"2026-10-31","label":"Point72 approach sent","done":"0","note":""},{"goal_id":"job","id":"warm_10","due":"2026-11-30","label":"Ten warm contacts","done":"0","note":"November"},{"goal_id":"job","id":"apps_5","due":"2026-11-30","label":"Applications to top five funds","done":"0","note":"November"},{"goal_id":"job","id":"mock_interview","due":"2026-11-30","label":"Weekly mock interview","done":"0","note":"November"},{"goal_id":"job","id":"interviews_2","due":"2026-12-15","label":"At least two first-round interviews","done":"0","note":""},{"goal_id":"job","id":"offer_convo","due":"2026-12-24","label":"Push for an offer conversation before Christmas","done":"0","note":""},{"goal_id":"savings","id":"baseline_accounts","due":"2026-10-18","label":"Baseline set + four accounts linked","done":"0","note":""},{"goal_id":"savings","id":"budget_auto","due":"2026-10-31","label":"Budget done + automatic transfers running","done":"0","note":""},{"goal_id":"savings","id":"m21k","due":"2026-12-31","label":"~[locked]","done":"000 saved","note":"0","null":["Q4 checkpoint"]},{"goal_id":"savings","id":"m100k","due":"2027-06-30","label":"[locked]","done":"000 saved","note":"0","null":["Extended to end of Q2 2027"]},{"goal_id":"squat","id":"sq_190","due":"2026-11-30","label":"Squat 190 kg","done":"0","note":""},{"goal_id":"squat","id":"sq_200","due":"2026-12-31","label":"Squat 200 kg","done":"0","note":""},{"goal_id":"bench","id":"bp_130","due":"2026-11-30","label":"Bench 130 kg","done":"0","note":""},{"goal_id":"bench","id":"bp_135","due":"2026-12-31","label":"Bench 135\u2013140 kg","done":"0","note":""},{"goal_id":"deadlift","id":"dl_210","due":"2026-11-30","label":"Deadlift 210 kg","done":"0","note":""},{"goal_id":"deadlift","id":"dl_225","due":"2026-12-31","label":"Deadlift 220\u2013225 kg","done":"0","note":""},{"goal_id":"deadlift","id":"dl_240","due":"2027-12-31","label":"Deadlift 240 kg","done":"0","note":"2027 target"},{"goal_id":"marathon","id":"mi40","due":"2026-12-31","label":"Build to 40 mi/week with one quality session","done":"0","note":"by December"},{"goal_id":"marathon","id":"10k40","due":"2026-11-30","label":"10K test sub-40","done":"0","note":"November"},{"goal_id":"marathon","id":"half130","due":"2026-12-31","label":"Half under 1:30","done":"0","note":""},{"goal_id":"marathon","id":"sub3","due":"2027-04-25","label":"Marathon sub-3:00 (TCS London)","done":"0","note":""},{"goal_id":"bodyfat","id":"bf_q4","due":"2026-12-31","label":"~0.5 kg/week \u00b7 5\u20136 kg lost \u00b7 ~15\u201316% BF","done":"0","note":"Q4 interim"},{"goal_id":"dates","id":"weekly_dates","due":"2026-12-31","label":"One date every week \u2014 all 11 in Q4","done":"0","note":""},{"goal_id":"dates","id":"weekend_away","due":"2026-12-31","label":"One bigger weekend away","done":"0","note":""},{"goal_id":"books","id":"cb101","due":"2026-10-25","label":"Central Banking 101 (+ Notion note)","done":"0","note":""},{"goal_id":"books","id":"book2","due":"2026-11-08","label":"Book 2 of 5 (+ Notion note)","done":"0","note":"every two weeks"},{"goal_id":"books","id":"book3","due":"2026-11-22","label":"Book 3 of 5 (+ Notion note)","done":"0","note":""},{"goal_id":"books","id":"book4","due":"2026-12-06","label":"Book 4 of 5 (+ Notion note)","done":"0","note":""},{"goal_id":"books","id":"book5","due":"2026-12-20","label":"Book 5 of 5 (+ Notion note)","done":"0","note":"five by 31 Dec"}],"targets":{"Career":20.0,"Fitness":20.0,"Learning":20.0,"Relationships":20.0},"start_date":"2026-10-10","money_enc":{"v":1,"kdf":"PBKDF2","hash":"SHA-256","iter":210000,"salt":"cIWVKIN//BTmYsqZlwyA/Q==","iv":"Xhf2I3z33BFjOTPX","ct":"mD8iNdn/ipm8nUjmIFVOY4y4mFo+cz73KvCKCsW1vrLZVYgpaQx9YzpaibeD2/5KhUIn88NF0KJwR8qPxGTItW7DJ3U2uxDjHQj4cWG5B8QBMy4mncIpzJ/VuQwaxkfRUq5OYng0kGlrZDPOSFMzuzmcg37lpohE3q2i2EDcxgoRQml0Gjqi0ySkl/z1xd43jEcSp0qF/3u4FQszSoEda/A+LUKwFgsdJt74sAXnyt5aIhNMoasF5iOla7K7JfY3eTk93NWMhWIVz6/CWcyR2mlq/ijfwCqty2hb41Zd4WiXf2mdVOAvDmFp0wOs0woUwNNn1d0DG2XIA0h4+Kyu/le9a70OhCYl4cq8cwnqF+QWODncFckIJmiEI2sqZ+rRcSGhGFdlPfSL94qymfQCaeKl7NrKIfah3WxvlAZqqdusIp8oiVl+dvk7VkYwgQ/spoQwvzt5esINv2iELKXTVD0SKnZZImqKVBZGCjLdCD0NTliT8g+sAaBCx2tcb3O9LYbtteIFWxZAeRao1Jj6ejuqwsU0Yfb+cjhUHBW8VIphFiisuUWDG1WSlmjGLlqhLDEpF290WWPsrA/8UUMA0Bm1u+y9RtnifY5xWcg3OEHUdGVeV3b+sRWKHuCB1c7IHdYNvAPANB1uDU9ZzUBUghvgga0gz4mYODR9zZmJ+VklcnGeHsKlWND6gi7vqkZv+m9/dt+k4UOya12Yz3ptpJ9Y9n4iWMZM+dYzr/OZaHQGKmjo"},"money_status":"encrypted","ticks_backend":"sheets"};
+const D={"log":[{"date":"2026-10-11","pillar":"Fitness","sub-area":"running","activity":"Royal Parks Half Marathon 1:36:05","points":"8","note":"race, baseline"}],"plan":{"weekLabel":"Interim schedule (until Runner app programme starts)","gymSource":"Coach Block 4 from Training Template / gym app seed.json (OR_Macrocycle). Day1\u2192Mon, Day2\u2192Wed, Day3\u2192Fri. Sets/reps/RPE shown = Block 4 Week 1; primary-lift progression notes cover Weeks 1\u20133. Block 5 (macrocycle w/c 12 Oct) is not in the sheet yet.","currentLifts":"Squat 180 / Bench 120 / Deadlift 190","week":[{"day":"Mon","kind":"gym","coachDay":1,"title":"Gym \u00b7 Day 1 \u00b7 Squat primary","summary":"Comp. Squat \u00b7 Close Grip Bench \u00b7 Incline DB Bench \u00b7 Leg Extensions \u00b7 Straight bar PD \u00b7 Seated Lat Raise","exercises":[{"classification":"Squat: Primary","exercise":"Comp. Squat","rx":"1\u00d73 @6 \u00b7 135kg cap \u00b7 2\u00d75 85% of top set \u00b7 114.75","progression":"W1: 1\u00d73 @6 [135kg cap]; 2\u00d75 85% of top set [114.75] \u2192 W2: 1\u00d73 @7 [135-140]; 2\u00d75 85% of top set [120] \u2192 W3: 1\u00d73 @7 [142.5-147.5]; 2\u00d75 85% of top set"},{"classification":"Bench: Secondary","exercise":"Close Grip Bench","rx":"3\u00d78 @4, @5, @6 \u00b7 80kg cap","progression":null},{"classification":"Bench: Supplementary","exercise":"Incline DB Bench","rx":"2\u00d710 @6, @7","progression":null},{"classification":"Quads","exercise":"Leg Extensions","rx":"1\u00d710 @8 \u00b7 2\u00d7Myo-Reps AMRAP x2 (10s rests)","progression":null},{"classification":"Triceps","exercise":"Straight bar PD","rx":"3\u00d710-12 @8","progression":null},{"classification":"Shoulders","exercise":"Seated Lat Raise","rx":"3\u00d710-12 @8","progression":null}],"extra":"Reading 20 min"},{"day":"Tue","kind":"run","title":"Run 5 miles","summary":"Run 5 miles","exercises":[],"extra":"Macro 08:00-09:30 \u00b7 Reading 30 min"},{"day":"Wed","kind":"gym","coachDay":2,"title":"Gym \u00b7 Day 2 \u00b7 Deadlift primary","summary":"Comp. Deadlift \u00b7 2ct Pause Bench \u00b7 Larsen Press \u00b7 RDL \u00b7 Single Arm PD \u00b7 Bayesian Curl \u00b7 Weighted Plank \u00b7 Single-Arm Barbell Hold","exercises":[{"classification":"Deadlift: Primary","exercise":"Comp. Deadlift","rx":"1\u00d73 @4 \u00b7 140kg cap \u00b7 1\u00d73 @5 \u00b7 150kg cap \u00b7 1\u00d73 Top set - 20kg","progression":"W1: 1\u00d73 @4 [140kg cap]; 1\u00d73 @5 [150kg cap]; 1\u00d73 Top set - 20kg \u2192 W2: 1\u00d73 @5 [140-150]; 1\u00d73 @6 [150-160]; 1\u00d73 Top set - 20kg \u2192 W3: 1\u00d73 @6 [150-160]; 1\u00d73 @7 [160-170]; 1\u00d73 Top set - 20kg"},{"classification":"Bench: Tertiary","exercise":"2ct Pause Bench","rx":"1\u00d73 @6 \u00b7 85kg cap","progression":null},{"classification":"Bench: Tertiary","exercise":"Larsen Press","rx":"2\u00d76 @5 \u00b7 75kg cap","progression":null},{"classification":"Deadlift: Secondary","exercise":"RDL","rx":"2\u00d78 @6, @7 \u00b7 120kg cap","progression":null},{"classification":"Back","exercise":"Single Arm PD","rx":"3\u00d710-12 @8","progression":null},{"classification":"Biceps","exercise":"Bayesian Curl","rx":"3\u00d710-12 @8","progression":null},{"classification":"Abs","exercise":"Weighted Plank","rx":"1\u00d7AMRAP @9","progression":null},{"classification":"Grip","exercise":"Single-Arm Barbell Hold","rx":"1\u00d7AMRAP @9","progression":null}],"extra":"Macro 08:00-09:30 \u00b7 Plan this week's Lauren thing"},{"day":"Thu","kind":"run","title":"Run 5 miles","summary":"Run 5 miles","exercises":[],"extra":"Macro 08:00-09:30 \u00b7 Optional: Rix Football 18:30-20:00"},{"day":"Fri","kind":"gym","coachDay":3,"title":"Gym \u00b7 Day 3 \u00b7 Bench primary","summary":"High Bar Squat \u00b7 Comp. Bench \u00b7 Leg Press \u00b7 Seated Hamstring Curl \u00b7 Straight bar extension \u00b7 Straight bar front raise","exercises":[{"classification":"Squat: Secondary","exercise":"High Bar Squat","rx":"3\u00d78 @4, @5, @6 \u00b7 100kg cap","progression":null},{"classification":"Bench: Primary","exercise":"Comp. Bench","rx":"1\u00d73 @6 \u00b7 95kg cap \u00b7 2\u00d77 80% of top set","progression":"W1: 1\u00d73 @6 [95kg cap]; 2\u00d77 80% of top set \u2192 W2: 1\u00d73 @7 [100kg]; 2\u00d77 80% of top set \u2192 W3: 1\u00d73 @8 [105]; 2\u00d77 80% of top set"},{"classification":"Squat: Supplementary","exercise":"Leg Press","rx":"2\u00d710 @6, @7","progression":null},{"classification":"Hamstrings","exercise":"Seated Hamstring Curl","rx":"1\u00d710 @8 \u00b7 2\u00d7Myo-Reps AMRAP x2 (10s rests)","progression":null},{"classification":"Triceps","exercise":"Straight bar extension","rx":"3\u00d710-12 @8","progression":null},{"classification":"Shoulders","exercise":"Straight bar front raise","rx":"3\u00d710-12 @8","progression":null}],"extra":"Lauren slot (date/surprise)"},{"day":"Sat","kind":"run","title":"Long run 10\u201315 miles","summary":"Long run 10\u201315 miles","exercises":[],"extra":"Lauren slot (alt)"},{"day":"Sun","kind":"run","title":"Run 6 miles","summary":"Run 6 miles","exercises":[],"extra":"Reading 45 min + 5-min weekly review"}],"phases":[{"name":"Recovery","start":"2026-10-12","end":"2026-10-18","run":"Easy only: 2-3 x 30-40 min, no quality. Football optional.","lift":"2 sessions @RPE6, no heavy pulls until Thu"},{"name":"Base","start":"2026-10-19","end":"2026-12-20","run":"Build 40->60 km/wk, long run 16->24k, tempo + strides. Checkpoint: 10k ~42-43 min by early Dec Baseline half 1:36:05 (Riegel \u22483:21).","lift":"Bench 125 x1, DL 200 x1, Squat hold 180"},{"name":"Build","start":"2026-12-21","end":"2027-02-14","run":"60->75 km/wk, long 26->32k with MP blocks, threshold + VO2 reps. Checkpoint: half end-Jan (sub-1:30 \u2248 ~3:10; sub-1:27 needed for sub-3). Baseline: Royal Parks Half 1:36:05 \u2192 Riegel \u22483:21.","lift":"Bench 130, DL 210-215, Squat 180-185; strength 2-3x"},{"name":"Peak","start":"2027-02-15","end":"2027-03-28","run":"75-85 km/wk, 2-3 x 32-35k long runs, MP work; set goal pace from Jan half (sub-1:30\u2192~3:10, sub-1:27\u2192sub-3)","lift":"Maintain: 2 sessions, low volume, no lifting PRs"},{"name":"Taper","start":"2027-03-29","end":"2027-04-25","run":"Volume -20/-40/-60%, keep some MP; race TCS London Marathon Sun 25 Apr 2027","lift":"1-2 light sessions, stop heavy lower body 10 days out"}],"race":{"name":"TCS London Marathon 2027","date":"2027-04-25","note":"Oliver runs Sun 25 Apr 2027"},"raceDate":"2027-04-25"},"books":[{"title":"Central Banking 101","author":"Joseph Wang","status":"reading","started":"2026-10","finished":"","notion_url":""}],"todo":[{"item":"Running app login","needed_by_agent":"Ollie","why":"To pull your running sessions into the plan automatically","added":"2026-10-10","status":"open"},{"item":"More book names for the reading list","needed_by_agent":"Ollie","why":"To fill the 26-book year after Central Banking 101","added":"2026-10-10","status":"waiting: decide whether to add Fixed Income Markets"},{"item":"Marathon race date","needed_by_agent":"Ollie","why":"TCS London Marathon Sun 25 Apr 2027","added":"2026-10-10","status":"done"},{"item":"Half marathon result (after Sun 11 Oct)","needed_by_agent":"Ollie","why":"Royal Parks Half 11 Oct 2026: 1:36:05 (Riegel \u22483:21 marathon). Baseline set.","added":"2026-10-10","status":"done"},{"item":"Pick a topic from Weekly Macro's ranked list","needed_by_agent":"Macro_Weekly","why":"Newsletter is waiting on your choice","added":"2026-10-10","status":"open"},{"item":"Current savings baseline for the \u00a3100K goal","needed_by_agent":"Ollie","why":"To track progress from the right start point","added":"2026-10-10","status":"open"},{"item":"Confirm weekly points targets","needed_by_agent":"Ollie","why":"Targets are placeholder 20 pts per pillar","added":"2026-10-10","status":"open"},{"item":"Interactive Brokers read-only access (Flex Query token + query id preferred, or monthly activity statement CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Barclays Smart Investor statement export (CSV/PDF)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Chase statement export (CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"NatWest statement export (CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Coach Block 5 / current-week gym prescription","needed_by_agent":"Ollie","why":"Block 4 ends ~5 Oct; macrocycle Block 5 starts w/c 12 Oct but is not in Training Template yet \u2014 need sets/reps/RPE for post-half weeks","added":"2026-10-10","status":"open"},{"item":"Confirm which Block 4 week (or Block 5) to use for load after the half","needed_by_agent":"Ollie","why":"App shows Block 4 Week 1 rx + W1\u2013W3 progression; need your call on starting loads post-race","added":"2026-10-10","status":"open"},{"item":"Confirm London Marathon day: Sat 24 or Sun 25 Apr","needed_by_agent":"Ollie","why":"Confirmed: Sun 25 Apr 2027","added":"2026-10-10","status":"done"}],"finance":[],"scoring":[{"pillar":"Fitness","sub-area":"gym","activity":"Gym session","points":"3"},{"pillar":"Fitness","sub-area":"running","activity":"5k run","points":"3"},{"pillar":"Fitness","sub-area":"running","activity":"Long run (15k+)","points":"5"},{"pillar":"Fitness","sub-area":"running","activity":"Race","points":"8"},{"pillar":"Fitness","sub-area":"eating","activity":"Clean eating day","points":"1"},{"pillar":"Learning","sub-area":"reading","activity":"30 pages reading","points":"2"},{"pillar":"Learning","sub-area":"output","activity":"Published write-up / newsletter","points":"5"},{"pillar":"Learning","sub-area":"output","activity":"Draft / notes session","points":"2"},{"pillar":"Relationships","sub-area":"wife","activity":"Date night","points":"4"},{"pillar":"Relationships","sub-area":"wife","activity":"Quality evening together","points":"2"},{"pillar":"Relationships","sub-area":"family","activity":"Family call","points":"2"},{"pillar":"Relationships","sub-area":"family","activity":"Family visit","points":"4"},{"pillar":"Relationships","sub-area":"friends","activity":"Friends meetup","points":"3"},{"pillar":"Career","sub-area":"macro","activity":"Macro study block","points":"2"},{"pillar":"Career","sub-area":"macro","activity":"Trade journal entry","points":"2"},{"pillar":"Career","sub-area":"macro","activity":"Trade idea written up","points":"3"},{"pillar":"Career","sub-area":"finances","activity":"Budget / portfolio review","points":"2"}],"goals":[{"id":"job","pillar":"Career","label":"Macro hedge fund job secured","short":"Career","kind":"habits","baseline":"","target":"","current":"0","unit":"","note":"","description":"Land a macro hedge fund seat by 31 Dec 2026. Monthly: 2 proper applications (CV + tangible for the fund + trade idea). Weekly: 1 blog write-up + 1 trade post. Daily: 30 min tracking markets / calibrating for the weekend.","deadline":"2026-12-31","steps":"12"},{"id":"lifts","pillar":"Fitness","label":"Squat 200 \u00b7 Bench 140 \u00b7 Deadlift 240","short":"Lifts","kind":"lifts","baseline":"0","target":"3","current":"0","unit":"lifts","note":"S 200 / B 140 / DL 240","description":"Hit competition lifts by 31 Dec 2026. Habit: gym 3\u00d7/week.","deadline":"2026-12-31","steps":"6"},{"id":"run","pillar":"Fitness","label":"Sub-1:30 half marathon","short":"Run","kind":"run","baseline":"1:36:05","target":"1:30:00","current":"1:36:05","unit":"h:mm:ss","note":"London Marathon sub-3 25 Apr 2027 (longer-term)","description":"Half under 1:30 by 31 Dec 2026. Habit: run 3\u00d7/week. Sub-3 TCS London Marathon 25 Apr 2027 stays as the longer race goal.","deadline":"2026-12-31","steps":"4"},{"id":"bodyfat","pillar":"Fitness","label":"Body fat 12%","short":"BF%","kind":"number","baseline":"22.5","target":"12","current":"22.5","unit":"%","note":"look like I lift","description":"Reach ~12% body fat by 31 Dec 2026. Habits: weigh-in daily; 180g protein daily.","deadline":"2026-12-31","steps":"8"},{"id":"books","pillar":"Learning","label":"10 book reviews","short":"Books","kind":"books","baseline":"0","target":"10","current":"0","unit":"","note":"Substack reviews","description":"Ten book reviews by 31 Dec 2026. Habit: new book every 2 weeks + review on Substack.","deadline":"2026-12-31","steps":"10"},{"id":"savings","pillar":"Career","label":"Savings goal","short":"Save","kind":"number","baseline":"","target":"","current":"","unit":"","note":"figures encrypted","description":"[amount] by 30 Jun 2027. Near-term: organise savings plan + direct debits this week; plan a separate income stream (Ollie helps).","deadline":"2027-06-30","steps":"8"},{"id":"lauren","pillar":"Relationships","label":"Make Lauren feel special","short":"Lauren","kind":"dates","baseline":"0","target":"1","current":"0","unit":"","note":"weekly date night","description":"Make Lauren feel special. Habit: a date night every week.","deadline":"2027-06-30","steps":"12"}],"job_milestones":[{"milestone":"apps_oct","done":"0","due":"2026-10-31","label":"October: 2 HF applications"},{"milestone":"apps_nov","done":"0","due":"2026-11-30","label":"November: 2 HF applications"},{"milestone":"apps_dec","done":"0","due":"2026-12-31","label":"December: 2 HF applications"},{"milestone":"interview","done":"0","due":"2026-12-15","label":"First-round interview"},{"milestone":"offer","done":"0","due":"2026-12-31","label":"Job secured"}],"savings_milestones":[{"milestone":"m21k","due":"2026-12-31","label":"~[locked] saved (year-end pace)"},{"milestone":"m100k","due":"2027-06-30","label":"[locked] saved (Q2 2027)"}],"career_weekly":[{"goal_id":"job","id":"blog","label":"1 weekly write-up (blog)","target_per_week":"1","log_match":"blog|write-up|writeup|substack"},{"goal_id":"job","id":"trade_post","label":"1 trade post","target_per_week":"1","log_match":"trade post|trade idea"},{"goal_id":"job","id":"markets","label":"Daily markets (log days)","target_per_week":"5","log_match":"markets|calibrat"},{"goal_id":"savings","id":"plan_dd","label":"Savings plan + direct debits","target_per_week":"1","log_match":"direct debit|savings plan|standing order"}],"actions":[{"goal_id":"job","pillar":"Career","scope":"daily","id":"markets","label":"30 min markets / calibrate","points":"2","target":"1","weight":"4","cadence":"daily"},{"goal_id":"job","pillar":"Career","scope":"weekly","id":"blog","label":"Weekly write-up (blog)","points":"3","target":"1","weight":"4","cadence":"weekly"},{"goal_id":"job","pillar":"Career","scope":"weekly","id":"trade_post","label":"Trade post","points":"3","target":"1","weight":"4","cadence":"weekly"},{"goal_id":"job","pillar":"Career","scope":"monthly","id":"apps","label":"HF applications (\u00d72: CV + tangible + idea)","points":"8","target":"2","weight":"4","cadence":"monthly"},{"goal_id":"lifts","pillar":"Fitness","scope":"weekly","id":"gym","label":"Gym sessions","points":"3","target":"3","weight":"3","cadence":"weekly"},{"goal_id":"run","pillar":"Fitness","scope":"weekly","id":"runs","label":"Runs","points":"3","target":"3","weight":"3","cadence":"weekly"},{"goal_id":"bodyfat","pillar":"Fitness","scope":"daily","id":"weighin","label":"Weigh-in","points":"1","target":"1","weight":"3","cadence":"daily"},{"goal_id":"bodyfat","pillar":"Fitness","scope":"daily","id":"protein","label":"180g protein","points":"2","target":"1","weight":"3","cadence":"daily"},{"goal_id":"books","pillar":"Learning","scope":"fortnightly","id":"book_review","label":"New book + Substack review","points":"5","target":"1","weight":"1","cadence":"fortnightly"},{"goal_id":"lauren","pillar":"Relationships","scope":"weekly","id":"date","label":"Date night with Lauren","points":"4","target":"1","weight":"2","cadence":"weekly"},{"goal_id":"savings","pillar":"Career","scope":"once","id":"plan_dd","label":"Organise savings plan + direct debits","points":"5","target":"1","weight":"2","cadence":"once"},{"goal_id":"savings","pillar":"Career","scope":"once","id":"income_stream","label":"Plan separate income stream","points":"5","target":"1","weight":"2","cadence":"once"}],"marathon_milestones":[{"milestone":"half_sub_130","label":"Half under 1:30","done":"0","due":"2026-12-31","note":"Year-end"},{"milestone":"sub3_london","label":"Marathon sub-3:00 (TCS London)","done":"0","due":"2027-04-25","note":"Sun 25 Apr 2027"}],"dayplan":[{"date":"2026-10-13","time":"06:00","id":"wake","item":"Wake","pillar":"Fitness","priority":"2","note":""},{"date":"2026-10-13","time":"06:15","id":"run5","item":"Easy 5 mi \u00b7 conversational \u00b7 legs post half","pillar":"Fitness","priority":"2","note":"non-negotiable"},{"date":"2026-10-13","time":"07:15","id":"breakfast","item":"Shower + high-protein breakfast","pillar":"Fitness","priority":"2","note":""},{"date":"2026-10-13","time":"08:00","id":"commute_read","item":"Commute: Central Banking 101 (~20 min)","pillar":"Learning","priority":"5","note":""},{"date":"2026-10-13","time":"09:00","id":"work_day","item":"Work \u00b7 hard stop 19:00 \u00b7 leave on time","pillar":"Career","priority":"4","note":"current job"},{"date":"2026-10-13","time":"19:30","id":"lauren","item":"Lauren \u00b7 phones away \u00b7 plan this week's date","pillar":"Relationships","priority":"3","note":""},{"date":"2026-10-13","time":"20:15","id":"hf_work","item":"Hedge fund \u00b7 Point72 London / Macro_Careers \u00b7 one concrete output","pillar":"Career","priority":"1","note":""},{"date":"2026-10-13","time":"22:30","id":"sleep","item":"Lights out \u00b7 7h sleep minimum","pillar":"Fitness","priority":"2","note":""}],"updates":[{"timestamp":"2026-10-12T11:05:00+01:00","text":"Today plan for Tue 13 Oct added (tickable). In-app updates feed with bell + unread badge."},{"timestamp":"2026-10-12T11:10:00+01:00","text":"Q4 milestones added \u2014 job, savings (100K goal \u2192 30 Jun 2027), lifts, running, body fat, Lauren, reading. Q4 2026 section on each goal."},{"timestamp":"2026-10-12T11:15:00+01:00","text":"Moved to GitHub Pages. Ticks sync via Google Sheet (or this device). Money figures encrypted client-side."},{"timestamp":"2026-10-12T11:35:00+01:00","text":"Goals clarity + gamification preview: XP/levels, streak freeze, perfect-week + checkpoint badges, celebrations."},{"timestamp":"2026-10-13T08:05:00+01:00","text":"Goals rewritten: 7-axis star (Career Lifts Run BF% Books Save Lauren), habit streaks, equal weekly weight. Preview only."},{"timestamp":"2026-10-13T08:20:00+01:00","text":"XP system: lifetime levels, streak multiplier, week-complete bonuses, rewards (kit / dinner / weekend). Preview only."}],"q4_milestones":[{"goal_id":"lifts","id":"sq_190","due":"2026-11-30","label":"Squat 190 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"bp_130","due":"2026-11-30","label":"Bench 130 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"dl_210","due":"2026-11-30","label":"Deadlift 210 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"sq_200","due":"2026-12-31","label":"Squat 200 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"bp_140","due":"2026-12-31","label":"Bench 140 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"dl_240","due":"2026-12-31","label":"Deadlift 240 kg","done":"0","note":"Year-end"},{"goal_id":"run","id":"half_130","due":"2026-12-31","label":"Half under 1:30","done":"0","note":"Year-end race shape"},{"goal_id":"run","id":"sub3_london","due":"2027-04-25","label":"Marathon sub-3:00 (TCS London)","done":"0","note":"Longer-term"},{"goal_id":"bodyfat","id":"bf_12","due":"2026-12-31","label":"Body fat ~12%","done":"0","note":"look like I lift"},{"goal_id":"savings","id":"plan_dd","due":"2026-10-19","label":"Savings plan + direct debits set up","done":"0","note":"This week"},{"goal_id":"savings","id":"income_stream","due":"2026-11-15","label":"Separate income stream planned","done":"0","note":"Ollie helps plan"},{"goal_id":"savings","id":"m100k","due":"2027-06-30","label":"Savings goal checkpoint","done":"0","note":"Encrypted figure"},{"goal_id":"job","id":"secured","due":"2026-12-31","label":"Macro HF job secured","done":"0","note":"End goal"},{"goal_id":"books","id":"reviews_10","due":"2026-12-31","label":"10 book reviews published","done":"0","note":"Substack"},{"goal_id":"lauren","id":"dates_weekly","due":"2027-06-30","label":"Weekly date night habit held","done":"0","note":""}],"checkpoints":[{"goal_id":"lifts","id":"sq_190","due":"2026-11-30","label":"Squat 190 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"bp_130","due":"2026-11-30","label":"Bench 130 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"dl_210","due":"2026-11-30","label":"Deadlift 210 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"sq_200","due":"2026-12-31","label":"Squat 200 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"bp_140","due":"2026-12-31","label":"Bench 140 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"dl_240","due":"2026-12-31","label":"Deadlift 240 kg","done":"0","note":"Year-end"},{"goal_id":"run","id":"half_130","due":"2026-12-31","label":"Half under 1:30","done":"0","note":"Year-end race shape"},{"goal_id":"run","id":"sub3_london","due":"2027-04-25","label":"Marathon sub-3:00 (TCS London)","done":"0","note":"Longer-term"},{"goal_id":"bodyfat","id":"bf_12","due":"2026-12-31","label":"Body fat ~12%","done":"0","note":"look like I lift"},{"goal_id":"savings","id":"plan_dd","due":"2026-10-19","label":"Savings plan + direct debits set up","done":"0","note":"This week"},{"goal_id":"savings","id":"income_stream","due":"2026-11-15","label":"Separate income stream planned","done":"0","note":"Ollie helps plan"},{"goal_id":"savings","id":"m100k","due":"2027-06-30","label":"Savings goal checkpoint","done":"0","note":"Encrypted figure"},{"goal_id":"job","id":"secured","due":"2026-12-31","label":"Macro HF job secured","done":"0","note":"End goal"},{"goal_id":"books","id":"reviews_10","due":"2026-12-31","label":"10 book reviews published","done":"0","note":"Substack"},{"goal_id":"lauren","id":"dates_weekly","due":"2027-06-30","label":"Weekly date night habit held","done":"0","note":""}],"rewards":[{"id":"kit","xp":"1000","label":"New running kit","note":"Treat yourself to fresh kit"},{"id":"dinner","xp":"2500","label":"Dinner out with Lauren","note":"Celebratory date night"},{"id":"weekend","xp":"5000","label":"Weekend away","note":"Book a proper escape"}],"targets":{"Career":20.0,"Fitness":20.0,"Learning":20.0,"Relationships":20.0},"start_date":"2026-10-10","money_enc":{"v":1,"kdf":"PBKDF2","hash":"SHA-256","iter":210000,"salt":"PfRDC2+acujETNT2WS80Iw==","iv":"w22RRDGoXjwnLawv","ct":"Rs+tDtO9PBaKlj9mB+O0hjW0seNqd7rH10Ak8BTKeQkXRnDvKf9eRSVYm6qOXuJm0SPpOYhuWCvD6DUcmmY6YdhZU5EbdDDC65UvtHaA5Z+eKcJdyGo6yEbF0Tf0bmdzpkDQxYi/bJZN9WGeYopy6nT+mT0PjIAwuTtdQcuo0+gfTAZTei+t55hmgijoJOrBFBRR8ylZow4zh6ajCnoIBcywjphYoHBbcL07MB2VJE7PsPqGKNxCOw8FXOgyT4h81ChL2ZHztYHYB6r4m50NCuC7o4FLqxSV57zAWC6gb78+FeFO6IyYjPFHyT5BMK2wfdRavENYLGYRY2GX9G4F31zK0oUdLYgQaoor62UrOiHe2dD/N717suSHtl95byjHhHsdg4im6gto6Grj2i6OM2XX3lmyJKbR8XXADBjzpIMN0JWb9QAX1aUglR5y39owYg8bTBsCJwaw1Aih9dUGQIpPa5/eCSQ1ZcIM9krONRBp0eG1y0EWeFOUa6NEQbo+DCiG1ORpfsYC/UTV+g8Ys53Exh++DPGtIwEv5C9fZ06Og9J/512BbGuEXi7NNYg12FLch6jp95giuhFs7xSTpqW59c/zSb7FHdr3wzg8fVSP+8lKiZzJU7r/2cCecTX6S6+uRaafLhMsrCU09Fl1VjoQquzFczIMwocr+aNAqOWsiPS7qxu6EabpqBwhW2Hvc3rtBsTnd0vg5k8UrDVmxvVNDuq8Os8fIv+RD66Z0OpEfjaw5b4p5KD24T3wrMpRjija5KJfQhyRkhZFmg8="},"money_status":"encrypted","ticks_backend":"sheets"};
 const logAll=D.log||[];
 const log=logAll.filter(r=>!/EXAMPLE/i.test((r.activity||'')+' '+(r.note||'')+' '+(r['sub-area']||'')));
 D.log=log; // use cleaned log everywhere below
 const PC={Career:'#2563eb',Fitness:'#30d158',Learning:'#ffe074',Relationships:'#ff375f'};
+const GC={job:'#2563eb',lifts:'#30d158',run:'#64d2ff',bodyfat:'#b5f56e',books:'#ffe074',savings:'#8b7cff',lauren:'#ff375f'};
+const ACTIONS=D.actions||[];
+const TICKS_KEY='life.ticks.v1';
+function defaultState(){
+  return {date:(typeof londonISO==='function'?londonISO():new Date().toLocaleDateString('en-CA',{timeZone:'Europe/London'})),week:'',daily:{},weekly:{},points:{Career:0,Fitness:0,Learning:0,Relationships:0},updatedAt:null};
+}
+let ticksState=defaultState();
+try{ const c=JSON.parse(localStorage.getItem(TICKS_KEY)||'null'); if(c) ticksState=c; }catch{}
+
+
 const day=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
 const iso=d=>d.toLocaleDateString('en-CA');
 const now=new Date();
@@ -468,40 +561,105 @@ function jobPct(){
   const done=ms.filter(m=>m.done==='1'||m.done===1||m.done==='true').length;
   return done/ms.length;
 }
+
+function periodKey(cadence){
+  const d=(typeof londonISO==='function'?londonISO():new Date().toLocaleDateString('en-CA',{timeZone:'Europe/London'}));
+  if(cadence==='daily') return d;
+  if(cadence==='weekly') return (typeof ticksState!=='undefined' && ticksState.week) || isoWeekLocal();
+  if(cadence==='monthly') return d.slice(0,7);
+  if(cadence==='fortnightly'){
+    // ISO week pair: weeks 1-2, 3-4…
+    const w=isoWeekLocal();
+    const [y,ww]=w.split('-W');
+    const n=Math.ceil(parseInt(ww,10)/2);
+    return y+'-F'+String(n).padStart(2,'0');
+  }
+  return 'once';
+}
+function isoWeekLocal(){
+  const x=new Date();
+  const dt=new Date(Date.UTC(x.getFullYear(),x.getMonth(),x.getDate()));
+  const day=dt.getUTCDay()||7;
+  dt.setUTCDate(dt.getUTCDate()+4-day);
+  const ys=new Date(Date.UTC(dt.getUTCFullYear(),0,1));
+  const week=Math.ceil((((dt-ys)/864e5)+1)/7);
+  return dt.getUTCFullYear()+'-W'+String(week).padStart(2,'0');
+}
+function actionProgress(a){
+  const scope=a.scope==='daily'?'daily':(a.scope==='once'?'weekly':a.scope==='monthly'?'weekly':a.scope==='fortnightly'?'weekly':'weekly');
+  // store monthly/fortnightly/once under weekly bucket with composite keys
+  const bucket = (a.cadence==='daily') ? 'daily' : 'weekly';
+  const id = (a.cadence==='daily') ? a.id : (a.cadence+':'+periodKey(a.cadence)+':'+a.id);
+  // also support simple id for weekly
+  let v;
+  if(a.cadence==='weekly' || a.scope==='weekly'){
+    v = ticksState?.weekly?.[a.pillar]?.[a.id];
+  } else if(a.cadence==='daily'){
+    v = ticksState?.daily?.[a.pillar]?.[a.id];
+  } else {
+    v = ticksState?.weekly?.[a.pillar]?.[a.cadence+'_'+a.id];
+    if(v==null) v = ticksState?.weekly?.[a.pillar]?.[a.id];
+  }
+  const n=typeof v==='number'?v:(v?1:0);
+  const tgt=Math.max(1,+a.target||1);
+  return {n, tgt, ok:n>=tgt, ratio:Math.min(1,n/tgt)};
+}
+function setActionValue(a, value){
+  if(a.cadence==='daily' || a.scope==='daily'){
+    ticksState.daily=ticksState.daily||{}; ticksState.daily[a.pillar]=ticksState.daily[a.pillar]||{};
+    ticksState.daily[a.pillar][a.id]=!!value;
+  } else {
+    ticksState.weekly=ticksState.weekly||{}; ticksState.weekly[a.pillar]=ticksState.weekly[a.pillar]||{};
+    const tgt=Math.max(1,+a.target||1);
+    const key=(a.cadence==='weekly'||!a.cadence)?a.id:(a.cadence+'_'+a.id);
+    if(tgt<=1) ticksState.weekly[a.pillar][key]=!!value;
+    else ticksState.weekly[a.pillar][key]=value?tgt:(typeof value==='number'?value:0);
+  }
+}
+function habitsForGoal(goalId){ return (ACTIONS||[]).filter(a=>a.goal_id===goalId); }
+function checkpointsFor(goalId){ return (D.checkpoints||D.q4_milestones||[]).filter(m=>m.goal_id===goalId); }
+function cpDone(m){
+  return !!(game.checkpoints&&game.checkpoints[m.id]) || m.done==='1'||m.done===1||m.done==='true';
+}
+function stepsDone(g){
+  const max=+g.steps||8;
+  let s=0;
+  // checkpoints hit
+  for(const m of checkpointsFor(g.id)) if(cpDone(m)) s++;
+  // current period habits met each count as a step (capped)
+  for(const a of habitsForGoal(g.id)) if(actionProgress(a).ok) s++;
+  return Math.min(max, s);
+}
+function snapSteps(pct, steps){
+  const n=Math.max(1,+steps||4);
+  const step=100/n;
+  return Math.round(Math.round((+pct||0)/step)*step);
+}
 function goalPct(g){
-  const kind=g.kind;
-  if(kind==='checklist') return jobPct()*100;
-  if(kind==='books'){const t=num(g.target,26)||26;return clamp01(booksFinished()/t)*100}
-  if(kind==='dates'){const hit=datesHit(),w=weeksElapsed();return clamp01(hit/w)*100}
-  if(kind==='marathon'){
-    const parseT=s=>{if(!s)return null; const p=String(s).split(':').map(Number); if(p.some(x=>!Number.isFinite(x)))return null; if(p.length===3)return p[0]*3600+p[1]*60+p[2]; if(p.length===2)return p[0]*60+p[1]; return null};
-    const b=parseT(g.baseline), tgt=parseT(g.target), cur=parseT(g.current||g.baseline);
-    if(b==null||tgt==null||cur==null||b===tgt) return 0;
-    // lower time is better: progress from baseline toward target
-    return clamp01((b-cur)/(b-tgt))*100;
+  // Long-term stepped progress (notches)
+  const max=+g.steps||8;
+  const done=stepsDone(g);
+  return snapSteps(100*done/max, max);
+}
+function weekEqualPct(g){
+  // Equal weekly weight across axes: this period's habit completion for the goal
+  const acts=habitsForGoal(g.id).filter(a=>a.cadence!=='once');
+  const once=habitsForGoal(g.id).filter(a=>a.cadence==='once');
+  if(!acts.length && once.length){
+    const r=once.reduce((a,x)=>a+actionProgress(x).ratio,0)/once.length;
+    return snapSteps(r*100, 4);
   }
-  if(kind==='number'){
-    let b=num(g.baseline,0), t=num(g.target,0);
-    let c=num(g.current,b);
-    if(g.id==='savings'){
-      const sc=savingsCurrent(), tgt=savingsTarget();
-      if(sc==null||tgt==null) return 0;
-      b=0; t=tgt; c=sc;
-    }
-    if(g.id==='bodyfat'){ // lower is better
-      if(b===t) return 0;
-      return clamp01((b-c)/(b-t))*100;
-    }
-    if(t===b) return c>=t?100:0;
-    return clamp01((c-b)/(t-b))*100;
-  }
-  return 0;
+  if(!acts.length) return 0;
+  // Weight daily/weekly/fortnightly/monthly equally per habit line
+  const r=acts.reduce((a,x)=>a+actionProgress(x).ratio,0)/acts.length;
+  return snapSteps(r*100, 4);
 }
 
 const goals=D.goals||[];
 const axisLabels=goals.map(g=>g.short||g.label);
-const axisColors=goals.map(g=>PC[g.pillar]||'#fff');
-const axisVals=goals.map(g=>Math.round(goalPct(g)));
+const axisColors=goals.map(g=>GC[g.id]||PC[g.pillar]||'#fff');
+// Home star = THIS WEEK equally weighted (stepped notches)
+const axisVals=goals.map(()=>0); // filled after ACTIONS/ticks ready via refreshStar()
 
 const axisTintPlugin={
   id:'axisTint',
@@ -511,22 +669,25 @@ const axisTintPlugin={
     const cx=r.xCenter, cy=r.yCenter, rad=r.drawingArea;
     const n=meta.data.length;
     ctx.save();
+    // discrete ring notches
+    ctx.strokeStyle='rgba(255,255,255,.06)';
+    ctx.lineWidth=1;
+    for(const frac of [0.25,0.5,0.75,1]){
+      ctx.beginPath(); ctx.arc(cx,cy,rad*frac,0,Math.PI*2); ctx.stroke();
+    }
     for(let i=0;i<n;i++){
       const a=i*2*Math.PI/n - Math.PI/2;
       const a0=a-Math.PI/n, a1=a+Math.PI/n;
       ctx.beginPath(); ctx.moveTo(cx,cy);
       ctx.arc(cx,cy,rad,a0,a1); ctx.closePath();
       const col=axisColors[i]||'#fff';
-      ctx.fillStyle=col.length===7?col+'18':col; // faint ~9% opacity
-      // if already rgba skip
       if(col.startsWith('#')){
         const h=col.slice(1);
         const full=h.length===3?h.split('').map(c=>c+c).join(''):h;
         const rr=parseInt(full.slice(0,2),16), gg=parseInt(full.slice(2,4),16), bb=parseInt(full.slice(4,6),16);
         ctx.fillStyle='rgba('+rr+','+gg+','+bb+',0.12)';
-      }
+      } else ctx.fillStyle=col;
       ctx.fill();
-      // coloured angle line
       ctx.beginPath();
       ctx.moveTo(cx,cy);
       ctx.lineTo(cx+Math.cos(a)*rad, cy+Math.sin(a)*rad);
@@ -536,20 +697,20 @@ const axisTintPlugin={
     ctx.restore();
   }
 };
-new Chart(star,{
+window._lifeStar=new Chart(star,{
   type:'radar',
   data:{
     labels:axisLabels,
     datasets:[{
-      label:'Progress',
+      label:'This week',
       data:axisVals,
       backgroundColor:'rgba(250,250,250,.10)',
       borderColor:'#fafafa',
       borderWidth:2,
       pointBackgroundColor:axisColors,
       pointBorderColor:'#000',
-      pointRadius:5,
-      pointHoverRadius:6
+      pointRadius:6,
+      pointHoverRadius:7
     }]
   },
   options:{
@@ -567,24 +728,31 @@ new Chart(star,{
       let ang=Math.atan2(dy,dx)+Math.PI/2; if(ang<0) ang+=2*Math.PI;
       openGoal(Math.round(ang/(2*Math.PI/goals.length))%goals.length);
     },
-    scales:{r:{min:0,max:100,ticks:{display:false,stepSize:25},grid:{color:'rgba(255,255,255,.07)'},angleLines:{display:false},pointLabels:{color:'#fafafa',font:{size:10,family:'Geist',weight:'600'},padding:6}}},
+    scales:{r:{min:0,max:100,ticks:{display:false,stepSize:25},grid:{color:'rgba(255,255,255,.05)'},angleLines:{display:false},pointLabels:{color:'#fafafa',font:{size:10,family:'Geist',weight:'600'},padding:6}}},
     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{
       const g=goals[c.dataIndex];
-      return (g?g.label:c.label)+': '+c.raw+'%';
+      const long=g?goalPct(g):0;
+      return (g?g.label:c.label)+': week '+c.raw+'% · long-term '+long+'%';
     }}}}
   },
   plugins:[axisTintPlugin]
 });
+function refreshStar(){
+  if(!window._lifeStar) return;
+  window._lifeStar.data.datasets[0].data=goals.map(g=>weekEqualPct(g));
+  window._lifeStar.update('none');
+}
 
 function fmtNum(v,u){if(v===''||v==null||!Number.isFinite(+v)) return '—'; const n=+v; return (u==='GBP'?'£':'')+(u==='GBP'?Math.round(n).toLocaleString():n)+(u&&u!=='GBP'?' '+u:'')}
 function currentDisplay(g){
-  if(g.kind==='checklist'){const ms=D.job_milestones||[]; return ms.filter(m=>m.done==='1'||m.done===1).length+' / '+ms.length+' milestones'}
-  if(g.kind==='books') return booksFinished()+' / '+(g.target||26)+' books';
-  if(g.kind==='dates') return datesHit()+' / '+weeksElapsed()+' weeks';
-  if(g.kind==='marathon') return (g.current||g.baseline||'—')+' pred (half 1:36:05 → base '+ (g.baseline||'—') +')';
+  if(g.kind==='books') return booksFinished()+' / '+(g.target||10)+' reviews';
+  if(g.kind==='dates') return datesHit()+' date nights logged';
+  if(g.kind==='run') return (g.current||g.baseline||'—')+' half · target '+(g.target||'1:30:00');
+  if(g.kind==='lifts') return g.note||'S 200 / B 140 / DL 240';
   if(g.id==='savings'){ const sc=savingsCurrent(); return sc==null?'🔒 locked':fmtNum(sc,'GBP'); }
-  if(g.id==='bodyfat') return fmtNum(g.current||g.baseline,'%');
-  return fmtNum(g.current!==''&&g.current!=null?g.current:g.baseline, g.unit);
+  if(g.id==='bodyfat') return fmtNum(g.current||g.baseline,'%')+' → '+fmtNum(g.target,'%');
+  const max=+g.steps||8, done=stepsDone(g);
+  return done+' / '+max+' steps';
 }
 
 function fmtDue(d){
@@ -592,16 +760,47 @@ function fmtDue(d){
   try{return new Date(d+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'Europe/London'})}
   catch{return d}
 }
-function q4For(goalId){return (D.q4_milestones||[]).filter(m=>m.goal_id===goalId)}
+function q4For(goalId){return (D.checkpoints||D.q4_milestones||[]).filter(m=>m.goal_id===goalId)}
 function renderQ4List(rows, opts){
   opts=opts||{};
   if(!rows.length) return '<div class="sub">No Q4 milestones</div>';
   return rows.map(m=>{
-    const on=m.done==='1'||m.done===1||m.done==='true';
+    const hit=!!(game.checkpoints&&game.checkpoints[m.id]) || m.done==='1'||m.done===1||m.done==='true';
     const due=m.due?'<span class="q4-due">'+fmtDue(m.due)+'</span>':'';
     const note=m.note&&opts.showNote?'<br><span class="sub">'+m.note+'</span>':'';
-    return '<div class="li"><span class="check '+(on?'on':'')+'"></span><span><b>'+(m.label||m.id)+'</b>'+due+note+'</span></div>';
+    return '<div class="li q4-tick" data-cp="'+(m.id||'')+'" style="cursor:pointer"><span class="check '+(hit?'on':'')+'"></span><span><b>'+(m.label||m.id)+'</b>'+due+note+'</span></div>';
   }).join('');
+}
+function wireQ4Ticks(root){
+  (root||document).querySelectorAll('.q4-tick').forEach(el=>{
+    el.onclick=()=>{
+      const id=el.dataset.cp; if(!id) return;
+      const on=!(game.checkpoints&&game.checkpoints[id]);
+      if(on){ markCheckpoint(id); addXp(
+        ({job:'Career',savings:'Career',lifts:'Fitness',run:'Fitness',bodyfat:'Fitness',books:'Learning',lauren:'Relationships'})[((D.q4_milestones||[]).find(x=>x.id===id)||{}).goal_id]||'Career',
+        20, 'Checkpoint'
+      ); }
+      else {
+        if(game.checkpoints) delete game.checkpoints[id];
+        game.badges=(game.badges||[]).filter(b=>b!=='cp:'+id);
+        saveGame(); renderGameUI();
+        // re-paint q4 sections
+        const fitEl=document.getElementById('fitQ4'); if(fitEl){ /* refreshed via renderGameUI callers */ }
+      }
+      // refresh q4 lists
+      try{
+        const groups=[['Lifts',['lifts']],['Running',['run']],['Body fat',['bodyfat']]];
+        const fitEl=document.getElementById('fitQ4');
+        if(fitEl) fitEl.innerHTML=groups.map(([title,ids])=>{ const rows=ids.flatMap(id=>q4For(id)); if(!rows.length) return ''; return '<div style="margin-bottom:14px"><div class="sub" style="font-weight:700;margin-bottom:6px">'+title+'</div>'+renderQ4List(rows,{showNote:true})+'</div>'; }).join('');
+        wireQ4Ticks(fitEl);
+        const lq=document.getElementById('learnQ4'); if(lq){ lq.innerHTML=renderQ4List(q4For('books'),{showNote:true}); wireQ4Ticks(lq); }
+        const rq=document.getElementById('relQ4'); if(rq){ rq.innerHTML=renderQ4List(q4For('dates'),{showNote:true}); wireQ4Ticks(rq); }
+        jobMs.innerHTML=renderQ4List(q4For('job'),{showNote:true}); wireQ4Ticks(jobMs);
+        paintSavMs(savMs);
+  wireQ4Ticks(savMs); wireQ4Ticks(savMs);
+      }catch(e){}
+    };
+  });
 }
 
 function openGoal(i){
@@ -609,8 +808,9 @@ function openGoal(i){
   const pct=Math.round(goalPct(g));
   gsTitle.textContent=g.label||g.short;
   gsPillar.textContent=g.pillar;
-  gsPillar.style.background=(PC[g.pillar]||'#fff')+'22';
-  gsPillar.style.color=PC[g.pillar]||'#fff';
+  const gcol=GC[g.id]||PC[g.pillar]||'#fff';
+  gsPillar.style.background=gcol+'22';
+  gsPillar.style.color=gcol;
   gsDesc.textContent=g.description||g.note||'';
   let stats='<div class="stat"><div class="k">Progress</div><div class="v" style="color:'+(PC[g.pillar]||'#fff')+'">'+pct+'%</div></div>';
   if(g.kind==='number'||g.id==='savings'){
@@ -624,10 +824,11 @@ function openGoal(i){
     }
   } else {
     stats+='<div class="stat"><div class="k">Current</div><div class="v">'+currentDisplay(g)+'</div></div>';
-    if(g.kind==='books') stats+='<div class="stat"><div class="k">Target</div><div class="v">'+(g.target||26)+' / year</div></div>';
+    if(g.kind==='books') stats+='<div class="stat"><div class="k">Target</div><div class="v">'+(g.target||10)+' reviews</div></div>';
     if(g.kind==='dates') stats+='<div class="stat"><div class="k">Cadence</div><div class="v">1 / week</div></div>';
   }
   if(g.deadline) stats+='<div class="stat"><div class="k">Deadline</div><div class="v">'+fmtDue(g.deadline)+'</div></div>';
+  stats+='<div class="stat"><div class="k">Steps</div><div class="v">'+stepsDone(g)+' / '+(+g.steps||8)+'</div></div>';
   gsStats.innerHTML=stats;
   const q4=q4For(g.id);
   let msHtml='';
@@ -660,7 +861,7 @@ function openGoal(i){
 }
 gsClose.onclick=()=>goalSheet.classList.remove('on');
 goalSheet.onclick=e=>{if(e.target===goalSheet)goalSheet.classList.remove('on')};
-goalList.innerHTML=goals.map((g,i)=>'<button type="button" class="goal-chip" data-gi="'+i+'" style="border-color:'+(PC[g.pillar]||'#fff')+'55">'+(g.short||g.label)+'</button>').join('');
+goalList.innerHTML=goals.map((g,i)=>'<button type="button" class="goal-chip" data-gi="'+i+'" style="border-color:'+(GC[g.id]||PC[g.pillar]||'#fff')+'55">'+(g.short||g.label)+'</button>').join('');
 goalList.querySelectorAll('[data-gi]').forEach(b=>b.onclick=()=>openGoal(+b.dataset.gi));
 
 
@@ -671,12 +872,545 @@ const weekEnd=new Date(+mon+7*864e5);
 const weekPts={};pillars.forEach(p=>weekPts[p]=0);
 (D.log||[]).forEach(r=>{const d=day(r.date);if(d>=mon&&d<weekEnd&&weekPts[r.pillar]!=null)weekPts[r.pillar]+=+r.points});
 const weekPct=pillars.map(p=>Math.round(100*(weekPts[p]/(D.targets[p]||20))));
-pillarDots.innerHTML='<div style="width:100%;text-align:center;font-size:12px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">This week</div>'+pillars.map((p,i)=>{
-  const pct=Math.min(weekPct[i],100), col=PC[p], r=22, c=2*Math.PI*r, off=c*(1-pct/100);
-  return '<div class="pdot"><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="'+r+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/><circle cx="28" cy="28" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="5" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" transform="rotate(-90 28 28)"/></svg><div class="n" style="color:'+col+'">'+weekPct[i]+'%</div><div class="l">'+p+'</div></div>';
-}).join('');
+/* week rings via renderWeekRings() */
 
 // Streaks
+/* —— Gamification (XP / levels / streaks / badges) —— */
+const GAME_KEY='life.game.v1';
+const XP_WEIGHT={Career:4,Fitness:3,Relationships:2,Learning:1}; // HF > fitness > Lauren > learning/work
+const PILLAR_GOALS={
+  Career:['job','savings'],
+  Fitness:['lifts','run','bodyfat'],
+  Learning:['books'],
+  Relationships:['lauren']
+};
+const BIG_ACTION_IDS=new Set(['apps','blog','trade_post','book_review','date','plan_dd','income_stream']);
+const REWARDS=(D.rewards||[]).map(r=>({id:r.id, xp:+r.xp||0, label:r.label||r.id, note:r.note||''})).sort((a,b)=>a.xp-b.xp);
+function defaultGame(){
+  return {
+    totalXp:0,
+    xp:{Career:0,Fitness:0,Learning:0,Relationships:0},
+    weekXp:{week:'', earned:0, doubled:false},
+    unlockedRewards:[],
+    badges:[],
+    streakFreeze:{week:'', available:1, used:0},
+    lastPerfectWeek:'',
+    habitStreaks:{},
+    checkpoints:{}
+  };
+}
+let game=defaultGame();
+try{
+  const g=JSON.parse(localStorage.getItem(GAME_KEY)||'null');
+  if(g){
+    game={...defaultGame(),...g,xp:{...defaultGame().xp,...(g.xp||{})},weekXp:{...defaultGame().weekXp,...(g.weekXp||{})}};
+    if(game.totalXp==null) game.totalXp=pillars.reduce((s,p)=>s+(+game.xp[p]||0),0);
+    game.unlockedRewards=Array.isArray(game.unlockedRewards)?game.unlockedRewards:[];
+  }
+}catch{}
+function saveGame(){
+  localStorage.setItem(GAME_KEY, JSON.stringify(game));
+  try{
+    if(typeof ticksState!=='undefined' && ticksState){
+      ticksState.xp=game.totalXp;
+      ticksState.game={totalXp:game.totalXp, xp:game.xp, weekXp:game.weekXp, unlockedRewards:game.unlockedRewards, habitStreaks:game.habitStreaks};
+    }
+  }catch{}
+}
+function habitStreakGet(id){
+  game.habitStreaks=game.habitStreaks||{};
+  return game.habitStreaks[id]||{current:0,best:0,last:''};
+}
+function habitStreakHit(a){
+  game.habitStreaks=game.habitStreaks||{};
+  const id=a.id;
+  const st=game.habitStreaks[id]||{current:0,best:0,last:''};
+  const key=periodKey(a.cadence||a.scope||'daily');
+  if(st.last===key) return st;
+  // continuity check for daily
+  if((a.cadence||'daily')==='daily'){
+    const y=new Date(); y.setDate(y.getDate()-1);
+    const yiso=y.toLocaleDateString('en-CA',{timeZone:'Europe/London'});
+    if(st.last===yiso) st.current=(+st.current||0)+1;
+    else st.current=1;
+  } else {
+    st.current=(+st.current||0)+1;
+  }
+  st.last=key;
+  st.best=Math.max(+st.best||0, st.current);
+  game.habitStreaks[id]=st;
+  saveGame();
+  return st;
+}
+function renderHabitStreaks(){
+  const el=document.getElementById('habitStreaks'); if(!el) return;
+  const acts=(ACTIONS||[]).filter(a=>a.cadence!=='once');
+  el.innerHTML=acts.map(a=>{
+    const st=habitStreakGet(a.id);
+    const col=GC[a.goal_id]||PC[a.pillar]||'#fff';
+    return '<div class="hstreak"><div class="top"><span class="flame">'+(st.current>0?'🔥':'🤍')+'</span><span class="hl">'+a.label+'</span></div>'+
+      '<div class="cad">'+a.cadence+'</div>'+
+      '<div class="nums"><div><b style="color:'+col+'">'+st.current+'</b>now</div><div><b>'+st.best+'</b>best</div></div></div>';
+  }).join('')||'<div class="sub">No habits</div>';
+}
+
+
+function levelFromXp(xp){
+  // Clean curve: L1@0, L2@40, L3@100, L4@180… (step grows by 20)
+  let lvl=1, need=40, left=+xp||0;
+  while(left>=need){ left-=need; lvl++; need+=20; }
+  return {level:lvl, into:left, need, pct:Math.min(100, Math.round(100*left/need)), total:+xp||0};
+}
+function totalXp(){ return +game.totalXp||0; }
+function xpBaseForAction(a){
+  if(!a) return 10;
+  if(BIG_ACTION_IDS.has(a.id)) return 50;
+  if((a.cadence||a.scope)==='daily') return 10;
+  if((a.cadence||'')==='once') return 50;
+  return 10; // gym/runs sessions etc.
+}
+function xpForAction(a){
+  // Base XP before streak multiplier (kept for callers)
+  return xpBaseForAction(a);
+}
+function streakMultFor(a){
+  const st=habitStreakGet(a.id);
+  // 1.0x first hit; +0.1x per consecutive period after, cap 2.0x. Grace via habitStreakHit continuity.
+  const cur=Math.max(0, +st.current||0);
+  return Math.min(2.0, 1.0 + 0.1*Math.max(0, cur-1));
+}
+function ensureWeekXpBucket(){
+  const week=(typeof ticksState!=='undefined'&&ticksState&&ticksState.week)||isoWeekLocal();
+  game.weekXp=game.weekXp||{week:'', earned:0, doubled:false};
+  if(game.weekXp.week!==week) game.weekXp={week, earned:0, doubled:false};
+  return game.weekXp;
+}
+function xpForDayPlan(row){
+  const p=+row.priority||5;
+  const map={1:50,2:20,3:15,4:10,5:10}; // day-plan ticks: HF-ish big, else daily-ish
+  return map[p]||10;
+}
+function floatXp(amount){
+  const n=Math.round(+amount||0); if(!n) return;
+  const el=document.createElement('div');
+  el.className='xp-float';
+  el.textContent=(n>0?'+':'')+n+' XP';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 1200);
+}
+function checkRewardUnlocks(prevTotal){
+  const tot=totalXp();
+  game.unlockedRewards=game.unlockedRewards||[];
+  let unlocked=null;
+  for(const r of REWARDS){
+    if(tot>=r.xp && prevTotal<r.xp && !game.unlockedRewards.includes(r.id)){
+      game.unlockedRewards.push(r.id);
+      unlocked=r;
+    }
+  }
+  if(unlocked){
+    toastXp('Unlocked · '+unlocked.label);
+    celebrate('Fitness', true);
+    try{ if(navigator.vibrate) navigator.vibrate([40,30,40,30,80]); }catch{}
+    const tag=document.createElement('div');
+    tag.className='xp-float';
+    tag.textContent='🎁 '+unlocked.label;
+    tag.style.color='#30d158';
+    document.body.appendChild(tag);
+    setTimeout(()=>tag.remove(), 1400);
+  }
+  return unlocked;
+}
+function addXp(pillar, amount, why, opts){
+  amount=Math.round(+amount||0);
+  if(!amount) return 0;
+  opts=opts||{};
+  const p = (pillar && game.xp[pillar]!==undefined) ? pillar : 'Career';
+  const beforeTot=totalXp();
+  const before=levelFromXp(beforeTot);
+  game.xp[p]=(+game.xp[p]||0)+amount;
+  game.totalXp=beforeTot+amount;
+  const wk=ensureWeekXpBucket();
+  if(!opts.skipWeekBucket) wk.earned=(+wk.earned||0)+amount;
+  const after=levelFromXp(game.totalXp);
+  saveGame();
+  if(!opts.silent){
+    toastXp('+' + amount + ' XP · ' + (why||p));
+    floatXp(amount);
+    celebrate(p, !!opts.big);
+  }
+  if(after.level>before.level){
+    toastXp('Level '+after.level);
+    celebrate(p, true);
+    try{ if(navigator.vibrate) navigator.vibrate([30,20,30]); }catch{}
+  }
+  checkRewardUnlocks(beforeTot);
+  if(!opts.skipRender) renderGameUI();
+  return amount;
+}
+function awardActionXp(a){
+  if(!a) return 0;
+  const st=habitStreakHit(a);
+  const mult=Math.min(2.0, 1.0 + 0.1*Math.max(0, (+st.current||1)-1));
+  const base=xpBaseForAction(a);
+  const amt=Math.round(base*mult);
+  addXp(a.pillar, amt, a.label+(mult>1.05?' · '+mult.toFixed(1)+'x':''));
+  return amt;
+}
+function toastXp(msg){
+  const el=document.getElementById('toastXp'); if(!el) return;
+  el.textContent=msg; el.classList.add('on');
+  clearTimeout(toastXp._t); toastXp._t=setTimeout(()=>el.classList.remove('on'), 1400);
+}
+function celebrate(pillar, big){
+  const box=document.getElementById('celeb'); if(!box) return;
+  const col=PC[pillar]||'#fff';
+  const n=big?28:14;
+  for(let i=0;i<n;i++){
+    const d=document.createElement('i');
+    const ang=Math.random()*Math.PI*2, dist=40+Math.random()*(big?160:90);
+    d.style.left=(50+Math.cos(ang)*10)+'%';
+    d.style.top=(big?42:55)+'%';
+    d.style.background=col;
+    d.style.setProperty('--dx', (Math.cos(ang)*dist)+'px');
+    d.style.setProperty('--dy', (Math.sin(ang)*dist - 30)+'px');
+    d.style.animationDelay=(Math.random()*0.08)+'s';
+    box.appendChild(d);
+    setTimeout(()=>d.remove(), 800);
+  }
+}
+
+function nextQ4(goalId){
+  const today=londonISO();
+  const rows=q4For(goalId).filter(m=>!(m.done==='1'||m.done===1||m.done==='true'));
+  rows.sort((a,b)=>(a.due||'').localeCompare(b.due||''));
+  // prefer due >= today, else nearest past incomplete
+  return rows.find(r=>!r.due||r.due>=today) || rows[0] || null;
+}
+function endGoalFor(goalId){
+  return (goals||[]).find(g=>g.id===goalId) || {};
+}
+function weekActionsFor(pillar){
+  return (ACTIONS||[]).filter(a=>a.pillar===pillar && (a.cadence==='weekly'||a.scope==='weekly'));
+}
+function weekActionStatus(a){
+  const v=ticksState.weekly?.[a.pillar]?.[a.id];
+  const n=typeof v==='number'?v:(v?1:0);
+  const tgt=Math.max(1,+a.target||1);
+  const ok=n>=tgt;
+  return {n,tgt,ok, label:a.label};
+}
+function statusChip(ok, due){
+  if(ok) return '<span class="status ok">Done</span>';
+  if(due && due < londonISO()) return '<span class="status due">Due</span>';
+  return '<span class="status open">Open</span>';
+}
+function renderGoalsCard(el, pillar){
+  if(!el) return;
+  const ids=PILLAR_GOALS[pillar]||[];
+  let html='';
+  for(const gid of ids){
+    const g=endGoalFor(gid);
+    if(!g||!g.id) continue;
+    const col=GC[gid]||PC[pillar]||'#fff';
+    const deadline=g.deadline?fmtDue(g.deadline):'—';
+    const long=goalPct(g);
+    const week=weekEqualPct(g);
+    const max=+g.steps||8, done=stepsDone(g);
+    const notches=Array.from({length:max},(_,i)=>'<span class="'+(i<done?'on':'')+'">●</span>').join('');
+    html+='<div class="obj-box" style="border-color:'+col+'44">';
+    html+='<div class="g-k">Main objective</div>';
+    html+='<div class="obj-title" style="color:'+col+'">'+(g.label||gid)+'</div>';
+    html+='<div class="obj-meta">Deadline · '+deadline+' · this week '+week+'% · long-term '+long+'%</div>';
+    html+='<div class="step-notches">'+notches+'</div>';
+    html+='<div class="obj-bar"><i style="width:'+week+'%;background:'+col+'"></i></div>';
+    html+='</div>';
+  }
+  el.innerHTML=html||'<div class="sub">No goals</div>';
+}
+
+function renderNextLines(){
+  const el=document.getElementById('nextLines'); if(!el) return;
+  const lab={Career:'Career',Fitness:'Fitness',Learning:'Learn',Relationships:'Lauren'};
+  el.innerHTML=pillars.map(p=>{
+    const ids=PILLAR_GOALS[p]||[];
+    let best=null;
+    for(const id of ids){
+      const n=nextQ4(id);
+      if(!n) continue;
+      if(!best || (n.due||'9999')<(best.due||'9999')) best={...n, goalId:id};
+    }
+    if(!best) return '<div class="nl"><span class="p" style="color:'+PC[p]+'">'+lab[p]+'</span><span class="t">All Q4 checkpoints clear</span></div>';
+    return '<div class="nl"><span class="p" style="color:'+PC[p]+'">'+lab[p]+'</span><span class="t">Next: '+(best.label||best.id)+'</span><span class="d">by '+(best.due?fmtDue(best.due):'—')+'</span></div>';
+  }).join('');
+}
+
+function renderLevelRings(){
+  const el=document.getElementById('lvlRings'); if(!el) return;
+  const lab={Career:'Career',Fitness:'Fitness',Learning:'Learn',Relationships:'Lauren'};
+  el.innerHTML=pillars.map(p=>{
+    const lv=levelFromXp(game.xp[p]||0);
+    const col=PC[p], r=22, c=2*Math.PI*r, off=c*(1-lv.pct/100);
+    return '<div class="lvl-ring"><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="'+r+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/><circle cx="28" cy="28" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="5" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" transform="rotate(-90 28 28)"/></svg><div class="lv" style="color:'+col+'">'+lv.level+'</div><div class="nm">'+lab[p]+'</div></div>';
+  }).join('');
+}
+
+function weekXpTotal(state){
+  // approximate from points * weights
+  const pts=state.points||computePoints(state);
+  return pillars.reduce((a,p)=>a+(+pts[p]||0)*(XP_WEIGHT[p]||1),0);
+}
+function renderWeekScore(){
+  const el=document.getElementById('weekScore'); if(!el) return;
+  const cur=weekXpTotal(ticksState);
+  // last week from history table data if loaded
+  const last=renderWeekScore._last||0;
+  const d=cur-last;
+  const cls=d>0?'up':(d<0?'dn':'');
+  const sign=d>0?'+':''
+  el.innerHTML='<div><div class="sub">This week score</div><div class="big">'+cur+'</div></div><div class="delta '+cls+'">'+(last?sign+d+' vs last week':'vs last week · —')+'</div>';
+}
+function checkPerfectWeek(){
+  // all weekly targets for all pillars met
+  let ok=true;
+  for(const p of pillars){
+    for(const a of weekActionsFor(p)){
+      if(!weekActionStatus(a).ok){ ok=false; break; }
+    }
+  }
+  const week=ticksState.week||'';
+  if(ok && week && game.lastPerfectWeek!==week){
+    game.lastPerfectWeek=week;
+    if(!game.badges.includes('perfect:'+week)) game.badges.push('perfect:'+week);
+    saveGame();
+    toastXp('Perfect week');
+    celebrate('Career', true);
+  }
+}
+function unlockCheckpointBadges(){
+  for(const m of (D.q4_milestones||[])){
+    const done=m.done==='1'||m.done===1||m.done==='true'||!!(ticksState.weekly?.DayPlan?.['q4_'+m.id]);
+    // also check if user ticked via DayPlan or we store in game.checkpoints
+    const key='cp:'+m.id;
+    const hit=!!(game.checkpoints&&game.checkpoints[m.id]) || done;
+    if(hit && !game.badges.includes(key)){
+      game.badges.push(key);
+      saveGame();
+    }
+  }
+}
+function markCheckpoint(id){
+  game.checkpoints=game.checkpoints||{};
+  if(game.checkpoints[id]) return;
+  game.checkpoints[id]=true;
+  const key='cp:'+id;
+  if(!game.badges.includes(key)) game.badges.push(key);
+  saveGame();
+  toastXp('Checkpoint unlocked');
+  celebrate('Fitness', true);
+  renderGameUI();
+}
+function renderBadges(){
+  const el=document.getElementById('badgesRow'); if(!el) return;
+  const perfect=game.badges.filter(b=>b.startsWith('perfect:'));
+  const cps=game.badges.filter(b=>b.startsWith('cp:'));
+  let html='';
+  html+='<span class="badge '+(perfect.length?'gold on':'')+'">Perfect week'+(perfect.length?' ×'+perfect.length:'')+'</span>';
+  html+='<span class="badge '+(cps.length?'on':'')+'">Checkpoints '+cps.length+'</span>';
+  // show up to 3 latest checkpoint names
+  const recent=cps.slice(-3).map(b=>{
+    const id=b.slice(3);
+    const m=(D.q4_milestones||[]).find(x=>x.id===id);
+    return '<span class="badge on">'+(m?m.label:id)+'</span>';
+  }).join('');
+  el.innerHTML=html+recent;
+}
+function renderFreeze(){
+  const el=document.getElementById('freezeLine'); if(!el) return;
+  const week=ticksState.week||'';
+  if(game.streakFreeze.week!==week){ game.streakFreeze={week, available:1, used:0}; saveGame(); }
+  const left=game.streakFreeze.available-game.streakFreeze.used;
+  el.textContent=left>0?'Streak freeze ready this week (auto-applies on a missed day).':'Streak freeze used this week.';
+}
+function applyStreakFreezeIfNeeded(){
+  // If yesterday missing but freeze available, keep streak display by treating freeze as a hit
+  // Implemented inside streak count below via game.streakFreeze
+}
+function streakWithFreeze(filterFn){
+  const s=new Set((D.log||[]).filter(filterFn).map(r=>r.date));
+  let d=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const today=iso(d);
+  if(!s.has(today)){
+    try{
+      const week=(typeof ticksState!=='undefined' && ticksState && ticksState.week)||'';
+      if(game.streakFreeze.week!==week){ game.streakFreeze={week, available:1, used:0}; }
+      if(game.streakFreeze.used>0 || game.streakFreeze.available>0) s.add(today);
+    }catch{}
+  }
+  if(!s.has(iso(d))) d=new Date(+d-864e5);
+  let n=0;
+  while(s.has(iso(d))){ n++; d=new Date(+d-864e5); }
+  return n;
+}
+
+/* —— Weekly pillar complete (dopamine) —— */
+const WEEK_DONE_KEY='life.weekDone.v1';
+function weekDoneState(){
+  const week=(typeof ticksState!=='undefined'&&ticksState.week)||isoWeekLocal();
+  let st={week:'', pillars:{}};
+  try{ st=JSON.parse(localStorage.getItem(WEEK_DONE_KEY)||'null')||st; }catch{}
+  if(st.week!==week){ st={week, pillars:{}}; localStorage.setItem(WEEK_DONE_KEY, JSON.stringify(st)); }
+  return st;
+}
+function saveWeekDone(st){ localStorage.setItem(WEEK_DONE_KEY, JSON.stringify(st)); }
+function pillarHabitComplete(pillar){
+  const ids=PILLAR_GOALS[pillar]||[];
+  // "Weekly to-dos" = weekly habits. Learning uses fortnightly as its period to-do.
+  let acts=(ACTIONS||[]).filter(a=>ids.includes(a.goal_id) && a.cadence==='weekly');
+  if(!acts.length){
+    acts=(ACTIONS||[]).filter(a=>ids.includes(a.goal_id) && (a.cadence==='fortnightly'||a.cadence==='monthly'));
+  }
+  if(!acts.length) return false;
+  return acts.every(a=>actionProgress(a).ok);
+}
+function celebratePillarWeek(pillar){
+  celebrate(pillar, true);
+  try{ if(navigator.vibrate) navigator.vibrate([40,30,40,30,80]); }catch{}
+  toastXp(pillar+' week complete');
+  addXp(pillar, 100, pillar+' week complete', {big:true, skipRender:true});
+  // star bump
+  const wrap=document.getElementById('starWrap')||document.querySelector('.chart-wrap');
+  if(wrap){ wrap.classList.remove('bump'); void wrap.offsetWidth; wrap.classList.add('star-step','bump'); }
+  refreshStar();
+  maybeDoubleWeekXp();
+}
+function goalWeekComplete(g){
+  return weekEqualPct(g)>=100;
+}
+function allSevenGoalsWeekComplete(){
+  const gs=(typeof goals!=='undefined'&&goals)||(D.goals||[]);
+  return gs.length>0 && gs.every(goalWeekComplete);
+}
+function maybeDoubleWeekXp(){
+  if(!allSevenGoalsWeekComplete()) return;
+  const wk=ensureWeekXpBucket();
+  if(wk.doubled) return;
+  const bonus=Math.round(+wk.earned||0);
+  if(bonus<=0){ wk.doubled=true; saveGame(); return; }
+  wk.doubled=true;
+  // Doubling: award another copy of this week's XP (does not re-enter week bucket)
+  addXp('Career', bonus, 'All 7 axes · week ×2', {big:true, skipWeekBucket:true});
+  toastXp('Week ×2 · +'+bonus+' XP');
+}
+function paintTabDoneStates(){
+  const st=weekDoneState();
+  const map={career:'Career',fitness:'Fitness',learning:'Learning',relationships:'Relationships'};
+  const glow={Career:'#2563eb',Fitness:'#30d158',Learning:'#ffe074',Relationships:'#ff375f'};
+  document.querySelectorAll('.tabbar button[data-v]').forEach(btn=>{
+    const v=btn.dataset.v;
+    const pillar=map[v];
+    if(!pillar){ btn.classList.remove('week-done'); return; }
+    const on=!!st.pillars[pillar];
+    btn.classList.toggle('week-done', on);
+    btn.style.setProperty('--glow', glow[pillar]||'#fff');
+    const svg=btn.querySelector('svg');
+    if(svg){ svg.classList.toggle('pop', on); }
+  });
+}
+function checkPillarWeekComplete(pillar){
+  const st=weekDoneState();
+  const now=pillarHabitComplete(pillar);
+  const was=!!st.pillars[pillar];
+  if(now && !was){
+    st.pillars[pillar]=true;
+    saveWeekDone(st);
+    celebratePillarWeek(pillar);
+  } else if(!now && was){
+    st.pillars[pillar]=false;
+    saveWeekDone(st);
+  }
+  paintTabDoneStates();
+}
+function checkAllPillarWeeks(){
+  for(const p of ['Career','Fitness','Learning','Relationships']) checkPillarWeekComplete(p);
+}
+function renderPillarNums(){
+  const el=document.getElementById('pillarNums'); if(!el) return;
+  el.innerHTML=goals.map(g=>{
+    const col=GC[g.id]||'#fff';
+    const w=weekEqualPct(g), long=goalPct(g);
+    return '<div class="pnum"><div class="k" style="color:'+col+'">'+(g.short||g.label)+'</div><div class="v">'+w+'%</div><div class="sub">week · long '+long+'%</div></div>';
+  }).join('');
+}
+
+function renderLevelHero(){
+  const lv=levelFromXp(totalXp());
+  const num=document.getElementById('lvlNum');
+  const title=document.getElementById('lvlTitle');
+  const sub=document.getElementById('lvlSub');
+  const bar=document.getElementById('lvlBar');
+  if(num) num.textContent=lv.level;
+  if(title) title.textContent='Level '+lv.level;
+  if(sub) sub.textContent=lv.total.toLocaleString('en-GB')+' XP · '+lv.into+' / '+lv.need+' to next';
+  if(bar) bar.style.width=lv.pct+'%';
+}
+function renderRewards(){
+  const row=document.getElementById('rewardsRow');
+  const nextEl=document.getElementById('rewardNext');
+  const tot=totalXp();
+  const unlocked=new Set(game.unlockedRewards||[]);
+  const icons={kit:'👟', dinner:'🍽️', weekend:'🏖️'};
+  if(row){
+    row.innerHTML=(REWARDS.length?REWARDS:[{id:'—',xp:1000,label:'Add rewards.csv',note:''}]).map(r=>{
+      const on=unlocked.has(r.id) || tot>=r.xp;
+      if(tot>=r.xp && !unlocked.has(r.id)){ /* display as unlocked even if list lag */ }
+      return '<div class="reward '+(on?'unlocked':'')+'">'+
+        '<div class="ico">'+(icons[r.id]||'🎁')+'</div>'+
+        '<div class="body"><div class="name">'+r.label+'</div><div class="meta">'+(r.note||'')+' · '+r.xp.toLocaleString('en-GB')+' XP</div></div>'+
+        '<div class="tag">'+(on?'Unlocked':'Locked')+'</div></div>';
+    }).join('');
+  }
+  if(nextEl){
+    const nxt=REWARDS.find(r=>tot<r.xp);
+    if(!nxt){
+      nextEl.innerHTML='<div class="sub">All rewards unlocked · '+tot.toLocaleString('en-GB')+' XP</div>';
+    } else {
+      const prev = [...REWARDS].reverse().find(r=>r.xp<=tot);
+      const base=prev?prev.xp:0;
+      const span=Math.max(1, nxt.xp-base);
+      const into=Math.max(0, tot-base);
+      const pct=Math.min(100, Math.round(100*into/span));
+      nextEl.innerHTML='<div class="sub">Next reward · <b style="color:#fff">'+nxt.label+'</b> · '+(nxt.xp-tot).toLocaleString('en-GB')+' XP to go</div>'+
+        '<div class="bar"><i style="width:'+pct+'%"></i></div>';
+    }
+  }
+}
+function renderGameUI(){
+  renderNextLines();
+  renderLevelHero();
+  renderRewards();
+  renderLevelRings();
+  renderWeekScore();
+  renderBadges();
+  renderFreeze();
+  renderHabitStreaks();
+  renderPillarNums();
+  refreshStar();
+  renderGoalsCard(document.getElementById('careerGoals'),'Career');
+  renderGoalsCard(document.getElementById('fitGoals'),'Fitness');
+  renderGoalsCard(document.getElementById('learnGoals'),'Learning');
+  renderGoalsCard(document.getElementById('relGoals'),'Relationships');
+  checkAllPillarWeeks();
+}
+function renderWeekRings(){
+  const el=document.getElementById('pillarDots'); if(!el) return;
+  el.innerHTML=goals.map(g=>{
+    const pct=weekEqualPct(g), col=GC[g.id]||'#fff';
+    const r=18, c=2*Math.PI*r, off=c*(1-pct/100);
+    return '<div class="wring"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="'+r+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="4"/><circle cx="24" cy="24" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="4" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" transform="rotate(-90 24 24)"/></svg><div class="n" style="color:'+col+'">'+pct+'%</div><div class="l">'+(g.short||g.label)+'</div></div>';
+  }).join('');
+}
+
 const streak=f=>{const s=new Set((D.log||[]).filter(f).map(r=>r.date));let d=new Date(now.getFullYear(),now.getMonth(),now.getDate());if(!s.has(iso(d)))d=new Date(+d-864e5);let n=0;while(s.has(iso(d))){n++;d=new Date(+d-864e5)}return n};
 const streakIcon={
   Any:'<svg viewBox="0 0 24 24"><path d="M12 3c2 4 2 6 0 10 3-1 5-3 5-6 3 3 4 6 2 10-3 5-8 6-11 4-4-2-5-7-3-11 2 3 4 4 7 3z"/></svg>',
@@ -686,7 +1420,7 @@ const streakIcon={
   Relationships:'<svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z"/></svg>'
 };
 const streakLab={Any:'Any',Career:'Career',Fitness:'Fitness',Learning:'Learn',Relationships:'Lauren'};
-streaks.innerHTML=[['Any',r=>true],...pillars.map(p=>[p,r=>r.pillar===p])].map(([n,f])=>'<div class="streak">'+streakIcon[n]+'<div class="n">'+streak(f)+'</div><div class="l">'+(streakLab[n]||n)+'</div></div>').join('');
+/* habit streaks via renderHabitStreaks() */
 
 /* —— Fitness / other tabs (unchanged content) —— */
 tsess.textContent=tdp.title||tdp.summary||'Rest day';
@@ -713,7 +1447,7 @@ lauren.innerHTML='Something exciting with Lauren every week (date or surprise).<
 (function(){
   const fitEl=document.getElementById('fitQ4');
   if(fitEl){
-    const groups=[['Lifts',['squat','bench','deadlift']],['Running',['marathon']],['Body fat',['bodyfat']]];
+    const groups=[['Lifts',['lifts']],['Running',['run']],['Body fat',['bodyfat']]];
     fitEl.innerHTML=groups.map(([title,ids])=>{
       const rows=ids.flatMap(id=>q4For(id));
       if(!rows.length) return '';
@@ -724,6 +1458,9 @@ lauren.innerHTML='Something exciting with Lauren every week (date or surprise).<
   if(lq) lq.innerHTML=renderQ4List(q4For('books'),{showNote:true});
   const rq=document.getElementById('relQ4');
   if(rq) rq.innerHTML=renderQ4List(q4For('dates'),{showNote:true});
+  wireQ4Ticks(document.getElementById('fitQ4'));
+  wireQ4Ticks(document.getElementById('learnQ4'));
+  wireQ4Ticks(document.getElementById('relQ4'));
 })();
 
 (function(){
@@ -790,7 +1527,9 @@ renderFin();
   jobPct.textContent=Math.round(goalPct(jg))+'%';
   savPct.textContent=Math.round(goalPct(sg))+'%';
   jobMs.innerHTML=renderQ4List(q4For('job').length?q4For('job'):(D.job_milestones||[]).map(m=>({...m,id:m.milestone})),{showNote:true})||'<div class="sub">No milestones</div>';
+  wireQ4Ticks(jobMs);
   paintSavMs(savMs);
+  wireQ4Ticks(savMs);
   const mon=new Date(now.getFullYear(),now.getMonth(),now.getDate()-((now.getDay()+6)%7));
   const weekEnd=new Date(+mon+7*864e5);
   const weekLog=(D.log||[]).filter(r=>{const d=day(r.date);return d>=mon&&d<weekEnd});
@@ -812,9 +1551,81 @@ renderFin();
 })();
 
 
+
+
+/* —— Day plan (plan.csv → weekly.DayPlan ticks) —— */
+function londonISO(){return new Date().toLocaleDateString('en-CA',{timeZone:'Europe/London'})}
+function pickPlanDate(){
+  const rows=D.dayplan||[];
+  if(!rows.length) return null;
+  const today=londonISO();
+  const dates=[...new Set(rows.map(r=>r.date))].sort();
+  if(dates.includes(today)) return today;
+  const next=dates.find(d=>d>today);
+  return next||dates[dates.length-1];
+}
+function dayPlanKey(date,id){return date+'_'+id}
+function dayPlanDone(date,id){
+  return !!(ticksState.weekly?.DayPlan?.[dayPlanKey(date,id)]);
+}
+function setDayPlanTick(date,id,value){
+  ticksState.weekly=ticksState.weekly||{};
+  ticksState.weekly.DayPlan=ticksState.weekly.DayPlan||{};
+  const key=dayPlanKey(date,id);
+  const prev=!!ticksState.weekly.DayPlan[key];
+  ticksState.weekly.DayPlan[key]=!!value;
+  if(value && !prev){
+    const row=(D.dayplan||[]).find(r=>r.date===date&&r.id===id);
+    if(row){
+      const pillar=row.pillar||'Fitness';
+      if(typeof addXp==='function') addXp(pillar, (typeof xpForDayPlan==='function'?xpForDayPlan(row):2)*2, row.item||id);
+    }
+  }
+  saveLocal();
+  renderDayPlan();
+  if(typeof renderGameUI==='function') renderGameUI();
+  syncTicks();
+}
+function prioDots(p){
+  const n=Math.max(1,Math.min(4,5-(+p||5)));
+  let h='<span class="prio" title="priority '+p+'">';
+  for(let i=0;i<4;i++) h+='<i class="'+(i<n?'on':'')+'"></i>';
+  return h+'</span>';
+}
+function renderDayPlan(){
+  const el=document.getElementById('dayplanList');
+  const title=document.getElementById('dayplanTitle');
+  const dateEl=document.getElementById('dayplanDate');
+  if(!el) return;
+  const date=pickPlanDate();
+  const rows=(D.dayplan||[]).filter(r=>r.date===date).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+  if(!date||!rows.length){
+    if(title) title.textContent='Day plan';
+    if(dateEl) dateEl.textContent='';
+    el.innerHTML='<div class="sub">No plan yet — add rows to plan.csv the night before</div>';
+    return;
+  }
+  const today=londonISO();
+  const dLabel=new Date(date+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'Europe/London'});
+  if(title) title.textContent=date===today?'Today':'Up next';
+  if(dateEl) dateEl.textContent=dLabel+(date===today?'':' · '+date);
+  el.innerHTML=rows.map(r=>{
+    const done=dayPlanDone(date,r.id);
+    const nn=(r.note||'').toLowerCase().includes('non-negotiable')?'<span class="nn">non-negotiable</span>':'';
+    return '<div class="dp-row'+(done?' done':'')+'" data-date="'+date+'" data-id="'+r.id+'">'+
+      '<span class="chk '+(done?'on':'')+'" aria-hidden="true"></span>'+
+      '<span class="dp-time">'+(r.time||'')+'</span>'+
+      '<span class="dp-item">'+(r.item||'')+nn+prioDots(r.priority)+'</span></div>';
+  }).join('');
+  el.querySelectorAll('.dp-row').forEach(row=>{
+    row.onclick=()=>{
+      const id=row.dataset.id, dt=row.dataset.date;
+      setDayPlanTick(dt,id,!dayPlanDone(dt,id));
+    };
+  });
+}
+
 /* —— Ticks: local cache + /api/ticks sync —— */
-const TICKS_KEY='life.ticks.v1';
-const ACTIONS=D.actions||[];
 function actionPts(a){return +a.points||0}
 function computePoints(state){
   const pts={Career:0,Fitness:0,Learning:0,Relationships:0};
@@ -835,22 +1646,17 @@ function computePoints(state){
   const out={Career:0,Fitness:0,Learning:0,Relationships:0};
   for(const a of ACTIONS){
     const p=a.pillar; if(out[p]==null) continue;
-    if(a.scope==='daily'){ if(state.daily?.[p]?.[a.id]) out[p]+=actionPts(a); }
+    if(a.cadence==='daily'||a.scope==='daily'){ if(state.daily?.[p]?.[a.id]) out[p]+=actionPts(a); }
     else {
-      const v=state.weekly?.[p]?.[a.id];
+      const key=(a.cadence==='weekly'||!a.cadence||a.scope==='weekly')?a.id:(a.cadence+'_'+a.id);
+      const v=state.weekly?.[p]?.[key] ?? state.weekly?.[p]?.[a.id];
       const n=typeof v==='number'?v:(v?1:0);
       const tgt=Math.max(1,+a.target||1);
-      // award full action points once per completion up to target
       out[p]+=actionPts(a)*Math.min(n,tgt);
     }
   }
   return out;
 }
-function defaultState(){
-  return {date:iso(now),week:'',daily:{},weekly:{},points:{Career:0,Fitness:0,Learning:0,Relationships:0},updatedAt:null};
-}
-let ticksState=defaultState();
-try{ const c=JSON.parse(localStorage.getItem(TICKS_KEY)||'null'); if(c) ticksState=c; }catch{}
 
 /* Ticks: Google Apps Script when paired (#pair=url|key), else localStorage-only */
 const TICKS_CFG='life.ticks.cfg.v1';
@@ -908,35 +1714,75 @@ function saveLocal(){
   localStorage.setItem(TICKS_KEY, JSON.stringify(ticksState));
 }
 function setTick(scope, pillar, id, value){
-  if(scope==='daily'){
-    ticksState.daily=ticksState.daily||{}; ticksState.daily[pillar]=ticksState.daily[pillar]||{};
-    ticksState.daily[pillar][id]=!!value;
+  const a=ACTIONS.find(x=>(x.id===id||x.cadence+'_'+x.id===id)&&x.pillar===pillar)
+    || ACTIONS.find(x=>x.id===id&&x.pillar===pillar);
+  const key=a?((a.cadence==='daily'||a.scope==='daily')?a.id:((a.cadence==='weekly'||!a.cadence)?a.id:(a.cadence+'_'+a.id))):id;
+  const prev=scope==='daily' || (a&&a.cadence==='daily')
+    ? !!(ticksState.daily?.[pillar]?.[key])
+    : (typeof ticksState.weekly?.[pillar]?.[key]==='number' ? ticksState.weekly[pillar][key]>0 : !!ticksState.weekly?.[pillar]?.[key]);
+  if(a){
+    // numeric stepper for target>1: value boolean means fill/clear
+    if(value && !prev) setActionValue(a, true);
+    else if(!value && prev) setActionValue(a, false);
+    else if(value && prev && +a.target>1){
+      // increment
+      const cur=actionProgress(a).n;
+      ticksState.weekly=ticksState.weekly||{}; ticksState.weekly[a.pillar]=ticksState.weekly[a.pillar]||{};
+      const k=(a.cadence==='weekly'||!a.cadence)?a.id:(a.cadence+'_'+a.id);
+      ticksState.weekly[a.pillar][k]=Math.min(+a.target, cur+1);
+    } else setActionValue(a, value);
   } else {
-    ticksState.weekly=ticksState.weekly||{}; ticksState.weekly[pillar]=ticksState.weekly[pillar]||{};
-    const cur=ticksState.weekly[pillar][id];
-    // toggle boolean or increment: we use boolean for target=1, number stepper for target>1 via checkbox meaning "done enough"
-    const tgt=+(ACTIONS.find(a=>a.scope==='weekly'&&a.pillar===pillar&&a.id===id)||{}).target||1;
-    if(tgt<=1) ticksState.weekly[pillar][id]=!!value;
-    else ticksState.weekly[pillar][id]=value?tgt:0;
+    if(scope==='daily'){
+      ticksState.daily=ticksState.daily||{}; ticksState.daily[pillar]=ticksState.daily[pillar]||{};
+      ticksState.daily[pillar][id]=!!value;
+    } else {
+      ticksState.weekly=ticksState.weekly||{}; ticksState.weekly[pillar]=ticksState.weekly[pillar]||{};
+      ticksState.weekly[pillar][id]=!!value;
+    }
+  }
+  const gained = (value && a) && (!prev || (+a.target>1 && prev));
+  // Award XP on first tick, and on each extra session for multi-target habits (gym/runs)
+  if(gained){
+    // For multi-target fill-to-max via checkbox, award once per newly completed unit
+    if(value && !prev && +a.target>1){
+      // setActionValue filled to target — award per session not yet counted this period
+      // streak once, then grant target × base*mult / target = one mult pass per unit
+      for(let i=0;i<(+a.target||1);i++){
+        if(i===0) awardActionXp(a);
+        else {
+          const mult=streakMultFor(a);
+          const amt=Math.round(xpBaseForAction(a)*mult);
+          addXp(a.pillar, amt, a.label+(mult>1.05?' · '+mult.toFixed(1)+'x':''), {skipRender:true});
+        }
+      }
+    } else {
+      awardActionXp(a);
+    }
+    checkPerfectWeek();
   }
   saveLocal();
   renderAllTicks();
+  renderGameUI();
+  if(a) checkPillarWeekComplete(a.pillar);
   syncTicks();
 }
-function renderTickList(el, pillarsFilter, scopes){
+function renderTickList(el, pillarsFilter, cadences){
   if(!el) return;
-  const acts=ACTIONS.filter(a=>pillarsFilter.includes(a.pillar)&&scopes.includes(a.scope));
-  if(!acts.length){el.innerHTML='<div class="sub">No actions configured</div>';return}
+  const acts=ACTIONS.filter(a=>pillarsFilter.includes(a.pillar)&&(cadences.includes(a.cadence)||cadences.includes(a.scope)));
+  if(!acts.length){el.innerHTML='<div class="sub">No habits configured</div>';return}
+  const order=['daily','weekly','fortnightly','monthly','once'];
   let html='';
-  for(const scope of scopes){
-    const group=acts.filter(a=>a.scope===scope);
+  for(const cad of order){
+    if(!cadences.includes(cad)) continue;
+    const group=acts.filter(a=>(a.cadence||a.scope)===cad);
     if(!group.length) continue;
-    html+='<div class="sub" style="margin:10px 0 4px;font-weight:700;text-transform:uppercase;letter-spacing:.05em">'+(scope==='daily'?'Today':'This week')+'</div>';
+    const titles={daily:'Daily',weekly:'This week',fortnightly:'This fortnight',monthly:'This month',once:'One-off'};
+    html+='<div class="sub" style="margin:10px 0 4px;font-weight:700;text-transform:uppercase;letter-spacing:.05em">'+(titles[cad]||cad)+'</div>';
     for(const a of group){
-      const checked=a.scope==='daily'
-        ? !!(ticksState.daily?.[a.pillar]?.[a.id])
-        : (typeof ticksState.weekly?.[a.pillar]?.[a.id]==='number' ? ticksState.weekly[a.pillar][a.id]>=(+a.target||1) : !!ticksState.weekly?.[a.pillar]?.[a.id]);
-      html+='<label class="tick"><input type="checkbox" data-scope="'+a.scope+'" data-pillar="'+a.pillar+'" data-id="'+a.id+'" '+(checked?'checked':'')+'/><span>'+a.label+'</span><span class="pts">+'+a.points+(a.scope==='weekly'&&+a.target>1?' ×'+(+a.target):'')+'</span></label>';
+      const p=actionProgress(a);
+      const checked=p.ok;
+      const pts=xpForAction(a);
+      html+='<label class="tick"><input type="checkbox" data-scope="'+(a.cadence==='daily'?'daily':'weekly')+'" data-pillar="'+a.pillar+'" data-id="'+a.id+'" '+(checked?'checked':'')+'/><span>'+a.label+(+a.target>1?' <span class="sub">'+p.n+'/'+p.tgt+'</span>':'')+'</span><span class="pts">+'+pts+' XP</span></label>';
     }
   }
   el.innerHTML=html;
@@ -944,142 +1790,57 @@ function renderTickList(el, pillarsFilter, scopes){
     inp.onchange=()=>setTick(inp.dataset.scope, inp.dataset.pillar, inp.dataset.id, inp.checked);
   });
 }
-
-/* —— Day plan (plan.csv → weekly.DayPlan ticks) —— */
-function londonISO(){return new Date().toLocaleDateString('en-CA',{timeZone:'Europe/London'})}
-function pickPlanDate(){
-  const rows=D.dayplan||[];
-  if(!rows.length) return null;
-  const today=londonISO();
-  const dates=[...new Set(rows.map(r=>r.date))].sort();
-  if(dates.includes(today)) return today;
-  const next=dates.find(d=>d>today);
-  return next||dates[dates.length-1];
-}
-function dayPlanKey(date,id){return date+'_'+id}
-function dayPlanDone(date,id){
-  return !!(ticksState.weekly?.DayPlan?.[dayPlanKey(date,id)]);
-}
-function setDayPlanTick(date,id,value){
-  ticksState.weekly=ticksState.weekly||{};
-  ticksState.weekly.DayPlan=ticksState.weekly.DayPlan||{};
-  ticksState.weekly.DayPlan[dayPlanKey(date,id)]=!!value;
-  saveLocal();
-  renderDayPlan();
-  syncTicks();
-}
-function prioDots(p){
-  const n=Math.max(1,Math.min(4,5-(+p||5))); // 1→4 dots, 4→1, 5→1
-  let h='<span class="prio" title="priority '+p+'">';
-  for(let i=0;i<4;i++) h+='<i class="'+(i<n?'on':'')+'"></i>';
-  return h+'</span>';
-}
-function renderDayPlan(){
-  const el=document.getElementById('dayplanList');
-  const title=document.getElementById('dayplanTitle');
-  const dateEl=document.getElementById('dayplanDate');
-  if(!el) return;
-  const date=pickPlanDate();
-  const rows=(D.dayplan||[]).filter(r=>r.date===date).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-  if(!date||!rows.length){
-    if(title) title.textContent='Day plan';
-    if(dateEl) dateEl.textContent='';
-    el.innerHTML='<div class="sub">No plan yet — add rows to plan.csv the night before</div>';
-    return;
+function renderHomeToday(){
+  const el=homeTicks; if(!el) return;
+  // daily habits + day plan merged
+  const dailies=ACTIONS.filter(a=>a.cadence==='daily');
+  let html='<div class="sub" style="margin:0 0 4px;font-weight:700;text-transform:uppercase;letter-spacing:.05em">Daily habits</div>';
+  for(const a of dailies){
+    const p=actionProgress(a);
+    html+='<label class="tick"><input type="checkbox" data-scope="daily" data-pillar="'+a.pillar+'" data-id="'+a.id+'" '+(p.ok?'checked':'')+'/><span>'+a.label+'</span><span class="pts">+'+xpForAction(a)+' XP</span></label>';
   }
-  const today=londonISO();
-  const dLabel=new Date(date+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'Europe/London'});
-  if(title) title.textContent=date===today?'Today':'Up next';
-  if(dateEl) dateEl.textContent=dLabel+(date===today?'':' · '+date);
-  el.innerHTML=rows.map(r=>{
-    const done=dayPlanDone(date,r.id);
-    const nn=(r.note||'').toLowerCase().includes('non-negotiable')?'<span class="nn">non-negotiable</span>':'';
-    return '<div class="dp-row'+(done?' done':'')+'" data-date="'+date+'" data-id="'+r.id+'">'+
-      '<span class="chk '+(done?'on':'')+'" aria-hidden="true"></span>'+
-      '<span class="dp-time">'+(r.time||'')+'</span>'+
-      '<span class="dp-item">'+(r.item||'')+nn+prioDots(r.priority)+'</span></div>';
-  }).join('');
-  el.querySelectorAll('.dp-row').forEach(row=>{
-    row.onclick=()=>{
-      const id=row.dataset.id, dt=row.dataset.date;
-      setDayPlanTick(dt,id,!dayPlanDone(dt,id));
-    };
+  el.innerHTML=html;
+  el.querySelectorAll('input[type=checkbox]').forEach(inp=>{
+    inp.onchange=()=>setTick(inp.dataset.scope, inp.dataset.pillar, inp.dataset.id, inp.checked);
   });
+  // day plan rendered in its own card; also mirror incomplete plan items under today if desired — keep separate card
 }
-
-/* —— Updates feed (bell + unread) —— */
-const UPD_SEEN='life.updates.lastSeen';
-function updatesSorted(){
-  return [...(D.updates||[])].sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp));
-}
-function lastSeenTs(){return Date.parse(localStorage.getItem(UPD_SEEN)||0)||0}
-function unreadCount(){
-  const seen=lastSeenTs();
-  return updatesSorted().filter(u=>Date.parse(u.timestamp)>seen).length;
-}
-function markUpdatesSeen(){
-  const list=updatesSorted();
-  if(!list.length) return;
-  localStorage.setItem(UPD_SEEN, list[0].timestamp);
-  paintBell();
-}
-function fmtUpdWhen(ts){
-  try{return new Date(ts).toLocaleString('en-GB',{timeZone:'Europe/London',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}
-  catch{return ts}
-}
-function renderUpdatesList(listEl){
-  if(!listEl) return;
-  const seen=lastSeenTs();
-  const rows=updatesSorted();
-  listEl.innerHTML=rows.length?rows.map(u=>{
-    const unread=Date.parse(u.timestamp)>seen;
-    return '<div class="upd-item'+(unread?' unread':'')+'"><div class="when">'+fmtUpdWhen(u.timestamp)+'</div><div>'+u.text+'</div></div>';
-  }).join(''):'<div class="sub">No updates yet</div>';
-}
-function paintBell(){
-  const n=unreadCount();
-  ['bellBadge','bellBadgeM'].forEach(id=>{
-    const b=document.getElementById(id); if(!b) return;
-    b.dataset.n=String(n); b.textContent=n>0?String(n):'';
-  });
-  renderUpdatesList(document.getElementById('updList'));
-  renderUpdatesList(document.getElementById('updListM'));
-}
-function closeAllUpd(){
-  document.querySelectorAll('.upd-panel').forEach(p=>p.classList.remove('on'));
-}
-function wireBell(btnId, panelId){
-  const btn=document.getElementById(btnId), panel=document.getElementById(panelId);
-  if(!btn||!panel) return;
-  btn.onclick=e=>{
-    e.stopPropagation();
-    const open=!panel.classList.contains('on');
-    closeAllUpd();
-    if(open){ panel.classList.add('on'); markUpdatesSeen(); paintBell(); }
-  };
-}
-wireBell('bellBtn','updPanel');
-wireBell('bellBtnM','updPanelM');
-document.addEventListener('click',e=>{
-  if(!e.target.closest('.bell-wrap')) closeAllUpd();
-});
-paintBell();
-
 function renderAllTicks(){
-  renderTickList(homeTicks, ['Career','Fitness','Learning','Relationships'], ['daily']);
-  renderTickList(careerTicks, ['Career'], ['daily','weekly']);
+  renderHomeToday();
+  renderTickList(careerTicks, ['Career'], ['daily','weekly','monthly','once']);
   renderTickList(fitTicks, ['Fitness'], ['daily','weekly']);
-  renderTickList(learnTicks, ['Learning'], ['daily','weekly']);
-  renderTickList(relTicks, ['Relationships'], ['daily','weekly']);
+  renderTickList(learnTicks, ['Learning'], ['fortnightly','weekly']);
+  renderTickList(relTicks, ['Relationships'], ['weekly']);
   renderDayPlan();
   const pts=computePoints(ticksState);
-  if(ticksSync) ticksSync.textContent='Synced points today/week: C '+pts.Career+' · F '+pts.Fitness+' · L '+pts.Learning+' · R '+pts.Relationships+(ticksState.updatedAt?' · '+new Date(ticksState.updatedAt).toLocaleString('en-GB',{timeZone:'Europe/London'}):' · local');
+  if(ticksSync) ticksSync.textContent=(ticksCfg()?'Synced':'On this device')+' · C '+pts.Career+' · F '+pts.Fitness+' · L '+pts.Learning+' · R '+pts.Relationships+(ticksState.updatedAt?' · '+new Date(ticksState.updatedAt).toLocaleString('en-GB',{timeZone:'Europe/London'}):'');
 }
 async function syncTicks(){
   try{
-    const body={daily:ticksState.daily, weekly:ticksState.weekly, points:computePoints(ticksState)};
+    saveGame(); // ensure ticksState.game / xp mirror lifetime XP
+    const body={
+      daily:ticksState.daily,
+      weekly:ticksState.weekly,
+      points:computePoints(ticksState),
+      xp:game.totalXp,
+      game:{totalXp:game.totalXp, xp:game.xp, weekXp:game.weekXp, unlockedRewards:game.unlockedRewards, habitStreaks:game.habitStreaks}
+    };
     const remote=await apiTicks('POST', body);
     ticksState={...ticksState, ...remote};
+    if(remote && remote.game){
+      // Prefer higher lifetime XP (never resets / never lose progress)
+      const remoteXp=+remote.game.totalXp||+remote.xp||0;
+      if(remoteXp>totalXp()){
+        game.totalXp=remoteXp;
+        if(remote.game.xp) game.xp={...game.xp, ...remote.game.xp};
+        if(remote.game.weekXp) game.weekXp={...game.weekXp, ...remote.game.weekXp};
+        if(Array.isArray(remote.game.unlockedRewards)){
+          game.unlockedRewards=[...new Set([...(game.unlockedRewards||[]), ...remote.game.unlockedRewards])];
+        }
+        if(remote.game.habitStreaks) game.habitStreaks={...game.habitStreaks, ...remote.game.habitStreaks};
+        saveGame();
+      }
+    }
     saveLocal();
     if(ticksSync) ticksSync.textContent='Saved · '+new Date(ticksState.updatedAt||Date.now()).toLocaleString('en-GB',{timeZone:'Europe/London'});
   }catch(e){
@@ -1094,6 +1855,16 @@ async function loadTicks(){
     const remoteTs=Date.parse(remote.updatedAt||0)||0;
     if(remoteTs>=localTs) ticksState=remote;
     else { saveLocal(); await syncTicks(); }
+    // Lifetime XP: take the max of local/remote (never reset)
+    const remoteXp=+(remote&&remote.game&&remote.game.totalXp)||+(remote&&remote.xp)||0;
+    if(remoteXp>totalXp()){
+      game.totalXp=remoteXp;
+      if(remote.game&&remote.game.xp) game.xp={...game.xp,...remote.game.xp};
+      if(remote.game&&Array.isArray(remote.game.unlockedRewards)){
+        game.unlockedRewards=[...new Set([...(game.unlockedRewards||[]),...remote.game.unlockedRewards])];
+      }
+      saveGame();
+    }
     saveLocal();
   }catch(e){ /* keep local */ }
   renderAllTicks();
@@ -1128,7 +1899,8 @@ async function loadHistory(){
   }
 }
 loadTicks();
-
+renderGameUI();
+paintTabDoneStates();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body>
