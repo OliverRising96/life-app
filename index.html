@@ -61,7 +61,20 @@ details.sess>summary::-webkit-details-marker{display:none}
 /* Home star */
 .home-hero{padding:8px 0 4px}
 .home-hero .label{font-size:12px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;text-align:center}
-.chart-wrap{position:relative;max-width:420px;margin:0 auto;padding:8px 4px 4px}
+.star-wrap-label{font-size:10px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.12em;text-align:center;margin:0 0 2px;opacity:.7}
+.chart-wrap{position:relative;max-width:380px;margin:0 auto;padding:4px 2px 0}
+.chart-wrap canvas{filter:drop-shadow(0 0 28px rgba(255,255,255,.06))}
+.chart-wrap.star-step.bump{animation:starBump .55s ease}
+@keyframes starBump{0%{transform:scale(1)}40%{transform:scale(1.03)}100%{transform:scale(1)}}
+.star-rings{display:flex;justify-content:space-between;gap:4px;margin:10px 2px 2px;padding:0 2px}
+.star-ring{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px 0;border:0;background:transparent;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.star-ring svg{width:28px;height:28px;display:block;overflow:visible}
+.star-ring .nm{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.42);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.star-ring.done .nm{color:rgba(255,255,255,.78)}
+.star-ring.done svg{filter:drop-shadow(0 0 5px rgba(255,255,255,.2))}
+.star-ring .pct{font-size:9px;font-weight:700;letter-spacing:-.02em;color:rgba(255,255,255,.0);height:0;overflow:hidden;transition:color .2s,height .2s}
+.star-ring.show-pct .pct{color:rgba(255,255,255,.72);height:12px}
+.goal-list{display:none} /* chips moved into rings; keep node for openGoal hooks if needed */
 .streaks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:4px}
 .streak{background:var(--card2);border-radius:var(--radius-sm);padding:10px 4px 8px;text-align:center;border:1px solid var(--line);min-width:0}
 .streak svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 4px;display:block;color:var(--mut)}
@@ -95,9 +108,8 @@ details.sess>summary::-webkit-details-marker{display:none}
   .chart-wrap{max-width:520px;padding:12px}
 }
 
-.goal-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 4px}
-.goal-chip{padding:7px 12px;border-radius:100px;border:1px solid var(--line);background:var(--card2);font-size:12px;font-weight:600;color:var(--tx2);cursor:pointer}
-.goal-chip:hover{background:#fff;color:#000}
+.goal-list{display:none}
+.goal-chip{display:none}
 .sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;display:none;align-items:flex-end;justify-content:center;padding:12px;padding-bottom:calc(var(--safe-b) + 12px)}
 .sheet-bg.on{display:flex}
 .sheet{background:var(--card2);border:1px solid var(--line);border-radius:24px;padding:22px 20px 18px;width:100%;max-width:440px;max-height:78vh;overflow:auto;box-shadow:0 16px 48px rgba(0,0,0,.5)}
@@ -307,10 +319,10 @@ details.sess>summary::-webkit-details-marker{display:none}
     <section class="view on" id="v-home">
       <div class="home-layout">
         <div class="card home-hero">
-          <div class="star-wrap-label">This week · equal weight · step notches</div>
+          <div class="star-wrap-label">This week</div>
           <div class="chart-wrap" id="starWrap"><canvas id="star" height="320"></canvas></div>
-          <div class="goal-list" id="goalList"></div>
-          <div class="pillar-nums" id="pillarNums"></div>
+          <div class="star-rings" id="pillarNums" aria-label="Week progress by axis"></div>
+          <div class="goal-list" id="goalList" hidden></div>
         </div>
         <div class="card">
           <h2>Habit streaks</h2>
@@ -433,7 +445,7 @@ details.sess>summary::-webkit-details-marker{display:none}
 <div class="celeb" id="celeb" aria-hidden="true"></div>
 <div class="toast-xp" id="toastXp"></div>
 <script>
-const D={"log":[{"date":"2026-10-11","pillar":"Fitness","sub-area":"running","activity":"Royal Parks Half Marathon 1:36:05","points":"8","note":"race, baseline"}],"plan":{"weekLabel":"Interim schedule (until Runner app programme starts)","gymSource":"Coach Block 4 from Training Template / gym app seed.json (OR_Macrocycle). Day1\u2192Mon, Day2\u2192Wed, Day3\u2192Fri. Sets/reps/RPE shown = Block 4 Week 1; primary-lift progression notes cover Weeks 1\u20133. Block 5 (macrocycle w/c 12 Oct) is not in the sheet yet.","currentLifts":"Squat 180 / Bench 120 / Deadlift 190","week":[{"day":"Mon","kind":"gym","coachDay":1,"title":"Gym \u00b7 Day 1 \u00b7 Squat primary","summary":"Comp. Squat \u00b7 Close Grip Bench \u00b7 Incline DB Bench \u00b7 Leg Extensions \u00b7 Straight bar PD \u00b7 Seated Lat Raise","exercises":[{"classification":"Squat: Primary","exercise":"Comp. Squat","rx":"1\u00d73 @6 \u00b7 135kg cap \u00b7 2\u00d75 85% of top set \u00b7 114.75","progression":"W1: 1\u00d73 @6 [135kg cap]; 2\u00d75 85% of top set [114.75] \u2192 W2: 1\u00d73 @7 [135-140]; 2\u00d75 85% of top set [120] \u2192 W3: 1\u00d73 @7 [142.5-147.5]; 2\u00d75 85% of top set"},{"classification":"Bench: Secondary","exercise":"Close Grip Bench","rx":"3\u00d78 @4, @5, @6 \u00b7 80kg cap","progression":null},{"classification":"Bench: Supplementary","exercise":"Incline DB Bench","rx":"2\u00d710 @6, @7","progression":null},{"classification":"Quads","exercise":"Leg Extensions","rx":"1\u00d710 @8 \u00b7 2\u00d7Myo-Reps AMRAP x2 (10s rests)","progression":null},{"classification":"Triceps","exercise":"Straight bar PD","rx":"3\u00d710-12 @8","progression":null},{"classification":"Shoulders","exercise":"Seated Lat Raise","rx":"3\u00d710-12 @8","progression":null}],"extra":"Reading 20 min"},{"day":"Tue","kind":"run","title":"Run 5 miles","summary":"Run 5 miles","exercises":[],"extra":"Macro 08:00-09:30 \u00b7 Reading 30 min"},{"day":"Wed","kind":"gym","coachDay":2,"title":"Gym \u00b7 Day 2 \u00b7 Deadlift primary","summary":"Comp. Deadlift \u00b7 2ct Pause Bench \u00b7 Larsen Press \u00b7 RDL \u00b7 Single Arm PD \u00b7 Bayesian Curl \u00b7 Weighted Plank \u00b7 Single-Arm Barbell Hold","exercises":[{"classification":"Deadlift: Primary","exercise":"Comp. Deadlift","rx":"1\u00d73 @4 \u00b7 140kg cap \u00b7 1\u00d73 @5 \u00b7 150kg cap \u00b7 1\u00d73 Top set - 20kg","progression":"W1: 1\u00d73 @4 [140kg cap]; 1\u00d73 @5 [150kg cap]; 1\u00d73 Top set - 20kg \u2192 W2: 1\u00d73 @5 [140-150]; 1\u00d73 @6 [150-160]; 1\u00d73 Top set - 20kg \u2192 W3: 1\u00d73 @6 [150-160]; 1\u00d73 @7 [160-170]; 1\u00d73 Top set - 20kg"},{"classification":"Bench: Tertiary","exercise":"2ct Pause Bench","rx":"1\u00d73 @6 \u00b7 85kg cap","progression":null},{"classification":"Bench: Tertiary","exercise":"Larsen Press","rx":"2\u00d76 @5 \u00b7 75kg cap","progression":null},{"classification":"Deadlift: Secondary","exercise":"RDL","rx":"2\u00d78 @6, @7 \u00b7 120kg cap","progression":null},{"classification":"Back","exercise":"Single Arm PD","rx":"3\u00d710-12 @8","progression":null},{"classification":"Biceps","exercise":"Bayesian Curl","rx":"3\u00d710-12 @8","progression":null},{"classification":"Abs","exercise":"Weighted Plank","rx":"1\u00d7AMRAP @9","progression":null},{"classification":"Grip","exercise":"Single-Arm Barbell Hold","rx":"1\u00d7AMRAP @9","progression":null}],"extra":"Macro 08:00-09:30 \u00b7 Plan this week's Lauren thing"},{"day":"Thu","kind":"run","title":"Run 5 miles","summary":"Run 5 miles","exercises":[],"extra":"Macro 08:00-09:30 \u00b7 Optional: Rix Football 18:30-20:00"},{"day":"Fri","kind":"gym","coachDay":3,"title":"Gym \u00b7 Day 3 \u00b7 Bench primary","summary":"High Bar Squat \u00b7 Comp. Bench \u00b7 Leg Press \u00b7 Seated Hamstring Curl \u00b7 Straight bar extension \u00b7 Straight bar front raise","exercises":[{"classification":"Squat: Secondary","exercise":"High Bar Squat","rx":"3\u00d78 @4, @5, @6 \u00b7 100kg cap","progression":null},{"classification":"Bench: Primary","exercise":"Comp. Bench","rx":"1\u00d73 @6 \u00b7 95kg cap \u00b7 2\u00d77 80% of top set","progression":"W1: 1\u00d73 @6 [95kg cap]; 2\u00d77 80% of top set \u2192 W2: 1\u00d73 @7 [100kg]; 2\u00d77 80% of top set \u2192 W3: 1\u00d73 @8 [105]; 2\u00d77 80% of top set"},{"classification":"Squat: Supplementary","exercise":"Leg Press","rx":"2\u00d710 @6, @7","progression":null},{"classification":"Hamstrings","exercise":"Seated Hamstring Curl","rx":"1\u00d710 @8 \u00b7 2\u00d7Myo-Reps AMRAP x2 (10s rests)","progression":null},{"classification":"Triceps","exercise":"Straight bar extension","rx":"3\u00d710-12 @8","progression":null},{"classification":"Shoulders","exercise":"Straight bar front raise","rx":"3\u00d710-12 @8","progression":null}],"extra":"Lauren slot (date/surprise)"},{"day":"Sat","kind":"run","title":"Long run 10\u201315 miles","summary":"Long run 10\u201315 miles","exercises":[],"extra":"Lauren slot (alt)"},{"day":"Sun","kind":"run","title":"Run 6 miles","summary":"Run 6 miles","exercises":[],"extra":"Reading 45 min + 5-min weekly review"}],"phases":[{"name":"Recovery","start":"2026-10-12","end":"2026-10-18","run":"Easy only: 2-3 x 30-40 min, no quality. Football optional.","lift":"2 sessions @RPE6, no heavy pulls until Thu"},{"name":"Base","start":"2026-10-19","end":"2026-12-20","run":"Build 40->60 km/wk, long run 16->24k, tempo + strides. Checkpoint: 10k ~42-43 min by early Dec Baseline half 1:36:05 (Riegel \u22483:21).","lift":"Bench 125 x1, DL 200 x1, Squat hold 180"},{"name":"Build","start":"2026-12-21","end":"2027-02-14","run":"60->75 km/wk, long 26->32k with MP blocks, threshold + VO2 reps. Checkpoint: half end-Jan (sub-1:30 \u2248 ~3:10; sub-1:27 needed for sub-3). Baseline: Royal Parks Half 1:36:05 \u2192 Riegel \u22483:21.","lift":"Bench 130, DL 210-215, Squat 180-185; strength 2-3x"},{"name":"Peak","start":"2027-02-15","end":"2027-03-28","run":"75-85 km/wk, 2-3 x 32-35k long runs, MP work; set goal pace from Jan half (sub-1:30\u2192~3:10, sub-1:27\u2192sub-3)","lift":"Maintain: 2 sessions, low volume, no lifting PRs"},{"name":"Taper","start":"2027-03-29","end":"2027-04-25","run":"Volume -20/-40/-60%, keep some MP; race TCS London Marathon Sun 25 Apr 2027","lift":"1-2 light sessions, stop heavy lower body 10 days out"}],"race":{"name":"TCS London Marathon 2027","date":"2027-04-25","note":"Oliver runs Sun 25 Apr 2027"},"raceDate":"2027-04-25"},"books":[{"title":"Central Banking 101","author":"Joseph Wang","status":"reading","started":"2026-10","finished":"","notion_url":""}],"todo":[{"item":"Running app login","needed_by_agent":"Ollie","why":"To pull your running sessions into the plan automatically","added":"2026-10-10","status":"open"},{"item":"More book names for the reading list","needed_by_agent":"Ollie","why":"To fill the 26-book year after Central Banking 101","added":"2026-10-10","status":"waiting: decide whether to add Fixed Income Markets"},{"item":"Marathon race date","needed_by_agent":"Ollie","why":"TCS London Marathon Sun 25 Apr 2027","added":"2026-10-10","status":"done"},{"item":"Half marathon result (after Sun 11 Oct)","needed_by_agent":"Ollie","why":"Royal Parks Half 11 Oct 2026: 1:36:05 (Riegel \u22483:21 marathon). Baseline set.","added":"2026-10-10","status":"done"},{"item":"Pick a topic from Weekly Macro's ranked list","needed_by_agent":"Macro_Weekly","why":"Newsletter is waiting on your choice","added":"2026-10-10","status":"open"},{"item":"Current savings baseline for the \u00a3100K goal","needed_by_agent":"Ollie","why":"To track progress from the right start point","added":"2026-10-10","status":"open"},{"item":"Confirm weekly points targets","needed_by_agent":"Ollie","why":"Targets are placeholder 20 pts per pillar","added":"2026-10-10","status":"open"},{"item":"Interactive Brokers read-only access (Flex Query token + query id preferred, or monthly activity statement CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Barclays Smart Investor statement export (CSV/PDF)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Chase statement export (CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"NatWest statement export (CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Coach Block 5 / current-week gym prescription","needed_by_agent":"Ollie","why":"Block 4 ends ~5 Oct; macrocycle Block 5 starts w/c 12 Oct but is not in Training Template yet \u2014 need sets/reps/RPE for post-half weeks","added":"2026-10-10","status":"open"},{"item":"Confirm which Block 4 week (or Block 5) to use for load after the half","needed_by_agent":"Ollie","why":"App shows Block 4 Week 1 rx + W1\u2013W3 progression; need your call on starting loads post-race","added":"2026-10-10","status":"open"},{"item":"Confirm London Marathon day: Sat 24 or Sun 25 Apr","needed_by_agent":"Ollie","why":"Confirmed: Sun 25 Apr 2027","added":"2026-10-10","status":"done"}],"finance":[],"scoring":[{"pillar":"Fitness","sub-area":"gym","activity":"Gym session","points":"3"},{"pillar":"Fitness","sub-area":"running","activity":"5k run","points":"3"},{"pillar":"Fitness","sub-area":"running","activity":"Long run (15k+)","points":"5"},{"pillar":"Fitness","sub-area":"running","activity":"Race","points":"8"},{"pillar":"Fitness","sub-area":"eating","activity":"Clean eating day","points":"1"},{"pillar":"Learning","sub-area":"reading","activity":"30 pages reading","points":"2"},{"pillar":"Learning","sub-area":"output","activity":"Published write-up / newsletter","points":"5"},{"pillar":"Learning","sub-area":"output","activity":"Draft / notes session","points":"2"},{"pillar":"Relationships","sub-area":"wife","activity":"Date night","points":"4"},{"pillar":"Relationships","sub-area":"wife","activity":"Quality evening together","points":"2"},{"pillar":"Relationships","sub-area":"family","activity":"Family call","points":"2"},{"pillar":"Relationships","sub-area":"family","activity":"Family visit","points":"4"},{"pillar":"Relationships","sub-area":"friends","activity":"Friends meetup","points":"3"},{"pillar":"Career","sub-area":"macro","activity":"Macro study block","points":"2"},{"pillar":"Career","sub-area":"macro","activity":"Trade journal entry","points":"2"},{"pillar":"Career","sub-area":"macro","activity":"Trade idea written up","points":"3"},{"pillar":"Career","sub-area":"finances","activity":"Budget / portfolio review","points":"2"}],"goals":[{"id":"job","pillar":"Career","label":"Macro hedge fund job secured","short":"Career","kind":"habits","baseline":"","target":"","current":"0","unit":"","note":"","description":"Land a macro hedge fund seat by 31 Dec 2026. Monthly: 2 proper applications (CV + tangible for the fund + trade idea). Weekly: 1 blog write-up + 1 trade post. Daily: 30 min tracking markets / calibrating for the weekend.","deadline":"2026-12-31","steps":"12"},{"id":"lifts","pillar":"Fitness","label":"Squat 200 \u00b7 Bench 140 \u00b7 Deadlift 240","short":"Lifts","kind":"lifts","baseline":"0","target":"3","current":"0","unit":"lifts","note":"S 200 / B 140 / DL 240","description":"Hit competition lifts by 31 Dec 2026. Habit: gym 3\u00d7/week.","deadline":"2026-12-31","steps":"6"},{"id":"run","pillar":"Fitness","label":"Sub-1:30 half marathon","short":"Run","kind":"run","baseline":"1:36:05","target":"1:30:00","current":"1:36:05","unit":"h:mm:ss","note":"London Marathon sub-3 25 Apr 2027 (longer-term)","description":"Half under 1:30 by 31 Dec 2026. Habit: run 3\u00d7/week. Sub-3 TCS London Marathon 25 Apr 2027 stays as the longer race goal.","deadline":"2026-12-31","steps":"4"},{"id":"bodyfat","pillar":"Fitness","label":"Body fat 12%","short":"BF%","kind":"number","baseline":"22.5","target":"12","current":"22.5","unit":"%","note":"look like I lift","description":"Reach ~12% body fat by 31 Dec 2026. Habits: weigh-in daily; 180g protein daily.","deadline":"2026-12-31","steps":"8"},{"id":"books","pillar":"Learning","label":"10 book reviews","short":"Books","kind":"books","baseline":"0","target":"10","current":"0","unit":"","note":"Substack reviews","description":"Ten book reviews by 31 Dec 2026. Habit: new book every 2 weeks + review on Substack.","deadline":"2026-12-31","steps":"10"},{"id":"savings","pillar":"Career","label":"Savings goal","short":"Save","kind":"number","baseline":"","target":"","current":"","unit":"","note":"figures encrypted","description":"[amount] by 30 Jun 2027. Near-term: organise savings plan + direct debits this week; plan a separate income stream (Ollie helps).","deadline":"2027-06-30","steps":"8"},{"id":"lauren","pillar":"Relationships","label":"Make Lauren feel special","short":"Lauren","kind":"dates","baseline":"0","target":"1","current":"0","unit":"","note":"weekly date night","description":"Make Lauren feel special. Habit: a date night every week.","deadline":"2027-06-30","steps":"12"}],"job_milestones":[{"milestone":"apps_oct","done":"0","due":"2026-10-31","label":"October: 2 HF applications"},{"milestone":"apps_nov","done":"0","due":"2026-11-30","label":"November: 2 HF applications"},{"milestone":"apps_dec","done":"0","due":"2026-12-31","label":"December: 2 HF applications"},{"milestone":"interview","done":"0","due":"2026-12-15","label":"First-round interview"},{"milestone":"offer","done":"0","due":"2026-12-31","label":"Job secured"}],"savings_milestones":[{"milestone":"m21k","due":"2026-12-31","label":"~[locked] saved (year-end pace)"},{"milestone":"m100k","due":"2027-06-30","label":"[locked] saved (Q2 2027)"}],"career_weekly":[{"goal_id":"job","id":"blog","label":"1 weekly write-up (blog)","target_per_week":"1","log_match":"blog|write-up|writeup|substack"},{"goal_id":"job","id":"trade_post","label":"1 trade post","target_per_week":"1","log_match":"trade post|trade idea"},{"goal_id":"job","id":"markets","label":"Daily markets (log days)","target_per_week":"5","log_match":"markets|calibrat"},{"goal_id":"savings","id":"plan_dd","label":"Savings plan + direct debits","target_per_week":"1","log_match":"direct debit|savings plan|standing order"}],"actions":[{"goal_id":"job","pillar":"Career","scope":"daily","id":"markets","label":"30 min markets / calibrate","points":"2","target":"1","weight":"4","cadence":"daily"},{"goal_id":"job","pillar":"Career","scope":"weekly","id":"blog","label":"Weekly write-up (blog)","points":"3","target":"1","weight":"4","cadence":"weekly"},{"goal_id":"job","pillar":"Career","scope":"weekly","id":"trade_post","label":"Trade post","points":"3","target":"1","weight":"4","cadence":"weekly"},{"goal_id":"job","pillar":"Career","scope":"monthly","id":"apps","label":"HF applications (\u00d72: CV + tangible + idea)","points":"8","target":"2","weight":"4","cadence":"monthly"},{"goal_id":"lifts","pillar":"Fitness","scope":"weekly","id":"gym","label":"Gym sessions","points":"3","target":"3","weight":"3","cadence":"weekly"},{"goal_id":"run","pillar":"Fitness","scope":"weekly","id":"runs","label":"Runs","points":"3","target":"3","weight":"3","cadence":"weekly"},{"goal_id":"bodyfat","pillar":"Fitness","scope":"daily","id":"weighin","label":"Weigh-in","points":"1","target":"1","weight":"3","cadence":"daily"},{"goal_id":"bodyfat","pillar":"Fitness","scope":"daily","id":"protein","label":"180g protein","points":"2","target":"1","weight":"3","cadence":"daily"},{"goal_id":"books","pillar":"Learning","scope":"fortnightly","id":"book_review","label":"New book + Substack review","points":"5","target":"1","weight":"1","cadence":"fortnightly"},{"goal_id":"lauren","pillar":"Relationships","scope":"weekly","id":"date","label":"Date night with Lauren","points":"4","target":"1","weight":"2","cadence":"weekly"},{"goal_id":"savings","pillar":"Career","scope":"once","id":"plan_dd","label":"Organise savings plan + direct debits","points":"5","target":"1","weight":"2","cadence":"once"},{"goal_id":"savings","pillar":"Career","scope":"once","id":"income_stream","label":"Plan separate income stream","points":"5","target":"1","weight":"2","cadence":"once"}],"marathon_milestones":[{"milestone":"half_sub_130","label":"Half under 1:30","done":"0","due":"2026-12-31","note":"Year-end"},{"milestone":"sub3_london","label":"Marathon sub-3:00 (TCS London)","done":"0","due":"2027-04-25","note":"Sun 25 Apr 2027"}],"dayplan":[{"date":"2026-10-13","time":"06:00","id":"wake","item":"Wake","pillar":"Fitness","priority":"2","note":""},{"date":"2026-10-13","time":"06:15","id":"run5","item":"Easy 5 mi \u00b7 conversational \u00b7 legs post half","pillar":"Fitness","priority":"2","note":"non-negotiable"},{"date":"2026-10-13","time":"07:15","id":"breakfast","item":"Shower + high-protein breakfast","pillar":"Fitness","priority":"2","note":""},{"date":"2026-10-13","time":"08:00","id":"commute_read","item":"Commute: Central Banking 101 (~20 min)","pillar":"Learning","priority":"5","note":""},{"date":"2026-10-13","time":"09:00","id":"work_day","item":"Work \u00b7 hard stop 19:00 \u00b7 leave on time","pillar":"Career","priority":"4","note":"current job"},{"date":"2026-10-13","time":"19:30","id":"lauren","item":"Lauren \u00b7 phones away \u00b7 plan this week's date","pillar":"Relationships","priority":"3","note":""},{"date":"2026-10-13","time":"20:15","id":"hf_work","item":"Hedge fund \u00b7 Point72 London / Macro_Careers \u00b7 one concrete output","pillar":"Career","priority":"1","note":""},{"date":"2026-10-13","time":"22:30","id":"sleep","item":"Lights out \u00b7 7h sleep minimum","pillar":"Fitness","priority":"2","note":""}],"updates":[{"timestamp":"2026-10-12T11:05:00+01:00","text":"Today plan for Tue 13 Oct added (tickable). In-app updates feed with bell + unread badge."},{"timestamp":"2026-10-12T11:10:00+01:00","text":"Q4 milestones added \u2014 job, savings (100K goal \u2192 30 Jun 2027), lifts, running, body fat, Lauren, reading. Q4 2026 section on each goal."},{"timestamp":"2026-10-12T11:15:00+01:00","text":"Moved to GitHub Pages. Ticks sync via Google Sheet (or this device). Money figures encrypted client-side."},{"timestamp":"2026-10-12T11:35:00+01:00","text":"Goals clarity + gamification preview: XP/levels, streak freeze, perfect-week + checkpoint badges, celebrations."},{"timestamp":"2026-10-13T08:05:00+01:00","text":"Goals rewritten: 7-axis star (Career Lifts Run BF% Books Save Lauren), habit streaks, equal weekly weight. Preview only."},{"timestamp":"2026-10-13T08:20:00+01:00","text":"XP system: lifetime levels, streak multiplier, week-complete bonuses, rewards (kit / dinner / weekend). Preview only."}],"q4_milestones":[{"goal_id":"lifts","id":"sq_190","due":"2026-11-30","label":"Squat 190 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"bp_130","due":"2026-11-30","label":"Bench 130 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"dl_210","due":"2026-11-30","label":"Deadlift 210 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"sq_200","due":"2026-12-31","label":"Squat 200 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"bp_140","due":"2026-12-31","label":"Bench 140 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"dl_240","due":"2026-12-31","label":"Deadlift 240 kg","done":"0","note":"Year-end"},{"goal_id":"run","id":"half_130","due":"2026-12-31","label":"Half under 1:30","done":"0","note":"Year-end race shape"},{"goal_id":"run","id":"sub3_london","due":"2027-04-25","label":"Marathon sub-3:00 (TCS London)","done":"0","note":"Longer-term"},{"goal_id":"bodyfat","id":"bf_12","due":"2026-12-31","label":"Body fat ~12%","done":"0","note":"look like I lift"},{"goal_id":"savings","id":"plan_dd","due":"2026-10-19","label":"Savings plan + direct debits set up","done":"0","note":"This week"},{"goal_id":"savings","id":"income_stream","due":"2026-11-15","label":"Separate income stream planned","done":"0","note":"Ollie helps plan"},{"goal_id":"savings","id":"m100k","due":"2027-06-30","label":"Savings goal checkpoint","done":"0","note":"Encrypted figure"},{"goal_id":"job","id":"secured","due":"2026-12-31","label":"Macro HF job secured","done":"0","note":"End goal"},{"goal_id":"books","id":"reviews_10","due":"2026-12-31","label":"10 book reviews published","done":"0","note":"Substack"},{"goal_id":"lauren","id":"dates_weekly","due":"2027-06-30","label":"Weekly date night habit held","done":"0","note":""}],"checkpoints":[{"goal_id":"lifts","id":"sq_190","due":"2026-11-30","label":"Squat 190 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"bp_130","due":"2026-11-30","label":"Bench 130 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"dl_210","due":"2026-11-30","label":"Deadlift 210 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"sq_200","due":"2026-12-31","label":"Squat 200 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"bp_140","due":"2026-12-31","label":"Bench 140 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"dl_240","due":"2026-12-31","label":"Deadlift 240 kg","done":"0","note":"Year-end"},{"goal_id":"run","id":"half_130","due":"2026-12-31","label":"Half under 1:30","done":"0","note":"Year-end race shape"},{"goal_id":"run","id":"sub3_london","due":"2027-04-25","label":"Marathon sub-3:00 (TCS London)","done":"0","note":"Longer-term"},{"goal_id":"bodyfat","id":"bf_12","due":"2026-12-31","label":"Body fat ~12%","done":"0","note":"look like I lift"},{"goal_id":"savings","id":"plan_dd","due":"2026-10-19","label":"Savings plan + direct debits set up","done":"0","note":"This week"},{"goal_id":"savings","id":"income_stream","due":"2026-11-15","label":"Separate income stream planned","done":"0","note":"Ollie helps plan"},{"goal_id":"savings","id":"m100k","due":"2027-06-30","label":"Savings goal checkpoint","done":"0","note":"Encrypted figure"},{"goal_id":"job","id":"secured","due":"2026-12-31","label":"Macro HF job secured","done":"0","note":"End goal"},{"goal_id":"books","id":"reviews_10","due":"2026-12-31","label":"10 book reviews published","done":"0","note":"Substack"},{"goal_id":"lauren","id":"dates_weekly","due":"2027-06-30","label":"Weekly date night habit held","done":"0","note":""}],"rewards":[{"id":"kit","xp":"1000","label":"New running kit","note":"Treat yourself to fresh kit"},{"id":"dinner","xp":"2500","label":"Dinner out with Lauren","note":"Celebratory date night"},{"id":"weekend","xp":"5000","label":"Weekend away","note":"Book a proper escape"}],"targets":{"Career":20.0,"Fitness":20.0,"Learning":20.0,"Relationships":20.0},"start_date":"2026-10-10","money_enc":{"v":1,"kdf":"PBKDF2","hash":"SHA-256","iter":210000,"salt":"PfRDC2+acujETNT2WS80Iw==","iv":"w22RRDGoXjwnLawv","ct":"Rs+tDtO9PBaKlj9mB+O0hjW0seNqd7rH10Ak8BTKeQkXRnDvKf9eRSVYm6qOXuJm0SPpOYhuWCvD6DUcmmY6YdhZU5EbdDDC65UvtHaA5Z+eKcJdyGo6yEbF0Tf0bmdzpkDQxYi/bJZN9WGeYopy6nT+mT0PjIAwuTtdQcuo0+gfTAZTei+t55hmgijoJOrBFBRR8ylZow4zh6ajCnoIBcywjphYoHBbcL07MB2VJE7PsPqGKNxCOw8FXOgyT4h81ChL2ZHztYHYB6r4m50NCuC7o4FLqxSV57zAWC6gb78+FeFO6IyYjPFHyT5BMK2wfdRavENYLGYRY2GX9G4F31zK0oUdLYgQaoor62UrOiHe2dD/N717suSHtl95byjHhHsdg4im6gto6Grj2i6OM2XX3lmyJKbR8XXADBjzpIMN0JWb9QAX1aUglR5y39owYg8bTBsCJwaw1Aih9dUGQIpPa5/eCSQ1ZcIM9krONRBp0eG1y0EWeFOUa6NEQbo+DCiG1ORpfsYC/UTV+g8Ys53Exh++DPGtIwEv5C9fZ06Og9J/512BbGuEXi7NNYg12FLch6jp95giuhFs7xSTpqW59c/zSb7FHdr3wzg8fVSP+8lKiZzJU7r/2cCecTX6S6+uRaafLhMsrCU09Fl1VjoQquzFczIMwocr+aNAqOWsiPS7qxu6EabpqBwhW2Hvc3rtBsTnd0vg5k8UrDVmxvVNDuq8Os8fIv+RD66Z0OpEfjaw5b4p5KD24T3wrMpRjija5KJfQhyRkhZFmg8="},"money_status":"encrypted","ticks_backend":"sheets"};
+const D={"log":[{"date":"2026-10-11","pillar":"Fitness","sub-area":"running","activity":"Royal Parks Half Marathon 1:36:05","points":"8","note":"race, baseline"}],"plan":{"weekLabel":"Interim schedule (until Runner app programme starts)","gymSource":"Coach Block 4 from Training Template / gym app seed.json (OR_Macrocycle). Day1\u2192Mon, Day2\u2192Wed, Day3\u2192Fri. Sets/reps/RPE shown = Block 4 Week 1; primary-lift progression notes cover Weeks 1\u20133. Block 5 (macrocycle w/c 12 Oct) is not in the sheet yet.","currentLifts":"Squat 180 / Bench 120 / Deadlift 190","week":[{"day":"Mon","kind":"gym","coachDay":1,"title":"Gym \u00b7 Day 1 \u00b7 Squat primary","summary":"Comp. Squat \u00b7 Close Grip Bench \u00b7 Incline DB Bench \u00b7 Leg Extensions \u00b7 Straight bar PD \u00b7 Seated Lat Raise","exercises":[{"classification":"Squat: Primary","exercise":"Comp. Squat","rx":"1\u00d73 @6 \u00b7 135kg cap \u00b7 2\u00d75 85% of top set \u00b7 114.75","progression":"W1: 1\u00d73 @6 [135kg cap]; 2\u00d75 85% of top set [114.75] \u2192 W2: 1\u00d73 @7 [135-140]; 2\u00d75 85% of top set [120] \u2192 W3: 1\u00d73 @7 [142.5-147.5]; 2\u00d75 85% of top set"},{"classification":"Bench: Secondary","exercise":"Close Grip Bench","rx":"3\u00d78 @4, @5, @6 \u00b7 80kg cap","progression":null},{"classification":"Bench: Supplementary","exercise":"Incline DB Bench","rx":"2\u00d710 @6, @7","progression":null},{"classification":"Quads","exercise":"Leg Extensions","rx":"1\u00d710 @8 \u00b7 2\u00d7Myo-Reps AMRAP x2 (10s rests)","progression":null},{"classification":"Triceps","exercise":"Straight bar PD","rx":"3\u00d710-12 @8","progression":null},{"classification":"Shoulders","exercise":"Seated Lat Raise","rx":"3\u00d710-12 @8","progression":null}],"extra":"Reading 20 min"},{"day":"Tue","kind":"run","title":"Run 5 miles","summary":"Run 5 miles","exercises":[],"extra":"Macro 08:00-09:30 \u00b7 Reading 30 min"},{"day":"Wed","kind":"gym","coachDay":2,"title":"Gym \u00b7 Day 2 \u00b7 Deadlift primary","summary":"Comp. Deadlift \u00b7 2ct Pause Bench \u00b7 Larsen Press \u00b7 RDL \u00b7 Single Arm PD \u00b7 Bayesian Curl \u00b7 Weighted Plank \u00b7 Single-Arm Barbell Hold","exercises":[{"classification":"Deadlift: Primary","exercise":"Comp. Deadlift","rx":"1\u00d73 @4 \u00b7 140kg cap \u00b7 1\u00d73 @5 \u00b7 150kg cap \u00b7 1\u00d73 Top set - 20kg","progression":"W1: 1\u00d73 @4 [140kg cap]; 1\u00d73 @5 [150kg cap]; 1\u00d73 Top set - 20kg \u2192 W2: 1\u00d73 @5 [140-150]; 1\u00d73 @6 [150-160]; 1\u00d73 Top set - 20kg \u2192 W3: 1\u00d73 @6 [150-160]; 1\u00d73 @7 [160-170]; 1\u00d73 Top set - 20kg"},{"classification":"Bench: Tertiary","exercise":"2ct Pause Bench","rx":"1\u00d73 @6 \u00b7 85kg cap","progression":null},{"classification":"Bench: Tertiary","exercise":"Larsen Press","rx":"2\u00d76 @5 \u00b7 75kg cap","progression":null},{"classification":"Deadlift: Secondary","exercise":"RDL","rx":"2\u00d78 @6, @7 \u00b7 120kg cap","progression":null},{"classification":"Back","exercise":"Single Arm PD","rx":"3\u00d710-12 @8","progression":null},{"classification":"Biceps","exercise":"Bayesian Curl","rx":"3\u00d710-12 @8","progression":null},{"classification":"Abs","exercise":"Weighted Plank","rx":"1\u00d7AMRAP @9","progression":null},{"classification":"Grip","exercise":"Single-Arm Barbell Hold","rx":"1\u00d7AMRAP @9","progression":null}],"extra":"Macro 08:00-09:30 \u00b7 Plan this week's Lauren thing"},{"day":"Thu","kind":"run","title":"Run 5 miles","summary":"Run 5 miles","exercises":[],"extra":"Macro 08:00-09:30 \u00b7 Optional: Rix Football 18:30-20:00"},{"day":"Fri","kind":"gym","coachDay":3,"title":"Gym \u00b7 Day 3 \u00b7 Bench primary","summary":"High Bar Squat \u00b7 Comp. Bench \u00b7 Leg Press \u00b7 Seated Hamstring Curl \u00b7 Straight bar extension \u00b7 Straight bar front raise","exercises":[{"classification":"Squat: Secondary","exercise":"High Bar Squat","rx":"3\u00d78 @4, @5, @6 \u00b7 100kg cap","progression":null},{"classification":"Bench: Primary","exercise":"Comp. Bench","rx":"1\u00d73 @6 \u00b7 95kg cap \u00b7 2\u00d77 80% of top set","progression":"W1: 1\u00d73 @6 [95kg cap]; 2\u00d77 80% of top set \u2192 W2: 1\u00d73 @7 [100kg]; 2\u00d77 80% of top set \u2192 W3: 1\u00d73 @8 [105]; 2\u00d77 80% of top set"},{"classification":"Squat: Supplementary","exercise":"Leg Press","rx":"2\u00d710 @6, @7","progression":null},{"classification":"Hamstrings","exercise":"Seated Hamstring Curl","rx":"1\u00d710 @8 \u00b7 2\u00d7Myo-Reps AMRAP x2 (10s rests)","progression":null},{"classification":"Triceps","exercise":"Straight bar extension","rx":"3\u00d710-12 @8","progression":null},{"classification":"Shoulders","exercise":"Straight bar front raise","rx":"3\u00d710-12 @8","progression":null}],"extra":"Lauren slot (date/surprise)"},{"day":"Sat","kind":"run","title":"Long run 10\u201315 miles","summary":"Long run 10\u201315 miles","exercises":[],"extra":"Lauren slot (alt)"},{"day":"Sun","kind":"run","title":"Run 6 miles","summary":"Run 6 miles","exercises":[],"extra":"Reading 45 min + 5-min weekly review"}],"phases":[{"name":"Recovery","start":"2026-10-12","end":"2026-10-18","run":"Easy only: 2-3 x 30-40 min, no quality. Football optional.","lift":"2 sessions @RPE6, no heavy pulls until Thu"},{"name":"Base","start":"2026-10-19","end":"2026-12-20","run":"Build 40->60 km/wk, long run 16->24k, tempo + strides. Checkpoint: 10k ~42-43 min by early Dec Baseline half 1:36:05 (Riegel \u22483:21).","lift":"Bench 125 x1, DL 200 x1, Squat hold 180"},{"name":"Build","start":"2026-12-21","end":"2027-02-14","run":"60->75 km/wk, long 26->32k with MP blocks, threshold + VO2 reps. Checkpoint: half end-Jan (sub-1:30 \u2248 ~3:10; sub-1:27 needed for sub-3). Baseline: Royal Parks Half 1:36:05 \u2192 Riegel \u22483:21.","lift":"Bench 130, DL 210-215, Squat 180-185; strength 2-3x"},{"name":"Peak","start":"2027-02-15","end":"2027-03-28","run":"75-85 km/wk, 2-3 x 32-35k long runs, MP work; set goal pace from Jan half (sub-1:30\u2192~3:10, sub-1:27\u2192sub-3)","lift":"Maintain: 2 sessions, low volume, no lifting PRs"},{"name":"Taper","start":"2027-03-29","end":"2027-04-25","run":"Volume -20/-40/-60%, keep some MP; race TCS London Marathon Sun 25 Apr 2027","lift":"1-2 light sessions, stop heavy lower body 10 days out"}],"race":{"name":"TCS London Marathon 2027","date":"2027-04-25","note":"Oliver runs Sun 25 Apr 2027"},"raceDate":"2027-04-25"},"books":[{"title":"Central Banking 101","author":"Joseph Wang","status":"reading","started":"2026-10","finished":"","notion_url":""}],"todo":[{"item":"Running app login","needed_by_agent":"Ollie","why":"To pull your running sessions into the plan automatically","added":"2026-10-10","status":"open"},{"item":"More book names for the reading list","needed_by_agent":"Ollie","why":"To fill the 26-book year after Central Banking 101","added":"2026-10-10","status":"waiting: decide whether to add Fixed Income Markets"},{"item":"Marathon race date","needed_by_agent":"Ollie","why":"TCS London Marathon Sun 25 Apr 2027","added":"2026-10-10","status":"done"},{"item":"Half marathon result (after Sun 11 Oct)","needed_by_agent":"Ollie","why":"Royal Parks Half 11 Oct 2026: 1:36:05 (Riegel \u22483:21 marathon). Baseline set.","added":"2026-10-10","status":"done"},{"item":"Pick a topic from Weekly Macro's ranked list","needed_by_agent":"Macro_Weekly","why":"Newsletter is waiting on your choice","added":"2026-10-10","status":"open"},{"item":"Current savings baseline for the \u00a3100K goal","needed_by_agent":"Ollie","why":"To track progress from the right start point","added":"2026-10-10","status":"open"},{"item":"Confirm weekly points targets","needed_by_agent":"Ollie","why":"Targets are placeholder 20 pts per pillar","added":"2026-10-10","status":"open"},{"item":"Interactive Brokers read-only access (Flex Query token + query id preferred, or monthly activity statement CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Barclays Smart Investor statement export (CSV/PDF)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Chase statement export (CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"NatWest statement export (CSV)","needed_by_agent":"Ollie","why":"Track savings vs \u00a3100K goal","added":"2026-10-10","status":"open"},{"item":"Coach Block 5 / current-week gym prescription","needed_by_agent":"Ollie","why":"Block 4 ends ~5 Oct; macrocycle Block 5 starts w/c 12 Oct but is not in Training Template yet \u2014 need sets/reps/RPE for post-half weeks","added":"2026-10-10","status":"open"},{"item":"Confirm which Block 4 week (or Block 5) to use for load after the half","needed_by_agent":"Ollie","why":"App shows Block 4 Week 1 rx + W1\u2013W3 progression; need your call on starting loads post-race","added":"2026-10-10","status":"open"},{"item":"Confirm London Marathon day: Sat 24 or Sun 25 Apr","needed_by_agent":"Ollie","why":"Confirmed: Sun 25 Apr 2027","added":"2026-10-10","status":"done"}],"finance":[],"scoring":[{"pillar":"Fitness","sub-area":"gym","activity":"Gym session","points":"3"},{"pillar":"Fitness","sub-area":"running","activity":"5k run","points":"3"},{"pillar":"Fitness","sub-area":"running","activity":"Long run (15k+)","points":"5"},{"pillar":"Fitness","sub-area":"running","activity":"Race","points":"8"},{"pillar":"Fitness","sub-area":"eating","activity":"Clean eating day","points":"1"},{"pillar":"Learning","sub-area":"reading","activity":"30 pages reading","points":"2"},{"pillar":"Learning","sub-area":"output","activity":"Published write-up / newsletter","points":"5"},{"pillar":"Learning","sub-area":"output","activity":"Draft / notes session","points":"2"},{"pillar":"Relationships","sub-area":"wife","activity":"Date night","points":"4"},{"pillar":"Relationships","sub-area":"wife","activity":"Quality evening together","points":"2"},{"pillar":"Relationships","sub-area":"family","activity":"Family call","points":"2"},{"pillar":"Relationships","sub-area":"family","activity":"Family visit","points":"4"},{"pillar":"Relationships","sub-area":"friends","activity":"Friends meetup","points":"3"},{"pillar":"Career","sub-area":"macro","activity":"Macro study block","points":"2"},{"pillar":"Career","sub-area":"macro","activity":"Trade journal entry","points":"2"},{"pillar":"Career","sub-area":"macro","activity":"Trade idea written up","points":"3"},{"pillar":"Career","sub-area":"finances","activity":"Budget / portfolio review","points":"2"}],"goals":[{"id":"job","pillar":"Career","label":"Macro hedge fund job secured","short":"Career","kind":"habits","baseline":"","target":"","current":"0","unit":"","note":"","description":"Land a macro hedge fund seat by 31 Dec 2026. Monthly: 2 proper applications (CV + tangible for the fund + trade idea). Weekly: 1 blog write-up + 1 trade post. Daily: 30 min tracking markets / calibrating for the weekend.","deadline":"2026-12-31","steps":"12"},{"id":"lifts","pillar":"Fitness","label":"Squat 200 \u00b7 Bench 140 \u00b7 Deadlift 240","short":"Lifts","kind":"lifts","baseline":"0","target":"3","current":"0","unit":"lifts","note":"S 200 / B 140 / DL 240","description":"Hit competition lifts by 31 Dec 2026. Habit: gym 3\u00d7/week.","deadline":"2026-12-31","steps":"6"},{"id":"run","pillar":"Fitness","label":"Sub-1:30 half marathon","short":"Run","kind":"run","baseline":"1:36:05","target":"1:30:00","current":"1:36:05","unit":"h:mm:ss","note":"London Marathon sub-3 25 Apr 2027 (longer-term)","description":"Half under 1:30 by 31 Dec 2026. Habit: run 3\u00d7/week. Sub-3 TCS London Marathon 25 Apr 2027 stays as the longer race goal.","deadline":"2026-12-31","steps":"4"},{"id":"bodyfat","pillar":"Fitness","label":"Body fat 12%","short":"BF%","kind":"number","baseline":"22.5","target":"12","current":"22.5","unit":"%","note":"look like I lift","description":"Reach ~12% body fat by 31 Dec 2026. Habits: weigh-in daily; 180g protein daily.","deadline":"2026-12-31","steps":"8"},{"id":"books","pillar":"Learning","label":"10 book reviews","short":"Books","kind":"books","baseline":"0","target":"10","current":"0","unit":"","note":"Substack reviews","description":"Ten book reviews by 31 Dec 2026. Habit: new book every 2 weeks + review on Substack.","deadline":"2026-12-31","steps":"10"},{"id":"savings","pillar":"Career","label":"Savings goal","short":"Save","kind":"number","baseline":"","target":"","current":"","unit":"","note":"figures encrypted","description":"[amount] by 30 Jun 2027. Near-term: organise savings plan + direct debits this week; plan a separate income stream (Ollie helps).","deadline":"2027-06-30","steps":"8"},{"id":"lauren","pillar":"Relationships","label":"Make Lauren feel special","short":"Lauren","kind":"dates","baseline":"0","target":"1","current":"0","unit":"","note":"weekly date night","description":"Make Lauren feel special. Habit: a date night every week.","deadline":"2027-06-30","steps":"12"}],"job_milestones":[{"milestone":"apps_oct","done":"0","due":"2026-10-31","label":"October: 2 HF applications"},{"milestone":"apps_nov","done":"0","due":"2026-11-30","label":"November: 2 HF applications"},{"milestone":"apps_dec","done":"0","due":"2026-12-31","label":"December: 2 HF applications"},{"milestone":"interview","done":"0","due":"2026-12-15","label":"First-round interview"},{"milestone":"offer","done":"0","due":"2026-12-31","label":"Job secured"}],"savings_milestones":[{"milestone":"m21k","due":"2026-12-31","label":"~[locked] saved (year-end pace)"},{"milestone":"m100k","due":"2027-06-30","label":"[locked] saved (Q2 2027)"}],"career_weekly":[{"goal_id":"job","id":"blog","label":"1 weekly write-up (blog)","target_per_week":"1","log_match":"blog|write-up|writeup|substack"},{"goal_id":"job","id":"trade_post","label":"1 trade post","target_per_week":"1","log_match":"trade post|trade idea"},{"goal_id":"job","id":"markets","label":"Daily markets (log days)","target_per_week":"5","log_match":"markets|calibrat"},{"goal_id":"savings","id":"plan_dd","label":"Savings plan + direct debits","target_per_week":"1","log_match":"direct debit|savings plan|standing order"}],"actions":[{"goal_id":"job","pillar":"Career","scope":"daily","id":"markets","label":"30 min markets / calibrate","points":"2","target":"1","weight":"4","cadence":"daily"},{"goal_id":"job","pillar":"Career","scope":"weekly","id":"blog","label":"Weekly write-up (blog)","points":"3","target":"1","weight":"4","cadence":"weekly"},{"goal_id":"job","pillar":"Career","scope":"weekly","id":"trade_post","label":"Trade post","points":"3","target":"1","weight":"4","cadence":"weekly"},{"goal_id":"job","pillar":"Career","scope":"monthly","id":"apps","label":"HF applications (\u00d72: CV + tangible + idea)","points":"8","target":"2","weight":"4","cadence":"monthly"},{"goal_id":"lifts","pillar":"Fitness","scope":"weekly","id":"gym","label":"Gym sessions","points":"3","target":"3","weight":"3","cadence":"weekly"},{"goal_id":"run","pillar":"Fitness","scope":"weekly","id":"runs","label":"Runs","points":"3","target":"3","weight":"3","cadence":"weekly"},{"goal_id":"bodyfat","pillar":"Fitness","scope":"daily","id":"weighin","label":"Weigh-in","points":"1","target":"1","weight":"3","cadence":"daily"},{"goal_id":"bodyfat","pillar":"Fitness","scope":"daily","id":"protein","label":"180g protein","points":"2","target":"1","weight":"3","cadence":"daily"},{"goal_id":"books","pillar":"Learning","scope":"fortnightly","id":"book_review","label":"New book + Substack review","points":"5","target":"1","weight":"1","cadence":"fortnightly"},{"goal_id":"lauren","pillar":"Relationships","scope":"weekly","id":"date","label":"Date night with Lauren","points":"4","target":"1","weight":"2","cadence":"weekly"},{"goal_id":"savings","pillar":"Career","scope":"once","id":"plan_dd","label":"Organise savings plan + direct debits","points":"5","target":"1","weight":"2","cadence":"once"},{"goal_id":"savings","pillar":"Career","scope":"once","id":"income_stream","label":"Plan separate income stream","points":"5","target":"1","weight":"2","cadence":"once"}],"marathon_milestones":[{"milestone":"half_sub_130","label":"Half under 1:30","done":"0","due":"2026-12-31","note":"Year-end"},{"milestone":"sub3_london","label":"Marathon sub-3:00 (TCS London)","done":"0","due":"2027-04-25","note":"Sun 25 Apr 2027"}],"dayplan":[{"date":"2026-10-13","time":"06:00","id":"wake","item":"Wake","pillar":"Fitness","priority":"2","note":""},{"date":"2026-10-13","time":"06:15","id":"run5","item":"Easy 5 mi \u00b7 conversational \u00b7 legs post half","pillar":"Fitness","priority":"2","note":"non-negotiable"},{"date":"2026-10-13","time":"07:15","id":"breakfast","item":"Shower + high-protein breakfast","pillar":"Fitness","priority":"2","note":""},{"date":"2026-10-13","time":"08:00","id":"commute_read","item":"Commute: Central Banking 101 (~20 min)","pillar":"Learning","priority":"5","note":""},{"date":"2026-10-13","time":"09:00","id":"work_day","item":"Work \u00b7 hard stop 19:00 \u00b7 leave on time","pillar":"Career","priority":"4","note":"current job"},{"date":"2026-10-13","time":"19:30","id":"lauren","item":"Lauren \u00b7 phones away \u00b7 plan this week's date","pillar":"Relationships","priority":"3","note":""},{"date":"2026-10-13","time":"20:15","id":"hf_work","item":"Hedge fund \u00b7 next application / Macro_Careers \u00b7 one concrete output","pillar":"Career","priority":"1","note":""},{"date":"2026-10-13","time":"22:30","id":"sleep","item":"Lights out \u00b7 7h sleep minimum","pillar":"Fitness","priority":"2","note":""}],"updates":[{"timestamp":"2026-10-12T11:05:00+01:00","text":"Today plan for Tue 13 Oct added (tickable). In-app updates feed with bell + unread badge."},{"timestamp":"2026-10-12T11:10:00+01:00","text":"Q4 milestones added \u2014 job, savings (100K goal \u2192 30 Jun 2027), lifts, running, body fat, Lauren, reading. Q4 2026 section on each goal."},{"timestamp":"2026-10-12T11:15:00+01:00","text":"Moved to GitHub Pages. Ticks sync via Google Sheet (or this device). Money figures encrypted client-side."},{"timestamp":"2026-10-12T11:35:00+01:00","text":"Goals clarity + gamification preview: XP/levels, streak freeze, perfect-week + checkpoint badges, celebrations."},{"timestamp":"2026-10-13T08:05:00+01:00","text":"Goals rewritten: 7-axis star (Career Lifts Run BF% Books Save Lauren), habit streaks, equal weekly weight. Preview only."},{"timestamp":"2026-10-13T08:20:00+01:00","text":"XP system: lifetime levels, streak multiplier, week-complete bonuses, rewards (kit / dinner / weekend). Preview only."}],"q4_milestones":[{"goal_id":"lifts","id":"sq_190","due":"2026-11-30","label":"Squat 190 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"bp_130","due":"2026-11-30","label":"Bench 130 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"dl_210","due":"2026-11-30","label":"Deadlift 210 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"sq_200","due":"2026-12-31","label":"Squat 200 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"bp_140","due":"2026-12-31","label":"Bench 140 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"dl_240","due":"2026-12-31","label":"Deadlift 240 kg","done":"0","note":"Year-end"},{"goal_id":"run","id":"half_130","due":"2026-12-31","label":"Half under 1:30","done":"0","note":"Year-end race shape"},{"goal_id":"run","id":"sub3_london","due":"2027-04-25","label":"Marathon sub-3:00 (TCS London)","done":"0","note":"Longer-term"},{"goal_id":"bodyfat","id":"bf_12","due":"2026-12-31","label":"Body fat ~12%","done":"0","note":"look like I lift"},{"goal_id":"savings","id":"plan_dd","due":"2026-10-19","label":"Savings plan + direct debits set up","done":"0","note":"This week"},{"goal_id":"savings","id":"income_stream","due":"2026-11-15","label":"Separate income stream planned","done":"0","note":"Ollie helps plan"},{"goal_id":"savings","id":"m100k","due":"2027-06-30","label":"Savings goal checkpoint","done":"0","note":"Encrypted figure"},{"goal_id":"job","id":"secured","due":"2026-12-31","label":"Macro HF job secured","done":"0","note":"End goal"},{"goal_id":"books","id":"reviews_10","due":"2026-12-31","label":"10 book reviews published","done":"0","note":"Substack"},{"goal_id":"lauren","id":"dates_weekly","due":"2027-06-30","label":"Weekly date night habit held","done":"0","note":""}],"checkpoints":[{"goal_id":"lifts","id":"sq_190","due":"2026-11-30","label":"Squat 190 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"bp_130","due":"2026-11-30","label":"Bench 130 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"dl_210","due":"2026-11-30","label":"Deadlift 210 kg","done":"0","note":"Nov marker"},{"goal_id":"lifts","id":"sq_200","due":"2026-12-31","label":"Squat 200 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"bp_140","due":"2026-12-31","label":"Bench 140 kg","done":"0","note":"Year-end"},{"goal_id":"lifts","id":"dl_240","due":"2026-12-31","label":"Deadlift 240 kg","done":"0","note":"Year-end"},{"goal_id":"run","id":"half_130","due":"2026-12-31","label":"Half under 1:30","done":"0","note":"Year-end race shape"},{"goal_id":"run","id":"sub3_london","due":"2027-04-25","label":"Marathon sub-3:00 (TCS London)","done":"0","note":"Longer-term"},{"goal_id":"bodyfat","id":"bf_12","due":"2026-12-31","label":"Body fat ~12%","done":"0","note":"look like I lift"},{"goal_id":"savings","id":"plan_dd","due":"2026-10-19","label":"Savings plan + direct debits set up","done":"0","note":"This week"},{"goal_id":"savings","id":"income_stream","due":"2026-11-15","label":"Separate income stream planned","done":"0","note":"Ollie helps plan"},{"goal_id":"savings","id":"m100k","due":"2027-06-30","label":"Savings goal checkpoint","done":"0","note":"Encrypted figure"},{"goal_id":"job","id":"secured","due":"2026-12-31","label":"Macro HF job secured","done":"0","note":"End goal"},{"goal_id":"books","id":"reviews_10","due":"2026-12-31","label":"10 book reviews published","done":"0","note":"Substack"},{"goal_id":"lauren","id":"dates_weekly","due":"2027-06-30","label":"Weekly date night habit held","done":"0","note":""}],"rewards":[{"id":"kit","xp":"1000","label":"New running kit","note":"Treat yourself to fresh kit"},{"id":"dinner","xp":"2500","label":"Dinner out with Lauren","note":"Celebratory date night"},{"id":"weekend","xp":"5000","label":"Weekend away","note":"Book a proper escape"}],"targets":{"Career":20.0,"Fitness":20.0,"Learning":20.0,"Relationships":20.0},"start_date":"2026-10-10","money_enc":{"v":1,"kdf":"PBKDF2","hash":"SHA-256","iter":210000,"salt":"nbldP/EQ76YrND/+SaNZ3Q==","iv":"0d/UMPG4AMbGI6K1","ct":"a80IESp7hRr7BA2t8WRfbvJYPQMXub2NYgXCJ25XCzOLBslpi8Cax7rR04fVyATC32+fcQ1sv0INPS5Jv0dpjE19PtO8kaF6iRhH6p+ds8nwInj1i/YBGek3AmthK5ayH/VNJ2FJOFNfO697GLecpyo6S8jRXLaX6N4uHAErlwPPzEK8eTw9IG/cZi7tvTi6Z3IUpfw1+a3utYxgBLktF/qHGN8h1UtAoRBoF96f88zmIIP0faJaVPSsNhuxjGgYQQYOUgFAPBuKMIT6lrpFwi+nLM089zSTvbFl69QGNtfCgbhgmSLpVgtsmk34bQHdDnPcS81TiIQHS9Oz3Hid8GQjaU8ghax2nGmDpVLZ6X/zCD0MNdtOzg6Tsy+V2XMrkpwYVahWBVeS5AWUFWsnnFntQ/QZ+lHqCzPaBiQW4HGTKExslhTtYByGZKcc5WuQwGRoNPyUxdA9ZBvxCjMHhrRXnBhf5UmhY93o/1y/ur96qtWA+z0tl8yOfW1DQwpQ74O9QdWWifcvPU92tW7kPnI8LDIR92NlhIgwppaVKkn3VxZVQq3g/srDacKKaWYYgyJeAmXjr+FMpHdc9aNTpZrJPq+UE7EN8Sur2vHF3fAmV9rWovDHWL3iyhCoyrTlFiKpo8qA21+BEsjri+dkD7vFktJwv6l3tnWRZPwmKZHG4Gj9xYUFuWVxcEDB0wbojyDRadhL0uScN9Aswdn5/byGn6JsagSdqSqRi9mfJhfQw+/6dM4I0JnZmaGoJ3Vr+44TB5eC3eI1B8avVT4="},"money_status":"encrypted","ticks_backend":"sheets"};
 const logAll=D.log||[];
 const log=logAll.filter(r=>!/EXAMPLE/i.test((r.activity||'')+' '+(r.note||'')+' '+(r['sub-area']||'')));
 D.log=log; // use cleaned log everywhere below
@@ -661,62 +673,128 @@ const axisColors=goals.map(g=>GC[g.id]||PC[g.pillar]||'#fff');
 // Home star = THIS WEEK equally weighted (stepped notches)
 const axisVals=goals.map(()=>0); // filled after ACTIONS/ticks ready via refreshStar()
 
-const axisTintPlugin={
-  id:'axisTint',
+function hexRgb(col){
+  if(!col||col[0]!=='#') return {r:255,g:255,b:255};
+  const h=col.slice(1);
+  const full=h.length===3?h.split('').map(c=>c+c).join(''):h;
+  return {r:parseInt(full.slice(0,2),16),g:parseInt(full.slice(2,4),16),b:parseInt(full.slice(4,6),16)};
+}
+const starPremiumPlugin={
+  id:'starPremium',
   beforeDatasetsDraw(chart){
-    const meta=chart.getDatasetMeta(0); if(!meta||!meta.data||!meta.data.length) return;
     const {ctx,scales:{r}}=chart; if(!r) return;
     const cx=r.xCenter, cy=r.yCenter, rad=r.drawingArea;
-    const n=meta.data.length;
+    const n=goals.length;
+    const vals=(chart.data.datasets[0]&&chart.data.datasets[0].data)||[];
     ctx.save();
-    // discrete ring notches
-    ctx.strokeStyle='rgba(255,255,255,.06)';
-    ctx.lineWidth=1;
+    // soft ambient disc
+    const amb=ctx.createRadialGradient(cx,cy,rad*0.08,cx,cy,rad*1.05);
+    amb.addColorStop(0,'rgba(255,255,255,.04)');
+    amb.addColorStop(0.55,'rgba(255,255,255,.015)');
+    amb.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=amb;
+    ctx.beginPath(); ctx.arc(cx,cy,rad,0,Math.PI*2); ctx.fill();
+    // thin grid rings
     for(const frac of [0.25,0.5,0.75,1]){
-      ctx.beginPath(); ctx.arc(cx,cy,rad*frac,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx,cy,rad*frac,0,Math.PI*2);
+      ctx.strokeStyle=frac===1?'rgba(255,255,255,.10)':'rgba(255,255,255,.05)';
+      ctx.lineWidth=frac===1?1:0.75;
+      ctx.stroke();
     }
+    // spokes — muted, completed axes glow
     for(let i=0;i<n;i++){
       const a=i*2*Math.PI/n - Math.PI/2;
-      const a0=a-Math.PI/n, a1=a+Math.PI/n;
-      ctx.beginPath(); ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,rad,a0,a1); ctx.closePath();
       const col=axisColors[i]||'#fff';
-      if(col.startsWith('#')){
-        const h=col.slice(1);
-        const full=h.length===3?h.split('').map(c=>c+c).join(''):h;
-        const rr=parseInt(full.slice(0,2),16), gg=parseInt(full.slice(2,4),16), bb=parseInt(full.slice(4,6),16);
-        ctx.fillStyle='rgba('+rr+','+gg+','+bb+',0.12)';
-      } else ctx.fillStyle=col;
-      ctx.fill();
+      const rgb=hexRgb(col);
+      const done=(+vals[i]||0)>=100;
       ctx.beginPath();
       ctx.moveTo(cx,cy);
       ctx.lineTo(cx+Math.cos(a)*rad, cy+Math.sin(a)*rad);
-      ctx.strokeStyle=col.length===7?('rgba('+parseInt(col.slice(1,3),16)+','+parseInt(col.slice(3,5),16)+','+parseInt(col.slice(5,7),16)+',0.45)'):col;
-      ctx.lineWidth=1.25; ctx.stroke();
+      if(done){
+        ctx.strokeStyle='rgba('+rgb.r+','+rgb.g+','+rgb.b+',0.55)';
+        ctx.lineWidth=1.6;
+        ctx.shadowColor='rgba('+rgb.r+','+rgb.g+','+rgb.b+',0.65)';
+        ctx.shadowBlur=10;
+      } else {
+        ctx.strokeStyle='rgba(255,255,255,.08)';
+        ctx.lineWidth=0.75;
+        ctx.shadowBlur=0;
+      }
+      ctx.stroke();
+      ctx.shadowBlur=0;
     }
+    ctx.restore();
+  },
+  afterDatasetsDraw(chart){
+    const meta=chart.getDatasetMeta(0); if(!meta||!meta.data) return;
+    const {ctx}=chart;
+    const vals=(chart.data.datasets[0]&&chart.data.datasets[0].data)||[];
+    // soft glow under polygon
+    ctx.save();
+    if(meta.data.length){
+      ctx.beginPath();
+      meta.data.forEach((pt,i)=>{
+        if(!pt) return;
+        if(i===0) ctx.moveTo(pt.x,pt.y); else ctx.lineTo(pt.x,pt.y);
+      });
+      ctx.closePath();
+      ctx.shadowColor='rgba(255,255,255,.28)';
+      ctx.shadowBlur=18;
+      ctx.fillStyle='rgba(255,255,255,.03)';
+      ctx.fill();
+      ctx.shadowBlur=0;
+    }
+    // vertex dots — small; completed get accent glow
+    meta.data.forEach((pt,i)=>{
+      if(!pt) return;
+      const col=axisColors[i]||'#fff';
+      const rgb=hexRgb(col);
+      const done=(+vals[i]||0)>=100;
+      const v=+vals[i]||0;
+      ctx.beginPath();
+      ctx.arc(pt.x,pt.y, done?4.2:2.8, 0, Math.PI*2);
+      if(done){
+        ctx.shadowColor='rgba('+rgb.r+','+rgb.g+','+rgb.b+',0.9)';
+        ctx.shadowBlur=12;
+        ctx.fillStyle=col;
+      } else if(v>0){
+        ctx.shadowBlur=0;
+        ctx.fillStyle=col;
+      } else {
+        ctx.shadowBlur=0;
+        ctx.fillStyle='rgba(255,255,255,.35)';
+      }
+      ctx.fill();
+      ctx.shadowBlur=0;
+      ctx.beginPath();
+      ctx.arc(pt.x,pt.y, done?1.6:1.1, 0, Math.PI*2);
+      ctx.fillStyle='#0a0a0b';
+      ctx.fill();
+    });
     ctx.restore();
   }
 };
 window._lifeStar=new Chart(star,{
   type:'radar',
   data:{
-    labels:axisLabels,
+    labels:axisLabels.map(s=>String(s||'').toUpperCase()),
     datasets:[{
       label:'This week',
       data:axisVals,
-      backgroundColor:'rgba(250,250,250,.10)',
-      borderColor:'#fafafa',
-      borderWidth:2,
+      backgroundColor:'rgba(255,255,255,.11)',
+      borderColor:'rgba(255,255,255,.82)',
+      borderWidth:1.35,
       pointBackgroundColor:axisColors,
-      pointBorderColor:'#000',
-      pointRadius:6,
-      pointHoverRadius:7
+      pointBorderColor:'transparent',
+      pointRadius:0, // drawn by plugin
+      pointHoverRadius:0,
+      fill:true
     }]
   },
   options:{
     responsive:true,
     maintainAspectRatio:true,
-    layout:{padding:{top:18,right:22,bottom:18,left:22}},
+    layout:{padding:{top:28,right:28,bottom:24,left:28}},
     onClick(evt, els, chart){
       if(els&&els.length){openGoal(els[0].index); return}
       const pts=chart.getElementsAtEventForMode(evt,'nearest',{intersect:false},true);
@@ -724,22 +802,59 @@ window._lifeStar=new Chart(star,{
       const r=chart.scales.r; if(!r) return;
       const x=evt.x, y=evt.y; if(x==null) return;
       const dx=x-r.xCenter, dy=y-r.yCenter, dist=Math.hypot(dx,dy);
-      if(dist<r.drawingArea*0.3 || dist>r.drawingArea+40) return;
+      if(dist<r.drawingArea*0.22 || dist>r.drawingArea+48) return;
       let ang=Math.atan2(dy,dx)+Math.PI/2; if(ang<0) ang+=2*Math.PI;
       openGoal(Math.round(ang/(2*Math.PI/goals.length))%goals.length);
     },
-    scales:{r:{min:0,max:100,ticks:{display:false,stepSize:25},grid:{color:'rgba(255,255,255,.05)'},angleLines:{display:false},pointLabels:{color:'#fafafa',font:{size:10,family:'Geist',weight:'600'},padding:6}}},
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{
-      const g=goals[c.dataIndex];
-      const long=g?goalPct(g):0;
-      return (g?g.label:c.label)+': week '+c.raw+'% · long-term '+long+'%';
-    }}}}
+    scales:{r:{
+      min:0,max:100,
+      ticks:{display:false,stepSize:25},
+      grid:{display:false},
+      angleLines:{display:false},
+      pointLabels:{
+        padding:12,
+        color:(ctx)=>{
+          const i=ctx.index;
+          const v=+(ctx.chart.data.datasets[0].data[i]||0);
+          const col=axisColors[i]||'#fff';
+          if(v>=100) return col;
+          return 'rgba(255,255,255,.48)';
+        },
+        font:{size:9,family:'Geist',weight:'600'},
+        callback:(label)=>String(label||'').toUpperCase()
+      }
+    }},
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'rgba(20,20,22,.92)',
+        titleColor:'#fff',
+        bodyColor:'rgba(255,255,255,.75)',
+        borderColor:'rgba(255,255,255,.1)',
+        borderWidth:1,
+        padding:10,
+        displayColors:false,
+        callbacks:{
+          title:c=> (goals[c[0].dataIndex]?goals[c[0].dataIndex].label:c[0].label),
+          label:c=>{
+            const g=goals[c.dataIndex];
+            const long=g?goalPct(g):0;
+            return 'Week '+c.raw+'% · long-term '+long+'%';
+          }
+        }
+      }
+    }
   },
-  plugins:[axisTintPlugin]
+  plugins:[starPremiumPlugin]
 });
 function refreshStar(){
   if(!window._lifeStar) return;
-  window._lifeStar.data.datasets[0].data=goals.map(g=>weekEqualPct(g));
+  const vals=goals.map(g=>weekEqualPct(g));
+  const ds=window._lifeStar.data.datasets[0];
+  ds.data=vals;
+  ds.pointBackgroundColor=axisColors;
+  // slightly stronger border when any axis complete
+  ds.borderColor=vals.some(v=>v>=100)?'rgba(255,255,255,.88)':'rgba(250,250,250,.72)';
   window._lifeStar.update('none');
 }
 
@@ -1336,11 +1451,31 @@ function checkAllPillarWeeks(){
 }
 function renderPillarNums(){
   const el=document.getElementById('pillarNums'); if(!el) return;
-  el.innerHTML=goals.map(g=>{
+  const r=11, c=2*Math.PI*r;
+  el.innerHTML=goals.map((g,i)=>{
     const col=GC[g.id]||'#fff';
-    const w=weekEqualPct(g), long=goalPct(g);
-    return '<div class="pnum"><div class="k" style="color:'+col+'">'+(g.short||g.label)+'</div><div class="v">'+w+'%</div><div class="sub">week · long '+long+'%</div></div>';
+    const w=weekEqualPct(g);
+    const done=w>=100;
+    const off=c*(1-Math.min(100,w)/100);
+    const nm=(g.short||g.label||'').toUpperCase();
+    return '<button type="button" class="star-ring'+(done?' done':'')+'" data-gi="'+i+'" aria-label="'+nm+' '+w+' percent this week">'+
+      '<svg viewBox="0 0 28 28" aria-hidden="true">'+
+      '<circle cx="14" cy="14" r="'+r+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="2"/>'+
+      '<circle cx="14" cy="14" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="'+(done?2.4:2)+'" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" transform="rotate(-90 14 14)"/>'+
+      (done?'<circle cx="14" cy="14" r="2.2" fill="'+col+'"/>':'')+
+      '</svg>'+
+      '<span class="nm" style="'+(done?'color:'+col:'')+'">'+nm+'</span>'+
+      '<span class="pct">'+w+'%</span>'+
+      '</button>';
   }).join('');
+  el.querySelectorAll('.star-ring').forEach(btn=>{
+    btn.onclick=()=>{
+      const showing=btn.classList.contains('show-pct');
+      el.querySelectorAll('.star-ring').forEach(b=>b.classList.remove('show-pct'));
+      if(!showing){ btn.classList.add('show-pct'); }
+      else { openGoal(+btn.dataset.gi); }
+    };
+  });
 }
 
 function renderLevelHero(){
