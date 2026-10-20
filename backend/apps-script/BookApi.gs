@@ -3,6 +3,7 @@
  *  One-off: Model Portfolio menu > "Upgrade sheet to v2 layout" rebuilds Trades + Model Portfolio tabs in place (old tab kept as "Trades (v1)"). */
 var COLS=['Risk Opened','Trade Idea','Type','L/S','Conviction','GBP at risk','Entry','Stop Loss','Take Profit','Current Level','Exit Date','P&L (£)','P&L (%)','Notes','Notion link',
           'Status','R multiple','R:R (plan)','Days held'];
+var FALLBACK_URL='https://script.google.com/macros/s/AKfycbzHDBHGV_YQHsLkjxw9NmE9L02OY8GElObxpEXhJFCgqfC1ETwCUZpFipMUEf6-5od4/exec';
 var NIN=15, N=500, NAV='Settings!$B$3';
 function onOpen(){ SpreadsheetApp.getUi().createMenu('Model Portfolio').addItem('Phone link (set up / show)','showPhoneLink').addItem('Rotate token','rotateToken')
   .addSeparator().addItem('Upgrade sheet to v2 layout (one-off)','upgradeToV2').addToUi(); }
@@ -10,7 +11,7 @@ function getToken_(){ var p=PropertiesService.getScriptProperties(), t=p.getProp
 function rotateToken(){ PropertiesService.getScriptProperties().deleteProperty('BOOK_TOKEN'); showPhoneLink(); }
 function showPhoneLink(){
   var url=ScriptApp.getService().getUrl(), ui=SpreadsheetApp.getUi();
-  if(!url){ ui.alert('Deploy first: Deploy > New deployment > Web app (Execute as: Me, Access: Anyone). Then run this again.'); return; }
+  if(!url||!/\/exec$/.test(url)) url=FALLBACK_URL;   // getUrl() can return a /dev or stale URL
   var link='https://oliverrising96.github.io/life-app/#book='+encodeURIComponent(url+'|'+getToken_());
   ui.showModalDialog(HtmlService.createHtmlOutput('<p>Open this on your phone once:</p><textarea style="width:100%;height:120px">'+link+'</textarea>'),'Model Portfolio phone link');
 }

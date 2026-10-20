@@ -304,7 +304,7 @@ details.sess>summary::-webkit-details-marker{display:none}
 .bk-t .dir.L{color:var(--green)}.bk-t .dir.S{color:var(--red)}.bk-t .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;font-size:13px}.bk-t .grid .k{font-size:10px;color:var(--mut);text-transform:uppercase}
 .bk-t a{color:var(--blue);font-size:13px;font-weight:600;text-decoration:none;display:inline-block;margin-top:12px}.bk-up{color:var(--green)}.bk-dn{color:var(--red)}.bk-sub{font-size:12px;color:var(--mut)}
 .bk-row{cursor:pointer}.bk-more{font-size:12px;color:var(--blue);font-weight:600;margin-top:10px}.bk-sec{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin:14px 4px 6px}.bk-back{color:var(--blue);font-weight:600;font-size:14px;margin:4px 4px 10px;cursor:pointer}.bk-big{font-size:26px;font-weight:700;margin-top:10px}.bk-nk{font-size:10px;color:var(--mut);text-transform:uppercase;margin-top:14px}.bk-note{font-size:13px;margin-top:4px;line-height:1.4}
-.bk-cfg input{width:100%;padding:10px;margin:4px 0 8px;border-radius:10px;border:1px solid var(--line);background:#111;color:var(--tx)}.bk-cfg button{padding:8px 14px;border-radius:99px;background:#fff;color:#000;font-weight:700;margin-right:6px}
+.bk-off{font-size:12px;color:var(--mut);margin-left:10px}.bk-cfg input{width:100%;padding:10px;margin:4px 0 8px;border-radius:10px;border:1px solid var(--line);background:#111;color:var(--tx)}.bk-cfg button{padding:8px 14px;border-radius:99px;background:#fff;color:#000;font-weight:700;margin-right:6px}
 </style>
 <script>/**
  * Skipped minification because the original files appears to be already minified.
@@ -2682,9 +2682,13 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 
 /* Book: read-only live trades from Trade Log sheet via Apps Script (#book=url|token). Nothing stored in repo. */
 const BOOK_CFG='life.book.cfg.v1', BOOK_CACHE='life.book.cache.v1';
-function bookCfg(){ try{return JSON.parse(localStorage.getItem(BOOK_CFG)||'null')}catch{return null} }
+const BOOK_URL='https://script.google.com/macros/s/AKfycbzHDBHGV_YQHsLkjxw9NmE9L02OY8GElObxpEXhJFCgqfC1ETwCUZpFipMUEf6-5od4/exec';
+function bookCfg(){ let c=null; try{c=JSON.parse(localStorage.getItem(BOOK_CFG)||'null')}catch{} return c&&c.token?{url:BOOK_URL,token:c.token}:null; }
+function bookSaveToken(tok){ localStorage.setItem(BOOK_CFG, JSON.stringify({token:tok})); try{ navigator.storage&&navigator.storage.persist&&navigator.storage.persist(); }catch{} }
+try{ navigator.storage&&navigator.storage.persist&&navigator.storage.persist(); }catch{}
+/* #book=<any url>|<token> or #book=<token>: the URL is always ignored (default BOOK_URL used); only the token is kept. */
 (function(){ const m=location.hash.match(/book=([^&]+)/); if(!m) return;
-  try{ const raw=decodeURIComponent(m[1]), i=raw.indexOf('|'); if(i>0){ localStorage.setItem(BOOK_CFG, JSON.stringify({url:raw.slice(0,i), token:raw.slice(i+1)})); history.replaceState(null,'',location.pathname+location.search); setTimeout(()=>go('book'),0);} }catch{} })();
+  try{ const raw=decodeURIComponent(m[1]), i=raw.lastIndexOf('|'), tok=(i>=0?raw.slice(i+1):raw).trim(); if(tok){ bookSaveToken(tok); localStorage.removeItem(BOOK_CACHE); } history.replaceState(null,'',location.pathname+location.search); setTimeout(()=>go('book'),0); }catch{} })();
 const bkN=(x,d=0)=>(x==null||x===''||isNaN(x))?'–':Number(x).toLocaleString('en-GB',{minimumFractionDigits:d,maximumFractionDigits:d});
 const bkG=x=>(x==null||x===''||isNaN(x))?'–':(x<0?'-£':'£')+bkN(Math.abs(x));
 const bkP=(x,d=2)=>(x==null||x===''||isNaN(x))?'–':(x*100).toFixed(d)+'%';
@@ -2740,10 +2744,10 @@ function bookDetail(t,H,Lv){
 }
 function bookCfgUI(){
   const el=document.getElementById('bookCfg'); if(!el) return; const c=bookCfg();
-  el.innerHTML='<div class="bk-cfg">'+(c?'<div class="bk-sub">Connected. Edit trades in the Google Sheet.</div><div style="margin-top:10px"><button id="bkRef">Refresh</button><button id="bkOff" style="background:#333;color:#fff">Disconnect</button></div>':
-   '<div class="bk-sub">Paste the web app URL and token (or open the phone link from the sheet’s “Model Portfolio” menu).</div><input id="bkU" placeholder="https://script.google.com/macros/s/…/exec"><input id="bkK" placeholder="token"><button id="bkSave">Connect</button>')+'</div>';
-  if(c){ bkRef.onclick=()=>bookLoad(true); bkOff.onclick=()=>{ localStorage.removeItem(BOOK_CFG); localStorage.removeItem(BOOK_CACHE); bookRender(null); bookCfgUI(); }; }
-  else bkSave.onclick=()=>{ const u=bkU.value.trim(), k=bkK.value.trim(); if(!/^https:\/\/script\.google(usercontent)?\.com\//.test(u)||!k) return alert('Need the script.google.com URL and token'); localStorage.setItem(BOOK_CFG, JSON.stringify({url:u,token:k})); bookCfgUI(); bookLoad(true); };
+  el.innerHTML='<div class="bk-cfg">'+(c?'<div class="bk-sub">Connected. Edit trades in the Google Sheet.</div><div style="margin-top:10px"><button id="bkRef">Refresh</button> <a href="#" id="bkOff" class="bk-off">Disconnect</a></div>':
+   '<div class="bk-sub"><b>Connect</b> — paste your token (Sheet › Model Portfolio menu › Phone link, the part after the last “|”).</div><input id="bkK" placeholder="token" autocomplete="off" autocapitalize="off" spellcheck="false"><button id="bkSave">Save</button>')+'</div>';
+  if(c){ bkRef.onclick=()=>bookLoad(true); bkOff.onclick=e=>{ e.preventDefault(); if(!confirm('Disconnect Model Portfolio on this device?')) return; localStorage.removeItem(BOOK_CFG); localStorage.removeItem(BOOK_CACHE); bookRender(null); bookCfgUI(); }; }
+  else bkSave.onclick=()=>{ let k=bkK.value.trim(); if(k.includes('|')) k=k.slice(k.lastIndexOf('|')+1); const m=k.match(/book=([^&]+)/); if(m){ const r=decodeURIComponent(m[1]); k=r.slice(r.lastIndexOf('|')+1); } if(!k) return alert('Paste the token'); bookSaveToken(k); bookCfgUI(); bookLoad(true); };
 }
 let bookBusy=false;
 async function bookLoad(){
