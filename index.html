@@ -339,7 +339,7 @@ details.sess>summary::-webkit-details-marker{display:none}
       <button data-v="learning">Learning</button>
       <button data-v="relationships">Relationships</button>
       <button data-v="todo">To do</button>
-      <button data-v="book">Book</button>
+      <button data-v="book">Model Portfolio</button>
     </div>
     <div class="meta" id="deskMeta"></div>
     <div class="bell-wrap">
@@ -452,7 +452,7 @@ details.sess>summary::-webkit-details-marker{display:none}
     </section>
 
     <section class="view" id="v-book">
-      <div class="card"><h2>Model book</h2><div id="bookHead"></div></div>
+      <div class="card"><h2>Model Portfolio</h2><div id="bookHead"></div></div>
       <div id="bookLive"></div>
       <div class="card"><h2>Feed</h2><div id="bookCfg"></div></div>
     </section>
@@ -477,7 +477,7 @@ details.sess>summary::-webkit-details-marker{display:none}
     <button data-v="learning"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Learn<i class="done-badge">✓</i></button>
     <button data-v="relationships"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z"/></svg>Lauren<i class="done-badge">✓</i></button>
     <button data-v="todo"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>To do<i class="bdg" id="tdb"></i></button>
-    <button data-v="book"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Book</button>
+    <button data-v="book"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Model Portfolio</button>
   </nav>
 </div>
 <div class="sheet-bg" id="goalSheet" role="dialog" aria-modal="true">
@@ -540,7 +540,7 @@ const td=tdNames[now.getDay()];
 const wk=D.plan.week||[];
 const ph=(D.plan.phases||[]).find(p=>iso(now)>=p.start&&iso(now)<=p.end)||(D.plan.phases||[])[0]||{};
 const tdp=wk.find(w=>w.day===td)||{};
-const titles={home:'Home',career:'Career',fitness:'Fitness',learning:'Learning',relationships:'Relationships',todo:'To do',book:'Book'};
+const titles={home:'Home',career:'Career',fitness:'Fitness',learning:'Learning',relationships:'Relationships',todo:'To do',book:'Model Portfolio'};
 function go(v){
   document.querySelectorAll('.tabbar button, .desk-nav .links button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   document.querySelectorAll('.view').forEach(el=>el.classList.toggle('on',el.id==='v-'+v));
@@ -2725,7 +2725,7 @@ function bookDetail(t,H,Lv){
   H.parentElement.style.display='none';
   const dp=bkDp(t), ls=String(t['L/S']||''), pl=t['P&L (£)'];
   const f=(k,v,c)=>'<div><div class="k">'+k+'</div><div class="'+(c||'')+'">'+v+'</div></div>';
-  Lv.innerHTML='<div class="bk-back" id="bkBack">‹ All trades</div>'+
+  Lv.innerHTML='<div class="bk-back" id="bkBack">‹ Model Portfolio</div>'+
    '<div class="card bk-t"><div class="top"><span class="nm">'+bkE(t['Trade Idea'])+'</span><span class="dir '+(ls==='Short'?'S':'L')+'">'+bkE(ls.toUpperCase())+'</span></div>'+
    '<div class="bk-sub">'+bkE([t.Status,t['Type']==='RV'?'Relative value':'Directional'].join(' · '))+'</div>'+
    '<div class="bk-big '+bkC(pl)+'">'+bkG(pl)+'<span class="bk-sub"> '+bkP(t['P&L (%)'])+' NAV · '+bkR(t['R multiple'])+'</span></div>'+
@@ -2741,7 +2741,7 @@ function bookDetail(t,H,Lv){
 function bookCfgUI(){
   const el=document.getElementById('bookCfg'); if(!el) return; const c=bookCfg();
   el.innerHTML='<div class="bk-cfg">'+(c?'<div class="bk-sub">Connected. Edit trades in the Google Sheet.</div><div style="margin-top:10px"><button id="bkRef">Refresh</button><button id="bkOff" style="background:#333;color:#fff">Disconnect</button></div>':
-   '<div class="bk-sub">Paste the web app URL and token (or open the phone link from the sheet’s “Book app” menu).</div><input id="bkU" placeholder="https://script.google.com/macros/s/…/exec"><input id="bkK" placeholder="token"><button id="bkSave">Connect</button>')+'</div>';
+   '<div class="bk-sub">Paste the web app URL and token (or open the phone link from the sheet’s “Model Portfolio” menu).</div><input id="bkU" placeholder="https://script.google.com/macros/s/…/exec"><input id="bkK" placeholder="token"><button id="bkSave">Connect</button>')+'</div>';
   if(c){ bkRef.onclick=()=>bookLoad(true); bkOff.onclick=()=>{ localStorage.removeItem(BOOK_CFG); localStorage.removeItem(BOOK_CACHE); bookRender(null); bookCfgUI(); }; }
   else bkSave.onclick=()=>{ const u=bkU.value.trim(), k=bkK.value.trim(); if(!/^https:\/\/script\.google(usercontent)?\.com\//.test(u)||!k) return alert('Need the script.google.com URL and token'); localStorage.setItem(BOOK_CFG, JSON.stringify({url:u,token:k})); bookCfgUI(); bookLoad(true); };
 }

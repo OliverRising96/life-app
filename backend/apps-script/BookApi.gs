@@ -1,10 +1,10 @@
-/** Trade Log v2 -> Life app "Book" feed.  Paste into the Trade Log sheet: Extensions > Apps Script (replace everything).
- *  Read-only feed. Returns ALL trades + Book metrics as JSON when ?token= matches.
- *  One-off: Book app menu > "Upgrade sheet to v2 layout" rebuilds Trades/Book in place (old tab kept as "Trades (v1)"). */
+/** Trade Log v2 -> Life app "Model Portfolio" feed.  Paste into the Trade Log sheet: Extensions > Apps Script (replace everything).
+ *  Read-only feed. Returns ALL trades + Model Portfolio metrics as JSON when ?token= matches.
+ *  One-off: Model Portfolio menu > "Upgrade sheet to v2 layout" rebuilds Trades + Model Portfolio tabs in place (old tab kept as "Trades (v1)"). */
 var COLS=['Risk Opened','Trade Idea','Type','L/S','Conviction','GBP at risk','Entry','Stop Loss','Take Profit','Current Level','Exit Date','P&L (£)','P&L (%)','Notes','Notion link',
           'Status','R multiple','R:R (plan)','Days held'];
 var NIN=15, N=500, NAV='Settings!$B$3';
-function onOpen(){ SpreadsheetApp.getUi().createMenu('Book app').addItem('Phone link (set up / show)','showPhoneLink').addItem('Rotate token','rotateToken')
+function onOpen(){ SpreadsheetApp.getUi().createMenu('Model Portfolio').addItem('Phone link (set up / show)','showPhoneLink').addItem('Rotate token','rotateToken')
   .addSeparator().addItem('Upgrade sheet to v2 layout (one-off)','upgradeToV2').addToUi(); }
 function getToken_(){ var p=PropertiesService.getScriptProperties(), t=p.getProperty('BOOK_TOKEN'); if(!t){ t=Utilities.getUuid().replace(/-/g,'')+Utilities.getUuid().replace(/-/g,''); p.setProperty('BOOK_TOKEN',t);} return t; }
 function rotateToken(){ PropertiesService.getScriptProperties().deleteProperty('BOOK_TOKEN'); showPhoneLink(); }
@@ -12,7 +12,7 @@ function showPhoneLink(){
   var url=ScriptApp.getService().getUrl(), ui=SpreadsheetApp.getUi();
   if(!url){ ui.alert('Deploy first: Deploy > New deployment > Web app (Execute as: Me, Access: Anyone). Then run this again.'); return; }
   var link='https://oliverrising96.github.io/life-app/#book='+encodeURIComponent(url+'|'+getToken_());
-  ui.showModalDialog(HtmlService.createHtmlOutput('<p>Open this on your phone once:</p><textarea style="width:100%;height:120px">'+link+'</textarea>'),'Book phone link');
+  ui.showModalDialog(HtmlService.createHtmlOutput('<p>Open this on your phone once:</p><textarea style="width:100%;height:120px">'+link+'</textarea>'),'Model Portfolio phone link');
 }
 
 /* ---------- one-off migration: v1 (32 cols, GOOGLEFINANCE) -> v2 (15 inputs + helpers) ---------- */
@@ -78,7 +78,7 @@ function buildTrades_(t){
   t.getRange('L1').setNote('Auto: GBP at risk x (Current - Entry) / (Entry - Stop). Works for longs and shorts.');
 }
 function buildBook_(ss){
-  var b=ss.getSheetByName('Book'); if(b) b.clear(); else b=ss.insertSheet('Book',1);
+  var b=ss.getSheetByName('Model Portfolio')||ss.getSheetByName('Book'); if(b){ b.clear(); b.setName('Model Portfolio'); } else b=ss.insertSheet('Model Portfolio',1);
   var L=N+1, P='Trades!$P$2:$P$'+L, S=function(c,st){return 'SUMIFS(Trades!$'+c+'$2:$'+c+'$'+L+','+P+',"'+st+'")';};
   var items=[['Starting NAV (£)','='+NAV,'£#,##0'],['Realised P&L (£)','='+S('L','Closed'),'£#,##0;[Red]-£#,##0'],['Unrealised P&L (£)','='+S('L','Live'),'£#,##0;[Red]-£#,##0'],
    ['Current NAV (£)','=B2+B3+B4','£#,##0'],['Return on NAV','=B5/B2-1','0.00%'],['Live trades','=COUNTIF('+P+',"Live")','0'],['Closed trades','=COUNTIF('+P+',"Closed")','0'],
@@ -89,7 +89,7 @@ function buildBook_(ss){
    ['Total R (closed)','=SUMIFS(Trades!$Q$2:$Q$'+L+','+P+',"Closed")','0.00']];
   b.getRange('A1:B1').setValues([['Metric','Value']]).setFontWeight('bold').setFontColor('#ffffff').setBackground('#1F2937');
   items.forEach(function(it,i){ b.getRange(i+2,1).setValue(it[0]); b.getRange(i+2,2).setFormula(it[1]).setNumberFormat(it[2]); });
-  b.setColumnWidth(1,240); b.getRange('D1').setValue('Live book (auto)').setFontWeight('bold');
+  b.setColumnWidth(1,240); b.getRange('D1').setValue('Live trades (auto)').setFontWeight('bold');
   b.getRange(2,4,1,COLS.length).setValues([COLS]).setFontWeight('bold').setFontColor('#ffffff').setBackground('#1F2937');
   b.getRange('D3').setFormula('=IFERROR(FILTER(Trades!A2:S'+L+','+P+'="Live"),"No live trades")');
 }
@@ -102,12 +102,12 @@ function doGet(e){
 function bookJson_(){
   var ss=SpreadsheetApp.getActive(), v=ss.getSheetByName('Trades').getDataRange().getValues(), h=v[0], ix={};
   h.forEach(function(n,i){ ix[n]=i; });
-  if(ix['Risk Opened']===undefined) return {error:'sheet not on v2 layout: run Book app > Upgrade sheet to v2 layout'};
+  if(ix['Risk Opened']===undefined) return {error:'sheet not on v2 layout: run Model Portfolio menu > Upgrade sheet to v2 layout'};
   function g(r,n){ var x=r[ix[n]]; return x instanceof Date ? Utilities.formatDate(x,'Europe/London','yyyy-MM-dd') : (x===''||x===undefined?null:x); }
   var trades=[];
   v.slice(1).forEach(function(r,i){ if(r[ix['Trade Idea']]==='') return; var o={row:i+2}; COLS.forEach(function(k){ o[k]=g(r,k); }); trades.push(o); });
   trades.sort(function(a,b){ if(a.Status!==b.Status) return a.Status==='Live'?-1:1;
     var ka=a.Status==='Live'?a['Risk Opened']:a['Exit Date'], kb=b.Status==='Live'?b['Risk Opened']:b['Exit Date']; return String(kb||'').localeCompare(String(ka||'')); });
-  var m={}; ss.getSheetByName('Book').getRange('A2:B20').getValues().forEach(function(r){ if(r[0]) m[r[0]]=r[1]; });
+  var m={}; (ss.getSheetByName('Model Portfolio')||ss.getSheetByName('Book')).getRange('A2:B20').getValues().forEach(function(r){ if(r[0]) m[r[0]]=r[1]; });
   return {v:2, asOf:new Date().toISOString(), book:m, trades:trades, live:trades.filter(function(t){return t.Status==='Live';})};
 }
