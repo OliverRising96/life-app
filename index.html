@@ -303,6 +303,7 @@ details.sess>summary::-webkit-details-marker{display:none}
 .bk-t .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.bk-t .nm{font-weight:700;font-size:16px}.bk-t .dir{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:#222}
 .bk-t .dir.L{color:var(--green)}.bk-t .dir.S{color:var(--red)}.bk-t .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;font-size:13px}.bk-t .grid .k{font-size:10px;color:var(--mut);text-transform:uppercase}
 .bk-t a{color:var(--blue);font-size:13px;font-weight:600;text-decoration:none;display:inline-block;margin-top:12px}.bk-up{color:var(--green)}.bk-dn{color:var(--red)}.bk-sub{font-size:12px;color:var(--mut)}
+.bk-row{cursor:pointer}.bk-more{font-size:12px;color:var(--blue);font-weight:600;margin-top:10px}.bk-sec{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin:14px 4px 6px}.bk-back{color:var(--blue);font-weight:600;font-size:14px;margin:4px 4px 10px;cursor:pointer}.bk-big{font-size:26px;font-weight:700;margin-top:10px}.bk-nk{font-size:10px;color:var(--mut);text-transform:uppercase;margin-top:14px}.bk-note{font-size:13px;margin-top:4px;line-height:1.4}
 .bk-cfg input{width:100%;padding:10px;margin:4px 0 8px;border-radius:10px;border:1px solid var(--line);background:#111;color:var(--tx)}.bk-cfg button{padding:8px 14px;border-radius:99px;background:#fff;color:#000;font-weight:700;margin-right:6px}
 </style>
 <script>/**
@@ -544,7 +545,7 @@ function go(v){
   document.querySelectorAll('.tabbar button, .desk-nav .links button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   document.querySelectorAll('.view').forEach(el=>el.classList.toggle('on',el.id==='v-'+v));
   ttl.textContent=titles[v]; scrollTo(0,0);
-  if(v==='book') bookLoad();
+  if(v==='book'){ bkOpen=null; bookLoad(); }
 }
 document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>go(b.dataset.v));
 deskMeta.textContent=now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',timeZone:'Europe/London'});
@@ -2689,34 +2690,53 @@ const bkG=x=>(x==null||x===''||isNaN(x))?'–':(x<0?'-£':'£')+bkN(Math.abs(x))
 const bkP=(x,d=2)=>(x==null||x===''||isNaN(x))?'–':(x*100).toFixed(d)+'%';
 const bkC=x=>x>0?'bk-up':(x<0?'bk-dn':'');
 const bkE=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+var bkData=null, bkOpen=null;
+const bkDp=t=>{const e=Math.abs(t['Entry']);return e===0||e>=100?1:(e<10?4:2)};
+const bkD=s=>s?new Date(s+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'}):'–';
+const bkR=x=>x==null?'–':(x>0?'+':'')+bkN(x,2)+'R';
 function bookRender(d, note){
   const H=document.getElementById('bookHead'), Lv=document.getElementById('bookLive'); if(!H) return;
   if(!d){ H.innerHTML='<div class="bk-sub">Not connected yet — set up the feed below.</div>'; Lv.innerHTML=''; return; }
-  const b=d.book||{}, nav=b['Current NAV (£)'], start=b['Starting NAV (£)']||1e6, orp=b['Open risk (% NAV)'], lim=b['Open risk limit (% NAV)'];
+  bkData=d;
+  const b=d.book||{}, nav=b['Current NAV (£)'], orp=b['Open risk (% NAV)'], lim=b['Open risk limit (% NAV)'];
+  const all=d.trades||d.live||[], live=all.filter(t=>(t.Status||'Live')==='Live'), closed=all.filter(t=>t.Status==='Closed');
+  if(bkOpen!=null){ const t=all.find(x=>x.row===bkOpen); if(t) return bookDetail(t,H,Lv); bkOpen=null; }
+  H.parentElement.style.display='';
   H.innerHTML='<div class="bk-hd">'+
    '<div><div class="k">NAV</div><div class="v">'+bkG(nav)+'</div><div class="bk-sub '+bkC(b['Return on NAV'])+'">'+bkP(b['Return on NAV'])+'</div></div>'+
    '<div><div class="k">Open risk</div><div class="v" style="color:'+(orp>lim?'var(--red)':'var(--tx)')+'">'+bkP(orp)+'</div><div class="bk-sub">limit '+bkP(lim,0)+' · '+bkE(b['Limit status']||'')+'</div></div>'+
    '<div><div class="k">Unrealised</div><div class="v '+bkC(b['Unrealised P&L (£)'])+'">'+bkG(b['Unrealised P&L (£)'])+'</div></div>'+
    '<div><div class="k">Realised</div><div class="v '+bkC(b['Realised P&L (£)'])+'">'+bkG(b['Realised P&L (£)'])+'</div></div></div>'+
-   '<div class="bk-sub" style="margin-top:10px">'+(d.live||[]).length+' live · as of '+new Date(d.asOf).toLocaleString('en-GB',{timeZone:'Europe/London',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' UK'+(note?' · '+bkE(note):'')+'</div>';
-  const live=d.live||[];
-  Lv.innerHTML=live.length?live.map(t=>{
-    const dir=String(t['Direction']||''), risk=t['Risk £']!=null?t['Risk £']/start:null, dp=Math.abs(t['Entry'])<10?4:2;
-    return '<div class="card bk-t"><div class="top"><span class="nm">'+bkE(t['Instrument'])+'</span><span class="dir '+(dir==='Short'?'S':'L')+'">'+bkE(dir.toUpperCase())+'</span></div>'+
-     '<div class="bk-sub">'+bkE([t['ID'],t['Asset class'],t['Region'],t['Type']].filter(Boolean).join(' · '))+'</div>'+
+   '<div class="bk-sub" style="margin-top:10px">'+live.length+' live · '+closed.length+' closed · hit rate '+(b['Hit rate (closed)']===''||b['Hit rate (closed)']==null?'–':bkP(b['Hit rate (closed)'],0))+' · as of '+new Date(d.asOf).toLocaleString('en-GB',{timeZone:'Europe/London',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' UK'+(note?' · '+bkE(note):'')+'</div>';
+  const row=t=>{ const ls=String(t['L/S']||t['Direction']||''), pl=t['P&L (£)']!==undefined?t['P&L (£)']:t['P&L £'];
+    return '<div class="card bk-t bk-row" data-r="'+(t.row||'')+'"><div class="top"><span class="nm">'+bkE(t['Trade Idea']||t['Instrument'])+'</span><span class="dir '+(ls==='Short'?'S':'L')+'">'+bkE(ls.toUpperCase())+'</span></div>'+
+     '<div class="bk-sub">'+bkE([t['Type'],t['Conviction']?'Conv '+t['Conviction']:'',t.Status==='Closed'?'closed '+bkD(t['Exit Date']):'opened '+bkD(t['Risk Opened']||t['Opened'])].filter(Boolean).join(' · '))+'</div>'+
      '<div class="grid">'+
-      '<div><div class="k">P&amp;L</div><div class="'+bkC(t['P&L £'])+'">'+bkG(t['P&L £'])+'</div></div>'+
-      '<div><div class="k">R</div><div class="'+bkC(t['R multiple'])+'">'+(t['R multiple']==null?'–':(t['R multiple']>0?'+':'')+bkN(t['R multiple'],2)+'R')+'</div></div>'+
-      '<div><div class="k">Risk</div><div>'+bkP(risk)+' NAV</div></div>'+
-      '<div><div class="k">Entry</div><div>'+bkN(t['Entry'],dp)+'</div></div>'+
-      '<div><div class="k">Mark</div><div>'+bkN(t['Price used'],dp)+(t['Mark source']==='Manual'?' ✎':'')+'</div></div>'+
-      '<div><div class="k">Days</div><div>'+bkN(t['Days held'])+'</div></div>'+
-      '<div><div class="k">Stop</div><div>'+bkN(t['Stop'],dp)+'</div></div>'+
-      '<div><div class="k">Target</div><div>'+bkN(t['Target'],dp)+'</div></div>'+
-      '<div><div class="k">R:R</div><div>'+bkN(t['R:R'],1)+'</div></div></div>'+
-     (t['Notes']?'<div class="bk-sub" style="margin-top:10px">'+bkE(t['Notes'])+'</div>':'')+
-     (/^https:\/\//.test(t['Notion rationale']||'')?'<a href="'+bkE(t['Notion rationale'])+'" target="_blank" rel="noopener">Rationale in Notion →</a>':'')+'</div>';
-  }).join(''):'<div class="card"><div class="bk-sub">No live trades.</div></div>';
+      '<div><div class="k">P&amp;L</div><div class="'+bkC(pl)+'">'+bkG(pl)+'</div></div>'+
+      '<div><div class="k">R</div><div class="'+bkC(t['R multiple'])+'">'+bkR(t['R multiple'])+'</div></div>'+
+      '<div><div class="k">'+(t.Status==='Closed'?'Exit':'Current')+'</div><div>'+bkN(t['Current Level'],bkDp(t))+'</div></div></div>'+
+      '<div class="bk-more">Details ›</div></div>'; };
+  Lv.innerHTML=(all.length?'':'<div class="card"><div class="bk-sub">No trades yet.</div></div>')+
+   (live.length?'<div class="bk-sec">Live</div>'+live.map(row).join(''):'')+
+   (closed.length?'<div class="bk-sec">Closed</div>'+closed.map(row).join(''):'');
+  Lv.querySelectorAll('.bk-row').forEach(el=>el.onclick=()=>{ bkOpen=+el.dataset.r; bookRender(bkData); window.scrollTo(0,0); });
+}
+function bookDetail(t,H,Lv){
+  H.parentElement.style.display='none';
+  const dp=bkDp(t), ls=String(t['L/S']||''), pl=t['P&L (£)'];
+  const f=(k,v,c)=>'<div><div class="k">'+k+'</div><div class="'+(c||'')+'">'+v+'</div></div>';
+  Lv.innerHTML='<div class="bk-back" id="bkBack">‹ All trades</div>'+
+   '<div class="card bk-t"><div class="top"><span class="nm">'+bkE(t['Trade Idea'])+'</span><span class="dir '+(ls==='Short'?'S':'L')+'">'+bkE(ls.toUpperCase())+'</span></div>'+
+   '<div class="bk-sub">'+bkE([t.Status,t['Type']==='RV'?'Relative value':'Directional'].join(' · '))+'</div>'+
+   '<div class="bk-big '+bkC(pl)+'">'+bkG(pl)+'<span class="bk-sub"> '+bkP(t['P&L (%)'])+' NAV · '+bkR(t['R multiple'])+'</span></div>'+
+   '<div class="grid">'+
+    f('Risk opened',bkD(t['Risk Opened']))+f('Exit date',bkD(t['Exit Date']))+f('Days',bkN(t['Days held']))+
+    f('£ at risk',bkG(t['GBP at risk']))+f('Conviction',t['Conviction']?bkE(t['Conviction'])+'/5':'–')+f('R:R plan',t['R:R (plan)']==null?'–':bkN(t['R:R (plan)'],1))+
+    f('Entry',bkN(t['Entry'],dp))+f('Stop loss',bkN(t['Stop Loss'],dp),'bk-dn')+f('Take profit',bkN(t['Take Profit'],dp),'bk-up')+
+    f(t.Status==='Closed'?'Exit level':'Current',bkN(t['Current Level'],dp))+f('P&amp;L £',bkG(pl),bkC(pl))+f('P&amp;L % NAV',bkP(t['P&L (%)']),bkC(pl))+'</div>'+
+   (t['Notes']?'<div class="k bk-nk">Notes</div><div class="bk-note">'+bkE(t['Notes'])+'</div>':'')+
+   (/^https:\/\//.test(t['Notion link']||'')?'<a href="'+bkE(t['Notion link'])+'" target="_blank" rel="noopener">Research in Notion →</a>':'<div class="bk-sub" style="margin-top:12px">No Notion link yet — add it in the sheet.</div>')+'</div>';
+  document.getElementById('bkBack').onclick=()=>{ bkOpen=null; bookRender(bkData); };
 }
 function bookCfgUI(){
   const el=document.getElementById('bookCfg'); if(!el) return; const c=bookCfg();
