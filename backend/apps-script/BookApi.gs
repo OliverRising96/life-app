@@ -2,11 +2,15 @@
  *  Read-only feed. Returns ALL trades + Model Portfolio metrics as JSON when ?token= matches.
  *  One-off: Model Portfolio menu > "Upgrade sheet to v2 layout" rebuilds Trades + Model Portfolio tabs in place (old tab kept as "Trades (v1)"). */
 var COLS=['Risk Opened','Trade Idea','Type','L/S','Conviction','GBP at risk','Entry','Stop Loss','Take Profit','Current Level','Exit Date','P&L (£)','P&L (%)','Notes','Notion link',
-          'Status','R multiple','R:R (plan)','Days held'];
+          'Status','R multiple','R:R (plan)','Days held','Link'];   // Link (col T) = URL to the underlying, e.g. TradingView options chain, or a TradingView symbol like CME:ZN1!
 var FALLBACK_URL='https://script.google.com/macros/s/AKfycbzHDBHGV_YQHsLkjxw9NmE9L02OY8GElObxpEXhJFCgqfC1ETwCUZpFipMUEf6-5od4/exec';
 var NIN=15, N=500, NAV='Settings!$B$3';
 function onOpen(){ SpreadsheetApp.getUi().createMenu('Model Portfolio').addItem('Phone link (set up / show)','showPhoneLink').addItem('Rotate token','rotateToken')
-  .addSeparator().addItem('Upgrade sheet to v2 layout (one-off)','upgradeToV2').addToUi(); }
+  .addItem('Add Link column (one-off)','addLinkColumn').addSeparator().addItem('Upgrade sheet to v2 layout (one-off)','upgradeToV2').addToUi(); }
+function addLinkColumn(){ var t=SpreadsheetApp.getActive().getSheetByName('Trades'), c=COLS.length;
+  if(t.getMaxColumns()<c) t.insertColumnsAfter(t.getMaxColumns(),c-t.getMaxColumns());
+  t.getRange(1,c).setValue('Link').setFontWeight('bold').setFontColor('#ffffff').setBackground('#1F2937').setNote('Paste a URL (e.g. TradingView options chain) or a TradingView symbol (e.g. CME:ZN1!, FX:EURGBP). Shows as a button in the app.');
+  t.setColumnWidth(c,260); t.getRange(2,c,N,1).setBackground('#FFF7D6'); SpreadsheetApp.getUi().alert('Link column ready in column T.'); }
 function getToken_(){ var p=PropertiesService.getScriptProperties(), t=p.getProperty('BOOK_TOKEN'); if(!t){ t=Utilities.getUuid().replace(/-/g,'')+Utilities.getUuid().replace(/-/g,''); p.setProperty('BOOK_TOKEN',t);} return t; }
 function rotateToken(){ PropertiesService.getScriptProperties().deleteProperty('BOOK_TOKEN'); showPhoneLink(); }
 function showPhoneLink(){
@@ -51,8 +55,8 @@ function buildTrades_(t){
   t.setFrozenRows(1); t.setFrozenColumns(2); t.setRowHeight(1,34);
   if(t.getMaxRows()<N+1) t.insertRowsAfter(t.getMaxRows(),N+1-t.getMaxRows());
   if(t.getMaxColumns()>COLS.length) t.deleteColumns(COLS.length+1,t.getMaxColumns()-COLS.length);
-  [100,190,60,65,80,95,80,80,80,90,95,95,75,260,220,70,75,70,70].forEach(function(w,i){t.setColumnWidth(i+1,w);});
-  t.getRange(2,1,N,NIN).setBackground('#FFF7D6'); t.getRange(2,12,N,2).setBackground('#EEF2F7'); t.getRange(2,16,N,4).setBackground('#EEF2F7');
+  [100,190,60,65,80,95,80,80,80,90,95,95,75,260,220,70,75,70,70,260].forEach(function(w,i){t.setColumnWidth(i+1,w);});
+  t.getRange(2,1,N,NIN).setBackground('#FFF7D6'); t.getRange(2,12,N,2).setBackground('#EEF2F7'); t.getRange(2,16,N,4).setBackground('#EEF2F7'); t.getRange(2,20,N,1).setBackground('#FFF7D6');
   var f={L:'=IF(OR($B2="",$F2="",$G2="",$H2="",$J2="",$G2=$H2),"",$F2*($J2-$G2)/($G2-$H2))',
          M:'=IF($L2="","",$L2/'+NAV+')',
          P:'=IF($B2="","",IF($K2="","Live","Closed"))',
@@ -92,7 +96,7 @@ function buildBook_(ss){
   items.forEach(function(it,i){ b.getRange(i+2,1).setValue(it[0]); b.getRange(i+2,2).setFormula(it[1]).setNumberFormat(it[2]); });
   b.setColumnWidth(1,240); b.getRange('D1').setValue('Live trades (auto)').setFontWeight('bold');
   b.getRange(2,4,1,COLS.length).setValues([COLS]).setFontWeight('bold').setFontColor('#ffffff').setBackground('#1F2937');
-  b.getRange('D3').setFormula('=IFERROR(FILTER(Trades!A2:S'+L+','+P+'="Live"),"No live trades")');
+  b.getRange('D3').setFormula('=IFERROR(FILTER(Trades!A2:T'+L+','+P+'="Live"),"No live trades")');
 }
 
 /* ---------- feed ---------- */

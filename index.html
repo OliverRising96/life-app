@@ -304,6 +304,7 @@ details.sess>summary::-webkit-details-marker{display:none}
 .bk-t .dir.L{color:var(--green)}.bk-t .dir.S{color:var(--red)}.bk-t .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;font-size:13px}.bk-t .grid .k{font-size:10px;color:var(--mut);text-transform:uppercase}
 .bk-t a{color:var(--blue);font-size:13px;font-weight:600;text-decoration:none;display:inline-block;margin-top:12px}.bk-up{color:var(--green)}.bk-dn{color:var(--red)}.bk-sub{font-size:12px;color:var(--mut)}
 .bk-row{cursor:pointer}.bk-more{font-size:12px;color:var(--blue);font-weight:600;margin-top:10px}.bk-sec{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin:14px 4px 6px}.bk-back{color:var(--blue);font-weight:600;font-size:14px;margin:4px 4px 10px;cursor:pointer}.bk-big{font-size:26px;font-weight:700;margin-top:10px}.bk-nk{font-size:10px;color:var(--mut);text-transform:uppercase;margin-top:14px}.bk-note{font-size:13px;margin-top:4px;line-height:1.4}
+.bk-lnk{float:right;color:var(--blue);font-weight:600;text-decoration:none;padding:2px 10px;border:1px solid var(--blue);border-radius:99px}.bk-lnk.big{float:none;display:inline-block;margin-top:14px;padding:8px 16px;font-size:14px}
 .bk-off{font-size:12px;color:var(--mut);margin-left:10px}.bk-cfg input{width:100%;padding:10px;margin:4px 0 8px;border-radius:10px;border:1px solid var(--line);background:#111;color:var(--tx)}.bk-cfg button{padding:8px 14px;border-radius:99px;background:#fff;color:#000;font-weight:700;margin-right:6px}
 </style>
 <script>/**
@@ -2697,6 +2698,12 @@ const bkE=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 var bkData=null, bkOpen=null;
 const bkDp=t=>{const e=Math.abs(t['Entry']);return e===0||e>=100?1:(e<10?4:2)};
 const bkD=s=>s?new Date(s+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'}):'–';
+const bkL=t=>{ const v=String(t['Link']||'').trim(), tv=x=>'https://www.tradingview.com/chart/?symbol='+encodeURIComponent(x);
+  if(/^https?:\/\//i.test(v)) return {u:v,auto:0}; if(/^[A-Z0-9_.]+:[A-Z0-9_.!]+$/i.test(v)) return {u:tv(v.toUpperCase()),auto:0};
+  const i=String(t['Trade Idea']||''), m=i.match(/\b([A-Z0-9_]{2,}:[A-Z0-9_.!]+)/); if(m) return {u:tv(m[1]),auto:1};
+  const fx=i.match(/\b(?:EUR|GBP|USD|JPY|CHF|AUD|NZD|CAD|NOK|SEK)\/?(?:EUR|GBP|USD|JPY|CHF|AUD|NZD|CAD|NOK|SEK)\b/); if(fx) return {u:tv('FX:'+fx[0].replace('/','')),auto:1};
+  return null; };
+const bkLB=(t,big)=>{ const l=bkL(t); return l?'<a class="bk-lnk'+(big?' big':'')+'" href="'+bkE(l.u)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+(l.auto?'Chart ↗':'Underlying ↗')+'</a>':''; };
 const bkR=x=>x==null?'–':(x>0?'+':'')+bkN(x,2)+'R';
 function bookRender(d, note){
   const H=document.getElementById('bookHead'), Lv=document.getElementById('bookLive'); if(!H) return;
@@ -2719,7 +2726,7 @@ function bookRender(d, note){
       '<div><div class="k">P&amp;L</div><div class="'+bkC(pl)+'">'+bkG(pl)+'</div></div>'+
       '<div><div class="k">R</div><div class="'+bkC(t['R multiple'])+'">'+bkR(t['R multiple'])+'</div></div>'+
       '<div><div class="k">'+(t.Status==='Closed'?'Exit':'Current')+'</div><div>'+bkN(t['Current Level'],bkDp(t))+'</div></div></div>'+
-      '<div class="bk-more">Details ›</div></div>'; };
+      '<div class="bk-more">Details ›'+bkLB(t)+'</div></div>'; };
   Lv.innerHTML=(all.length?'':'<div class="card"><div class="bk-sub">No trades yet.</div></div>')+
    (live.length?'<div class="bk-sec">Live</div>'+live.map(row).join(''):'')+
    (closed.length?'<div class="bk-sec">Closed</div>'+closed.map(row).join(''):'');
@@ -2738,7 +2745,7 @@ function bookDetail(t,H,Lv){
     f('£ at risk',bkG(t['GBP at risk']))+f('Conviction',t['Conviction']?bkE(t['Conviction'])+'/5':'–')+f('R:R plan',t['R:R (plan)']==null?'–':bkN(t['R:R (plan)'],1))+
     f('Entry',bkN(t['Entry'],dp))+f('Stop loss',bkN(t['Stop Loss'],dp),'bk-dn')+f('Take profit',bkN(t['Take Profit'],dp),'bk-up')+
     f(t.Status==='Closed'?'Exit level':'Current',bkN(t['Current Level'],dp))+f('P&amp;L £',bkG(pl),bkC(pl))+f('P&amp;L % NAV',bkP(t['P&L (%)']),bkC(pl))+'</div>'+
-   (t['Notes']?'<div class="k bk-nk">Notes</div><div class="bk-note">'+bkE(t['Notes'])+'</div>':'')+
+   bkLB(t,1)+(t['Notes']?'<div class="k bk-nk">Notes</div><div class="bk-note">'+bkE(t['Notes'])+'</div>':'')+
    (/^https:\/\//.test(t['Notion link']||'')?'<a href="'+bkE(t['Notion link'])+'" target="_blank" rel="noopener">Research in Notion →</a>':'<div class="bk-sub" style="margin-top:12px">No Notion link yet — add it in the sheet.</div>')+'</div>';
   document.getElementById('bkBack').onclick=()=>{ bkOpen=null; bookRender(bkData); };
 }
